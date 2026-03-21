@@ -1,22 +1,56 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import '../styles/global.css';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { 
+  title, 
+  description = "Buy professional karaoke tracks with or without chorus. Instant download after payment." 
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    
+    <link rel="icon" type="image/webp" href="/holy_fire_logo.webp" />
+    <link rel="shortcut icon" href="/holy_fire_logo.webp" />
+    <meta name="msapplication-TileImage" content="/holy_fire_logo.webp" />
+    <link rel="preload" as="image" href="/holy_fire_logo.webp" />
+    
+    <title>{title}</title>
+  </head>
+  <body class="bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 text-white min-h-screen">
+    <header class="border-b border-white/10">
+      <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3">
+          <img src="/holy_fire_logo.webp" alt="HolyfireMedia logo" class="h-10 w-10 rounded-full border border-white/25 object-cover bg-white/10" />
+          <span class="text-lg md:text-2xl font-bold">HolyfireMedia</span>
+        </a>
+        <nav class="flex flex-wrap items-center justify-end gap-3 text-sm md:text-base">
+          <a href="/" class="text-purple-100 hover:text-white transition">Home</a>
+          <a href="/contact" class="text-purple-100 hover:text-white transition">Contact</a>
+          <a href="/privacy-policy" class="text-purple-100 hover:text-white transition">Privacy</a>
+          <a href="/terms" class="text-purple-100 hover:text-white transition">Terms</a>
+          <a href="/refund-policy" class="text-purple-100 hover:text-white transition">Refund</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="min-h-[calc(100vh-80px)]">
+      <slot />
+    </main>
+  </body>
+</html>

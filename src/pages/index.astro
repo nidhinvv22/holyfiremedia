@@ -1,11 +1,104 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const products = [
+  {
+    id: 1,
+    name: "With Chorus",
+    price: "₹500",
+    features: [
+      "Backing vocals included",
+      "Studio-quality audio",
+      "Instant download after successful payment",
+      "MP3 & WAV formats",
+    ],
+    stripeLink: "#"
+  },
+  {
+    id: 2,
+    name: "Without Chorus",
+    price: "₹600",
+    features: [
+      "Pure instrumental version",
+      "Studio-quality audio",
+      "Instant download after successful payment",
+      "MP3 & WAV formats",
+    ],
+    stripeLink: "#"
+  }
+];
+
+const siteConfig = {
+  name: "KaraokePro",
+  tagline: "Premium Karaoke Tracks",
+  description: "Professional studio-quality karaoke tracks designed to match the original song feel.All tracks are either original productions or used with proper permissions. Choose your version, pay securely, download instantly.",
+  copyrightHolder: "HolyfireMedia"
+};
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={`${siteConfig.copyrightHolder}`}>
+  <div class="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900">
+    
+    <!-- Hero Section -->
+    <section class="container mx-auto px-4 py-16 text-center">
+      <h2 class="text-5xl font-extrabold text-white mb-4">
+        {siteConfig.tagline}
+      </h2>
+      <p class="text-xl text-purple-200 mb-8 max-w-2xl mx-auto">
+        {siteConfig.description}
+      </p>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="container mx-auto px-4 pb-20">
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {products.map((product) => (
+          <article class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:scale-105 transition-all duration-300">
+            
+            <!-- Product Header -->
+            <h3 class="text-2xl font-bold text-white mb-6">
+              {product.name}
+            </h3>
+
+            <!-- Price -->
+            <div class="mb-6">
+              <span class="text-5xl font-extrabold text-white">
+                {product.price}
+              </span>
+              <span>
+             <br>   (Inclusive of applicable taxes)
+              </span>
+            </div>
+
+            <!-- Features List -->
+            <ul class="space-y-3 mb-8">
+              {product.features.map((feature) => (
+                <li class="flex items-start gap-2 text-purple-100">
+                  <span class="text-green-400 flex-shrink-0">✓</span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <!-- CTA Button -->
+            <a
+              href={product.stripeLink}
+              class="block w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-6 rounded-xl text-center transition-all duration-300"
+              aria-label={`Purchase ${product.name} karaoke track`}
+            >
+              Buy Now
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-8">
+      <div class="container mx-auto px-4 text-center text-purple-200">
+        <p>© {new Date().getFullYear()} {siteConfig.copyrightHolder}. All rights reserved.</p>
+      </div>
+    </footer>
+
+  </div>
 </Layout>

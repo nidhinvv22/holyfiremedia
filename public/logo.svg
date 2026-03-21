@@ -1,0 +1,10 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="HolyfireMedia logo">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="20" ry="20" fill="url(#g)" />
+  <image href="/holyfire_logo.jpg" x="10" y="10" width="80" height="80" preserveAspectRatio="xMidYMid meet" />
+</svg>
