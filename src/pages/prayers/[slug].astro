@@ -1,0 +1,94 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+export function getStaticPaths() {
+  const prayers = [
+    { 
+      slug: "holy-rosary", 
+      title: "Malayalam Holy Rosary", 
+      englishText: "In the name of the Father, and of the Son, and of the Holy Spirit. Amen.",
+      manglishText: "Pithavinteyum puthranteyum parishudhalmhavinteyum namathil. Amen.",
+      malayalamText: "പിതാവിന്റെയും പുത്രന്റെയും പരിശുദ്ധാത്മാവിന്റെയും നാമത്തിൽ. ആമ്മേൻ."
+    },
+    { 
+      slug: "divine-mercy", 
+      title: "Divine Mercy Chaplet", 
+      englishText: "Eternal Father, I offer you the Body and Blood, Soul and Divinity of Your Dearly Beloved Son, Our Lord, Jesus Christ...",
+      manglishText: "Nithya pithave, ente papangalkkum lokam muzhuvanumulla papangalkkum pariharamaayi...",
+      malayalamText: "നിത്യ പിതാവേ, എന്റെ പാപങ്ങൾക്കും ലോകം മുഴുവനുമുള്ള പാപങ്ങൾക്കും പരിഹാരമായി..."
+    },
+    { 
+      slug: "morning-prayer", 
+      title: "Morning Prayer", 
+      englishText: "O my God, I offer Thee all my prayers, works, joys, and sufferings of this day...",
+      manglishText: "Ente daivame, innathe ente ella prarthanakalum, pravrithikalum, santhoshangalum...",
+      malayalamText: "എന്റെ ദൈവമേ, ഇന്നത്തെ എന്റെ എല്ലാ പ്രാർത്ഥനകളും, പ്രവൃത്തികളും, സന്തോഷങ്ങളും..."
+    },
+    { 
+      slug: "evening-prayer", 
+      title: "Evening Prayer", 
+      englishText: "Visit, we beseech Thee, O Lord, this dwelling, and drive far from it all snares of the enemy...",
+      manglishText: "Karthave, ee bhavanatthe sandarshikkaname, shathruvukalude ella aakramangalum...",
+      malayalamText: "കർത്താവേ, ഈ ഭവനത്തെ സന്ദർശിക്കണമേ, ശത്രുക്കളുടെ എല്ലാ ആക്രമണങ്ങളും..."
+    }
+  ];
+  
+  return prayers.map((prayer) => {
+    return {
+      params: { slug: prayer.slug },
+      props: { prayer }
+    };
+  });
+}
+
+const { prayer } = Astro.props;
+---
+
+<MainLayout title={`${prayer.title} | HolyfireMedia`}>
+  <div class="container mx-auto px-4 py-16">
+    <div class="max-w-4xl mx-auto">
+      <!-- Back Button -->
+      <a href="/prayers" class="inline-flex items-center text-purple-300 hover:text-pink-400 mb-8 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Devotions
+      </a>
+
+      <!-- Content Container -->
+      <div class="bg-indigo-900/30 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl relative">
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-10 text-center border-b border-white/10 pb-8">
+          {prayer.title}
+        </h1>
+
+        <div class="space-y-12">
+          
+          <!-- Malayalam Section -->
+          <section class="bg-white/5 p-6 md:p-8 rounded-2xl border border-white/5 relative group">
+            <span class="absolute -top-3 left-6 bg-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow border border-pink-500">Malayalam</span>
+            <p class="text-xl md:text-2xl text-white leading-relaxed font-malayalam">
+              {prayer.malayalamText}
+            </p>
+          </section>
+
+          <!-- Manglish Section -->
+          <section class="bg-white/5 p-6 md:p-8 rounded-2xl border border-white/5 relative group">
+            <span class="absolute -top-3 left-6 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow border border-purple-500">Manglish</span>
+            <p class="text-lg md:text-xl text-purple-100 leading-relaxed italic">
+              {prayer.manglishText}
+            </p>
+          </section>
+
+          <!-- English Section -->
+          <section class="bg-white/5 p-6 md:p-8 rounded-2xl border border-white/5 relative group">
+            <span class="absolute -top-3 left-6 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow border border-blue-500">English Translation</span>
+            <p class="text-lg md:text-xl text-purple-100 leading-relaxed font-serif">
+              {prayer.englishText}
+            </p>
+          </section>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</MainLayout>

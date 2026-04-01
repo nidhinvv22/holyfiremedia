@@ -1,104 +1,133 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import MainLayout from '../layouts/MainLayout.astro';
 
-const products = [
-  {
-    id: 1,
-    name: "With Chorus",
-    price: "₹500",
-    features: [
-      "Backing vocals included",
-      "Studio-quality audio",
-      "Instant download after successful payment",
-      "MP3 & WAV formats",
-    ],
-    stripeLink: "#"
-  },
-  {
-    id: 2,
-    name: "Without Chorus",
-    price: "₹600",
-    features: [
-      "Pure instrumental version",
-      "Studio-quality audio",
-      "Instant download after successful payment",
-      "MP3 & WAV formats",
-    ],
-    stripeLink: "#"
-  }
+// Placeholder Data
+const featuredArtists = [
+  { id: 1, name: "Fr Joseph Mukkatt", bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", image: "https://placehold.co/400x400/3b0764/ffffff?text=Artist+1", slug: "artist-101" },
+  { id: 2, name: "Artist Two", bio: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", image: "https://placehold.co/400x400/3b0764/ffffff?text=Artist+2", slug: "artist-2" },
+  { id: 3, name: "Artist Three", bio: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.", image: "https://placehold.co/400x400/3b0764/ffffff?text=Artist+3", slug: "artist-3" },
 ];
 
-const siteConfig = {
-  name: "KaraokePro",
-  tagline: "Premium Karaoke Tracks",
-  description: "Professional studio-quality karaoke tracks designed to match the original song feel.All tracks are either original productions or used with proper permissions. Choose your version, pay securely, download instantly.",
-  copyrightHolder: "HolyfireMedia"
-};
+const featuredSongs = [
+  { id: 1, title: "Song One", artist: "Fr Joseph Mukkatt", slug: "song-1" },
+  { id: 2, title: "Song Two", artist: "Artist Two", slug: "song-2" },
+  { id: 3, title: "Song Three", artist: "Artist One", slug: "song-3" },
+];
 ---
 
-<Layout title={`${siteConfig.copyrightHolder}`}>
-  <div class="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900">
-    
-    <!-- Hero Section -->
-    <section class="container mx-auto px-4 py-16 text-center">
-      <h2 class="text-5xl font-extrabold text-white mb-4">
-        {siteConfig.tagline}
-      </h2>
-      <p class="text-xl text-purple-200 mb-8 max-w-2xl mx-auto">
-        {siteConfig.description}
+<MainLayout>
+  <!-- HERO SECTION -->
+  <section class="container mx-auto px-4 py-20 md:py-32 text-center">
+    <div class="max-w-4xl mx-auto space-y-8 animate-fade-in-up">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-300 to-purple-300 drop-shadow-xl leading-tight">
+        Proclaiming the Word of God <br class="hidden sm:block" /> through Music
+      </h1>
+      <p class="text-xl md:text-2xl text-purple-200 font-medium max-w-2xl mx-auto">
+        Discover Malayalam Christian songs, artists, lyrics, prayers, and karaoke tracks.
       </p>
-    </section>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
+        <a href="/artists" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-lg hover:shadow-pink-500/25 transition-all hover:scale-105 active:scale-95 text-lg">
+          Explore Artists
+        </a>
+        <a href="/prayers" class="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 text-lg">
+          View Prayers
+        </a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Products Grid -->
-    <section class="container mx-auto px-4 pb-20">
-      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        {products.map((product) => (
-          <article class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:scale-105 transition-all duration-300">
-            
-            <!-- Product Header -->
-            <h3 class="text-2xl font-bold text-white mb-6">
-              {product.name}
-            </h3>
+  <!-- FEATURED ARTISTS -->
+  <section class="container mx-auto px-4 py-16">
+    <div class="flex justify-between items-end mb-10">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Featured Artists</h2>
+      <a href="/artists" class="text-pink-300 hover:text-pink-400 font-medium flex items-center gap-1 group">
+        View All 
+        <span class="group-hover:translate-x-1 transition-transform">→</span>
+      </a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      {featuredArtists.map((artist) => (
+        <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-2xl shadow-xl hover:shadow-purple-500/20 hover:scale-105 transition-all duration-300 group">
+          <img src={artist.image} alt={artist.name} class="w-full aspect-square object-cover rounded-xl mb-6 shadow-md" />
+          <h3 class="text-2xl font-bold text-white mb-2">{artist.name}</h3>
+          <p class="text-purple-200 mb-6 line-clamp-2">{artist.bio}</p>
+          <a href={`/artists/${artist.slug}`} class="inline-block w-full text-center py-3 px-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white font-medium transition-colors">
+            View Profile
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
 
-            <!-- Price -->
-            <div class="mb-6">
-              <span class="text-5xl font-extrabold text-white">
-                {product.price}
-              </span>
-              <span>
-             <br>   (Inclusive of applicable taxes)
-              </span>
+  <!-- SONGS SECTION -->
+  <section class="container mx-auto px-4 py-16">
+    <div class="bg-indigo-900/30 backdrop-blur-md border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl">
+      <div class="flex justify-between items-end mb-10">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Latest Songs</h2>
+        <a href="/songs" class="text-pink-300 hover:text-pink-400 font-medium flex items-center gap-1 group">
+          All Songs <span class="group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+      </div>
+      <div class="space-y-4">
+        {featuredSongs.map((song) => (
+          <div class="flex items-center justify-between p-4 rounded-xl hover:bg-white/5 transition-colors group">
+            <div class="flex items-center gap-4">
+              <div class="h-12 w-12 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-inner">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-white group-hover:text-pink-300 transition-colors">{song.title}</h3>
+                <p class="text-purple-300">{song.artist}</p>
+              </div>
             </div>
-
-            <!-- Features List -->
-            <ul class="space-y-3 mb-8">
-              {product.features.map((feature) => (
-                <li class="flex items-start gap-2 text-purple-100">
-                  <span class="text-green-400 flex-shrink-0">✓</span>
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-
-            <!-- CTA Button -->
-            <a
-              href={product.stripeLink}
-              class="block w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-6 rounded-xl text-center transition-all duration-300"
-              aria-label={`Purchase ${product.name} karaoke track`}
-            >
-              Buy Now
+            <a href={`/songs`} class="hidden sm:inline-flex px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/10 text-white font-medium rounded-lg transition-all">
+              View Song
             </a>
-          </article>
+          </div>
         ))}
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-white/10 py-8">
-      <div class="container mx-auto px-4 text-center text-purple-200">
-        <p>© {new Date().getFullYear()} {siteConfig.copyrightHolder}. All rights reserved.</p>
+  <!-- KARAOKE & PRAYERS SPLIT -->
+  <section class="container mx-auto px-4 py-16">
+    <div class="grid md:grid-cols-2 gap-8">
+      
+      <!-- Karaoke Section -->
+      <div class="bg-gradient-to-br from-pink-900/40 to-purple-900/40 backdrop-blur border border-pink-500/20 rounded-3xl p-8 md:p-12 text-center sm:text-left flex flex-col items-center sm:items-start justify-center shadow-xl hover:shadow-pink-500/10 transition-shadow">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Premium Karaoke Tracks</h2>
+        <p class="text-pink-200 text-lg mb-8">Download high-quality professional karaoke tracks to sing along with your favorite Christian hymns.</p>
+        <a href="/karaoke" class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-lg transition-transform hover:scale-105 inline-block">
+          Explore Karaoke
+        </a>
       </div>
-    </footer>
 
-  </div>
-</Layout>
+      <!-- Prayer Section -->
+      <div class="bg-gradient-to-br from-blue-900/40 to-indigo-900/40 backdrop-blur border border-blue-500/20 rounded-3xl p-8 md:p-12 text-center sm:text-left shadow-xl hover:shadow-blue-500/10 transition-shadow">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">Prayer & Devotion</h2>
+        <ul class="space-y-4 mb-8">
+          {['Holy Rosary', 'Divine Mercy Chaplet', 'Morning Prayer'].map((item) => (
+            <li class="flex items-center gap-3 text-blue-100 text-lg">
+              <span class="text-pink-400 font-bold">✧</span> {item}
+            </li>
+          ))}
+        </ul>
+        <a href="/prayers" class="px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold rounded-xl shadow-lg transition-transform hover:-translate-y-1 inline-block">
+          View All Prayers
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="container mx-auto px-4 py-16 pb-24 text-center max-w-3xl">
+    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-6">Our Mission</h2>
+    <p class="text-lg text-purple-200 leading-relaxed">
+      HolyfireMedia is dedicated to spreading the message of faith and love through the powerful medium of music. We curate the best Malayalam Christian songs, lyrics, and karaoke tracks, offering a spiritual haven for believers around the world.
+    </p>
+  </section>
+
+</MainLayout>

@@ -1,0 +1,41 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const devotions = [
+  { id: 1, title: "Malayalam Holy Rosary", slug: "holy-rosary", description: "The complete Malayalam Rosary with all mysteries.", icon: "📿" },
+  { id: 2, title: "Divine Mercy Chaplet", slug: "divine-mercy", description: "Chaplet of the Divine Mercy sung in Malayalam.", icon: "✨" },
+  { id: 3, title: "Morning Prayer", slug: "morning-prayer", description: "Start your day with these powerful morning devotions.", icon: "🌅" },
+  { id: 4, title: "Evening Prayer", slug: "evening-prayer", description: "Evening prayers of thanksgiving and protection.", icon: "🌙" }
+];
+---
+
+<MainLayout title="Prayer & Devotions | HolyfireMedia" description="A collection of structured prayers and devotions in Malayalam.">
+  <div class="container mx-auto px-4 py-16">
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-6">Prayer & Devotion</h1>
+      <p class="text-xl text-purple-200">
+        Find peace and grow in your faith with our collection of daily prayers, rosaries, and litanies.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      {devotions.map((item) => (
+        <a href={`/prayers/${item.slug}`} class="block group">
+          <div class="bg-gradient-to-br from-indigo-900/40 to-purple-900/40 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-xl hover:shadow-[0_0_20px_rgba(236,72,153,0.2)] hover:-translate-y-1 transition-all duration-300">
+            <div class="text-5xl mb-6 bg-white/5 inline-flex p-4 rounded-2xl border border-white/5 group-hover:scale-110 transition-transform">
+              {item.icon}
+            </div>
+            <h2 class="text-2xl font-bold text-white mb-3 group-hover:text-pink-300 transition-colors">{item.title}</h2>
+            <p class="text-purple-200 mb-6">{item.description}</p>
+            <div class="flex items-center text-pink-400 font-medium group-hover:text-pink-300">
+              Read Prayer 
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</MainLayout>

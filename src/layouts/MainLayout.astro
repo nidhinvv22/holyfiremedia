@@ -1,0 +1,143 @@
+---
+import '@fontsource/inter';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "HolyfireMedia | Proclaiming the Word of God through Music", 
+  description = "Discover Malayalam Christian songs, artists, lyrics, prayers, and karaoke tracks." 
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const navItems = [
+  { name: 'Home', path: '/' },
+  { name: 'Artists', path: '/artists' },
+  { name: 'Songs', path: '/songs' },
+  { name: 'Lyrics', path: '/lyrics' },
+  { name: 'Karaoke', path: '/karaoke' },
+  { name: 'Prayers', path: '/prayers' },
+  { name: 'Contact', path: '/contact' },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    
+    <link rel="icon" type="image/webp" href="/holy_fire_logo.webp" />
+    <link rel="shortcut icon" href="/holy_fire_logo.webp" />
+    <meta name="msapplication-TileImage" content="/holy_fire_logo.webp" />
+    
+    <title>{title}</title>
+  </head>
+  <body class="bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 text-white min-h-screen font-sans selection:bg-pink-500/30 font-inter">
+    <!-- Navbar -->
+    <header class="border-b border-white/10 sticky top-0 bg-purple-900/50 backdrop-blur-lg z-50">
+      <div class="container mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-4">
+        <a href="/" class="flex items-center gap-3 group">
+          <img src="/holy_fire_logo.webp" alt="HolyfireMedia logo" class="h-10 w-10 rounded-full border border-white/25 object-cover bg-white/10 group-hover:scale-105 transition-transform" />
+          <span class="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-200 to-purple-200">
+            HolyfireMedia
+          </span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm md:text-base font-medium">
+          {navItems.map((item) => (
+            <a 
+              href={item.path} 
+              class={`transition-colors hover:text-pink-300 ${currentPath === item.path || (currentPath.startsWith(item.path) && item.path !== '/') ? 'text-pink-400 font-semibold' : 'text-purple-100'}`}
+            >
+              {item.name}
+            </a>
+          ))}
+        </nav>
+        
+        <!-- Mobile Menu Button (CSS Only Toggle Checkbox Pattern or Simple Script) -->
+        <button id="mobile-menu-btn" class="md:hidden text-white p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 6h18M3 18h18" />
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Mobile Nav -->
+      <div id="mobile-nav" class="hidden md:hidden border-t border-white/10 bg-purple-900/95 backdrop-blur-xl">
+        <nav class="container mx-auto px-4 py-4 flex flex-col gap-4">
+          {navItems.map((item) => (
+            <a 
+              href={item.path} 
+              class={`block transition-colors hover:text-pink-300 ${currentPath === item.path || (currentPath.startsWith(item.path) && item.path !== '/') ? 'text-pink-400 font-semibold' : 'text-purple-100'}`}
+            >
+              {item.name}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="min-h-[calc(100vh-140px)]">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-black/20 mt-12 py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto mb-8 text-center md:text-left">
+          <div class="md:col-span-2">
+            <a href="/" class="flex items-center gap-3 justify-center md:justify-start mb-4">
+              <img src="/holy_fire_logo.webp" alt="HolyfireMedia logo" class="h-8 w-8 rounded-full border border-white/25 object-cover" />
+              <span class="text-xl font-bold">HolyfireMedia</span>
+            </a>
+            <p class="text-purple-200 text-sm max-w-sm mx-auto md:mx-0">
+              Proclaiming the Word of God through Music. Your premier destination for Malayalam Christian songs, lyrics, and karaoke.
+            </p>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-sm text-purple-200">
+              <li><a href="/artists" class="hover:text-pink-300 transition">Artists</a></li>
+              <li><a href="/songs" class="hover:text-pink-300 transition">Songs</a></li>
+              <li><a href="/karaoke" class="hover:text-pink-300 transition">Karaoke</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-white mb-4">Legal</h4>
+            <ul class="space-y-2 text-sm text-purple-200">
+              <li><a href="/privacy-policy" class="hover:text-pink-300 transition">Privacy Policy</a></li>
+              <li><a href="/terms" class="hover:text-pink-300 transition">Terms of Service</a></li>
+              <li><a href="/refund-policy" class="hover:text-pink-300 transition">Refund Policy</a></li>
+              <li><a href="/contact" class="hover:text-pink-300 transition">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-white/10 pt-8 text-center text-sm text-purple-300">
+          <p>&copy; {new Date().getFullYear()} HolyfireMedia. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Simple toggle for mobile menu
+      const btn = document.getElementById('mobile-menu-btn');
+      const nav = document.getElementById('mobile-nav');
+      if (btn && nav) {
+        btn.addEventListener('click', () => {
+          nav.classList.toggle('hidden');
+        });
+      }
+    </script>
+  </body>
+</html>

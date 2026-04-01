@@ -1,20 +1,38 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import MainLayout from '../layouts/MainLayout.astro';
 ---
 
-<Layout title="Refund Policy">
-  <div class="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 text-white">
-    <main class="container mx-auto px-4 py-20 max-w-3xl">
-      <h1 class="text-4xl md:text-5xl font-extrabold mb-6">Refund Policy</h1>
-      <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 space-y-4 text-purple-100">
-        <p>All sales are final. Since this is a digital product, no refunds will be issued once the download link is delivered.</p>
-      </div>
-    </main>
+<MainLayout title="Refund Policy" description="Refund Policy for digital karaoke tracks.">
+  <div class="container mx-auto px-4 py-20 max-w-4xl">
+    <div class="bg-indigo-900/30 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl relative">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-8 border-b border-white/10 pb-6">Refund Policy</h1>
+      
+      <div class="prose prose-invert prose-pink max-w-none text-purple-100 space-y-6">
+        <p class="text-lg leading-relaxed">
+          At HolyfireMedia, customer satisfaction is a priority. Please review our policy regarding digital downloads and refunds.
+        </p>
 
-    <footer class="border-t border-white/10 py-6">
-      <div class="container mx-auto px-4 text-center text-purple-200">
-        <p>© 2026 HolyfireMedia | Contact: jmmusicdistribution@gmail.com</p>
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">Digital Products</h2>
+        <p>
+          Because our products are digital audio files (MP3/WAV) that are instantly delivered upon purchase, we generally do not offer refunds once the download link has been provided and accessed.
+        </p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">Exceptions</h2>
+        <p>
+          Refunds may be granted under the following exceptional circumstances:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 marker:text-pink-500">
+          <li>The downloaded file is corrupted or unplayable, and our technical support cannot resolve the issue.</li>
+          <li>Duplicate accidental purchases of the exact same track within a 24-hour window.</li>
+          <li>The wrong track was delivered by our system compared to what was shown in the receipt.</li>
+        </ul>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">Requesting a Refund</h2>
+        <p>
+          To request a refund, please contact us within 7 days of your purchase detailing the issue. 
+          <br>Email: <a href="mailto:jmmusicdistribution@gmail.com" class="text-pink-400 hover:text-pink-300 font-bold mt-2 inline-block">jmmusicdistribution@gmail.com</a>
+        </p>
       </div>
-    </footer>
+    </div>
   </div>
-</Layout>
+</MainLayout>
