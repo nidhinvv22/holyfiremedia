@@ -36,6 +36,27 @@ const navItems = [
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:image" content={new URL("/holy_fire_logo.webp", Astro.url)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url.href} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL("/holy_fire_logo.webp", Astro.url)} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={Astro.url.href} />
+
+    <!-- JSON-LD WebSite Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "HolyfireMedia",
+      "url": "https://holyfiremedia.in/",
+      "description": "Discover Malayalam Christian songs, artists, lyrics, prayers, and karaoke tracks."
+    })} />
     
     <link rel="icon" type="image/webp" href="/holy_fire_logo.webp" />
     <link rel="shortcut icon" href="/holy_fire_logo.webp" />

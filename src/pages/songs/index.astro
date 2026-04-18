@@ -1,15 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-
-// Placeholder Data
-const songs = [
-  { id: 1, title: "Daivame Kaithozham", artist: "Artist One", duration: "4:32", hasKaraoke: true },
-  { id: 2, title: "Kaval Malakhamare", artist: "Artist Two", duration: "5:10", hasKaraoke: true },
-  { id: 3, title: "Athmavile", artist: "Artist Three", duration: "3:45", hasKaraoke: false },
-  { id: 4, title: "Snahithane", artist: "Artist One", duration: "4:15", hasKaraoke: true },
-  { id: 5, title: "Yudham Cheyyum", artist: "Artist Four", duration: "5:30", hasKaraoke: true },
-  { id: 6, title: "Ninnitham", artist: "Artist Five", duration: "4:48", hasKaraoke: false },
-];
+import { songs } from '../../data/songs';
 ---
 
 <MainLayout title="All Songs | HolyfireMedia" description="Browse all Malayalam Christian songs.">
@@ -66,11 +57,13 @@ const songs = [
             <div class="col-span-1 text-purple-300 text-center hidden md:block">{song.duration}</div>
             
             <div class="col-span-12 md:col-span-2 flex gap-2 justify-end">
-              <a href="/lyrics" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded transition-colors">
-                Lyrics
-              </a>
+              {song.hasLyrics && (
+                <a href={`/lyrics/${song.slug}`} class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded transition-colors">
+                  Lyrics
+                </a>
+              )}
               {song.hasKaraoke && (
-                <a href="/karaoke" class="px-3 py-1.5 bg-pink-600 hover:bg-pink-500 text-white text-sm font-medium rounded shadow-md transition-transform hover:scale-105">
+                <a href={`/karaoke/${song.slug}`} class="px-3 py-1.5 bg-pink-600 hover:bg-pink-500 text-white text-sm font-medium rounded shadow-md transition-transform hover:scale-105">
                   Karaoke
                 </a>
               )}

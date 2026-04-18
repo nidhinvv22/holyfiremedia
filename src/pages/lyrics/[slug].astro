@@ -1,0 +1,114 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { songs } from '../../data/songs';
+
+export async function getStaticPaths() {
+  return songs.map((song) => {
+    return {
+      params: { slug: song.slug },
+      props: { song },
+    };
+  });
+}
+
+const { song } = Astro.props;
+---
+
+<MainLayout title={`${song.title} Lyrics`} description={`Read ${song.title} lyrics in Manglish and Malayalam.`}>
+  <div class="container mx-auto px-4 py-16">
+    <div class="max-w-5xl mx-auto">
+      <a href="/lyrics" class="inline-flex items-center text-pink-400 hover:text-pink-300 transition-colors mb-8 group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Lyrics List
+      </a>
+
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">{song.title}</h1>
+      <p class="text-xl text-purple-300 mb-12">By {song.artist}</p>
+
+      {song.lyrics ? (
+        <div class="bg-indigo-900/30 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl relative">
+          <!-- Language Toggle -->
+          <div class="flex flex-wrap justify-center mb-8 gap-3 md:gap-4">
+            <button id="btn-malayalam" class="px-5 py-2 rounded-full bg-pink-600 font-bold text-white shadow-lg transition-all border border-pink-500 transform hover:scale-105 active:scale-95 text-sm md:text-base">Malayalam</button>
+            <button id="btn-manglish" class="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 font-bold text-purple-200 transition-all border border-white/20 transform hover:scale-105 active:scale-95 text-sm md:text-base">Manglish</button>
+          </div>
+
+          <!-- Text Sections -->
+          <div id="content-container" class="relative">
+            <!-- Malayalam Section -->
+            <section id="sec-malayalam" class="bg-white/5 p-6 md:p-8 rounded-2xl border border-white/5 block fade-in">
+              <pre class="font-malayalam text-purple-100/90 whitespace-pre-wrap font-medium text-lg leading-loose break-words bg-transparent border-none">
+                {song.lyrics.malayalam.trim()}
+              </pre>
+            </section>
+
+            <!-- Manglish Section -->
+            <section id="sec-manglish" class="bg-white/5 p-6 md:p-8 rounded-2xl border border-white/5 hidden fade-in">
+              <pre class="font-serif text-purple-100/90 whitespace-pre-wrap font-medium text-lg leading-loose break-words bg-transparent border-none">
+                {song.lyrics.manglish.trim()}
+              </pre>
+            </section>
+          </div>
+
+          <style>
+            .fade-in {
+              animation: fadeIn 0.4s ease-in-out forwards;
+            }
+            @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(5px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+          </style>
+
+          <script is:inline>
+            document.addEventListener('DOMContentLoaded', () => {
+              const btnMal = document.getElementById('btn-malayalam');
+              const btnMan = document.getElementById('btn-manglish');
+
+              const secMal = document.getElementById('sec-malayalam');
+              const secMan = document.getElementById('sec-manglish');
+
+              const activeBtnClass = 'bg-pink-600 text-white shadow-lg border-pink-500';
+              const inactiveBtnClass = 'bg-white/10 text-purple-200 border-white/20 hover:bg-white/20';
+              const baseBtnClass = 'px-5 py-2 rounded-full font-bold transition-all border transform hover:scale-105 active:scale-95 text-sm md:text-base';
+
+              function setActiveState(activeBtn, activeSec) {
+                if(!btnMal || !btnMan || !secMal || !secMan) return;
+
+                // Reset buttons
+                [btnMal, btnMan].forEach(btn => {
+                  btn.className = baseBtnClass + ' ' + inactiveBtnClass;
+                });
+                
+                // Set active button
+                activeBtn.className = baseBtnClass + ' ' + activeBtnClass;
+
+                // Hide all sections
+                [secMal, secMan].forEach(sec => {
+                  sec.classList.remove('block');
+                  sec.classList.add('hidden');
+                });
+                
+                // Show active section
+                activeSec.classList.remove('hidden');
+                activeSec.classList.add('block');
+              }
+
+              btnMal?.addEventListener('click', () => setActiveState(btnMal, secMal));
+              btnMan?.addEventListener('click', () => setActiveState(btnMan, secMan));
+            });
+          </script>
+        </div>
+      ) : (
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-12 text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-purple-400 mb-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <p class="text-xl text-purple-200">Lyrics for this song are currently unavailable.</p>
+        </div>
+      )}
+    </div>
+  </div>
+</MainLayout>

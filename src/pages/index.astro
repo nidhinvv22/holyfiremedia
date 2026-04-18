@@ -1,18 +1,14 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import frJosephImg from '../assets/fr_joseph_mukkatt.webp';
+import { songs } from '../data/songs';
 
-// Placeholder Data
+// Placeholder Data for Artists (until we move artists to data store)
 const featuredArtists = [
-  { id: 1, name: "Fr Joseph Mukkatt", bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", image: "https://placehold.co/400x400/3b0764/ffffff?text=Artist+1", slug: "artist-101" },
-  { id: 2, name: "Artist Two", bio: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", image: "https://placehold.co/400x400/3b0764/ffffff?text=Artist+2", slug: "artist-2" },
-  { id: 3, name: "Artist Three", bio: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.", image: "https://placehold.co/400x400/3b0764/ffffff?text=Artist+3", slug: "artist-3" },
+  { id: 1, name: "Fr. Joseph Mukkatt", bio: "Fr. Joseph Mukkatt shares Malayalam Christian songs, homilies, and Catholic spiritual reflections.", image: frJosephImg.src, slug: "fr-joseph-mukkatt" },
 ];
 
-const featuredSongs = [
-  { id: 1, title: "Song One", artist: "Fr Joseph Mukkatt", slug: "song-1" },
-  { id: 2, title: "Song Two", artist: "Artist Two", slug: "song-2" },
-  { id: 3, title: "Song Three", artist: "Artist One", slug: "song-3" },
-];
+const featuredSongs = songs.slice(0, 3);
 ---
 
 <MainLayout>
@@ -20,10 +16,10 @@ const featuredSongs = [
   <section class="container mx-auto px-4 py-20 md:py-32 text-center">
     <div class="max-w-4xl mx-auto space-y-8 animate-fade-in-up">
       <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-300 to-purple-300 drop-shadow-xl leading-tight">
-        Proclaiming the Word of God <br class="hidden sm:block" /> through Music
+        Malayalam Christian Prayers, <br class="hidden sm:block" /> Lyrics & Karaoke
       </h1>
       <p class="text-xl md:text-2xl text-purple-200 font-medium max-w-2xl mx-auto">
-        Discover Malayalam Christian songs, artists, lyrics, prayers, and karaoke tracks.
+        Your spiritual home for Malayalam Catholic prayers, Holy Communion songs, Manglish Rosaries, and devotional music.
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
         <a href="/artists" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-lg hover:shadow-pink-500/25 transition-all hover:scale-105 active:scale-95 text-lg">
@@ -82,8 +78,8 @@ const featuredSongs = [
                 <p class="text-purple-300">{song.artist}</p>
               </div>
             </div>
-            <a href={`/songs`} class="hidden sm:inline-flex px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/10 text-white font-medium rounded-lg transition-all">
-              View Song
+            <a href={`/lyrics/${song.slug}`} class="hidden sm:inline-flex px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/10 text-white font-medium rounded-lg transition-all">
+              View Lyrics
             </a>
           </div>
         ))}
@@ -126,7 +122,7 @@ const featuredSongs = [
   <section class="container mx-auto px-4 py-16 pb-24 text-center max-w-3xl">
     <h2 class="text-2xl sm:text-3xl font-bold text-white mb-6">Our Mission</h2>
     <p class="text-lg text-purple-200 leading-relaxed">
-      HolyfireMedia is dedicated to spreading the message of faith and love through the powerful medium of music. We curate the best Malayalam Christian songs, lyrics, and karaoke tracks, offering a spiritual haven for believers around the world.
+      HolyfireMedia is dedicated to spreading the message of faith and love. We curate the best Catholic Malayalam prayers, Holy Communion songs, Manglish lyrics, and karaoke tracks—offering a comprehensive spiritual haven for believers around the world.
     </p>
   </section>
 

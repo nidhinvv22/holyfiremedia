@@ -1,0 +1,172 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { songs } from '../../data/songs';
+import aradhyaneFile from '../../assets/Aradhyane_Parishudhane_Ennullam_Thirayunnori_Karoke_with_chorus.mp3';
+import previewEnullam from '../../assets/enullam_sample.MP3';
+
+export async function getStaticPaths() {
+  return songs.map((song) => {
+    return {
+      params: { slug: song.slug },
+      props: { song },
+    };
+  });
+}
+
+const { song } = Astro.props;
+const { slug } = Astro.params;
+
+let downloadUrl = song.freeFile;
+let previewUrl = `/audio/preview-${song.slug}.mp3`;
+if (slug === "aradhyane-parishudhane") {
+  downloadUrl = aradhyaneFile;
+  previewUrl = previewEnullam;
+}
+---
+
+<MainLayout title={`${song.title} Karaoke Download | Malayalam Christian Karaoke`} description={song.description}>
+  <div class="container mx-auto px-4 py-16">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <a href="/karaoke" class="inline-flex items-center text-pink-400 hover:text-pink-300 transition-colors mb-8 group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Karaoke List
+      </a>
+      
+      <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300 drop-shadow-lg mb-6">
+        {song.title}
+      </h1>
+      <p class="text-2xl text-white mb-6 font-semibold">Artist: {song.artist}</p>
+      <p class="text-xl text-purple-200 leading-relaxed max-w-2xl mx-auto">
+        {song.description}
+      </p>
+
+      {/* Audio Preview */}
+      <div class="mt-12 animate-fade-in-up">
+        <h3 class="text-lg font-semibold text-white mb-4">Preview Karaoke (With Chorus)</h3>
+        <audio controls class="w-full max-w-md mx-auto rounded-full bg-indigo-900/40 opacity-90 border border-white/10 shadow-lg" style="border-radius: 9999px;">
+          <source src={previewUrl} type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+
+    <!-- Karaoke Versions Layout -->
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20 md:items-stretch animate-fade-in-up">
+      
+      <!-- Column 1: Free Version -->
+      <article class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(236,72,153,0.3)] transition-all duration-300 relative overflow-hidden group flex flex-col">
+        <!-- Glow -->
+        <div class="absolute top-0 right-0 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl group-hover:bg-pink-500/40 transition-colors pointer-events-none"></div>
+        
+        <h3 class="text-2xl font-bold text-white mb-6 relative z-10">Standard Version (With Chorus)</h3>
+        
+        <div class="mb-6 relative z-10">
+          <div class="flex items-baseline gap-2 text-white">
+            <span class="text-5xl font-extrabold tracking-tight">FREE</span>
+          </div>
+          <p class="text-sm text-purple-300 mt-2">Instant community download</p>
+        </div>
+
+        <ul class="space-y-4 mb-8 relative z-10 flex-grow">
+          {["MP3 format", "Includes backing vocals", "Standard quality"].map((feature) => (
+            <li class="flex items-start gap-3 text-purple-100">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-pink-500/20 flex items-center justify-center border border-pink-500/30">
+                <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              </span>
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <!-- Conditional Download Link -->
+        {
+          downloadUrl ? (
+            <button
+              onclick={`downloadFile('${downloadUrl}')`}
+              class="w-full mt-auto px-6 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-xl transition-colors relative z-10 text-center block"
+            >
+              Download Free Karaoke
+            </button>
+          ) : (
+            <button disabled class="w-full mt-auto px-6 py-4 bg-white/5 border border-white/10 text-white/50 font-semibold rounded-xl cursor-not-allowed relative z-10 text-center block">
+              Download Not Available
+            </button>
+          )
+        }
+        <p class="text-xs text-purple-300 text-center mt-3 relative z-10">Instant automatic download &bull; Free with chorus</p>
+      </article>
+
+      <!-- Column 2: Premium Version -->
+      <div class="relative group hover:scale-[1.02] transition-all duration-300 flex flex-col">
+        <!-- Gradient Border Background Base -->
+        <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-[1.5rem] opacity-75 blur-[2px] group-hover:opacity-100 transition duration-500"></div>
+        
+        <article class="relative flex flex-col h-full bg-[#1b0b3b] backdrop-blur-xl rounded-3xl p-8 border border-white/10 overflow-hidden m-[1px]">
+          
+          <!-- Best Value Badge -->
+          <div class="absolute top-0 right-0 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl z-20 shadow-lg border-b border-l border-white/20">
+            BEST VALUE
+          </div>
+
+          <!-- Glow Inside -->
+          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl group-hover:bg-purple-500/30 transition-colors pointer-events-none"></div>
+
+          <h3 class="text-2xl font-bold text-white mb-6 relative z-10 pr-16 lg:pr-20">Pro Studio Version</h3>
+          
+          <div class="mb-6 relative z-10">
+            <div class="flex items-baseline gap-2 text-white">
+              <span class="text-5xl font-extrabold tracking-tight">₹{song.price}</span>
+              <span class="text-purple-300 font-medium">/ track</span>
+            </div>
+            <p class="text-sm text-purple-300 mt-2">(Inclusive of applicable taxes)</p>
+          </div>
+
+          <ul class="space-y-4 mb-8 relative z-10 flex-grow">
+            {["High-fidelity WAV + MP3", "Pure Instrumental (No Chorus)", "Studio Mastered", "Commercial License"].map((feature) => (
+              <li class="flex items-start gap-3 text-purple-100 font-medium">
+                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center shadow-[0_0_10px_rgba(236,72,153,0.3)]">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </span>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <button onclick="alert('Razorpay Payment Gateway Placeholder... Initializing transaction for Premium Karaoke Track.')" class="w-full mt-auto px-6 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.6)] transition-all text-center relative z-10 block hover:scale-105 duration-300">
+            Buy Now
+          </button>
+        </article>
+      </div>
+
+    </div>
+  </div>
+
+  <style>
+    /* Styling for audio player */
+    audio::-webkit-media-controls-panel {
+      background-color: rgba(49, 46, 129, 0.4);
+    }
+    audio::-webkit-media-controls-play-button,
+    audio::-webkit-media-controls-mute-button {
+      background-color: rgba(236, 72, 153, 0.2);
+      border-radius: 50%;
+    }
+    audio::-webkit-media-controls-current-time-display,
+    audio::-webkit-media-controls-time-remaining-display {
+      color: white;
+    }
+  </style>
+
+  <script is:inline>
+    function downloadFile(url) {
+      const a = document.createElement("a");
+      a.href = url;
+      a.setAttribute("download", "");
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  </script>
+</MainLayout>

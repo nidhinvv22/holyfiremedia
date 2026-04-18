@@ -5,29 +5,353 @@ export function getStaticPaths() {
   const prayers = [
     { 
       slug: "holy-rosary", 
-      title: "Malayalam Holy Rosary", 
-      englishText: "In the name of the Father, and of the Son, and of the Holy Spirit. Amen.",
-      manglishText: "Pithavinteyum puthranteyum parishudhalmhavinteyum namathil. Amen.",
-      malayalamText: "പിതാവിന്റെയും പുത്രന്റെയും പരിശുദ്ധാത്മാവിന്റെയും നാമത്തിൽ. ആമ്മേൻ."
+      title: "Malayalam Holy Rosary (ജപമാല)", 
+      manglishText: `
+        <h2 class="text-2xl font-bold mb-4 text-center">Parishudha Kanyakamathavinte Japamala</h2>
+
+        <h3 class="text-xl text-pink-400 font-bold mt-6 mb-2">Prarambha Prarthana</h3>
+        <p class="mb-4 text-justify">Alavillatha sakala nanma swaroopanayirikkunna sarveshwara karthave, nissararum nandiketta papikalumaya njangal nisseemapratapavanaya ange sannidhiyil prarthikkuvan ayogyarakunnu. Engilum ange ananthamaya dayayil sharanappettukondu, parishudha daivamathavinte sthuthikkai japamala yarpikkuvan njangal agrahikkunnu. Ee arppanam bhakthiyodum shradhayodum koode cheyyunnathinu karthave, njangale anugrahikkaname.</p>
+
+        <h3 class="text-xl text-pink-400 font-bold mt-6 mb-2">Sarvashakthanaya pithavum.......</h3>
+        <p class="text-right text-pink-300 font-bold mb-2">1. Swarga.</p>
+
+        <p class="mb-4 text-justify">Pithavaya daivathinte makalayirikkunna parishudha mariyame, njangalil daivavishwasamenna punyamundayi phalam cheyyunnathinu ange thirukkumaranodu apekshikkaname.</p>
+        <p class="text-right text-pink-300 font-bold mb-2">1. Nanma.</p>
+
+        <p class="mb-4 text-justify">Puthranaya daivathinte mathavayirikkunna parishudha mariyame, njangalil daivasharanam enna punyamundayi valarunnathinu ange thirukkumaranodu apekshikkaname.</p>
+        <p class="text-right text-pink-300 font-bold mb-2">1. Nanma.</p>
+
+        <p class="mb-4 text-justify">Parishudhathmavaya daivathinu ettavum priyamulla parishudha mariyame, njangalil daivasnehamenna punyamundayi vardhikkunnathinu ange thirukkumaranodu apekshikkaname.</p>
+        <p class="text-right text-pink-300 font-bold mb-2">1. Nanma. 1. Thrithva.</p>
+
+        <div class="bg-red-900/20 border border-red-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-4">Konthayude oro dashakavum kazhinju chollunna Fathima sukruthajapam</h3>
+          <p class="text-center italic text-purple-100">Oh! Ente eeshoye, njangalude papangal kshamikkaname, narakagniyil ninnu njangale rakshikkaname. Ella aathmakkaleyum prathyekam ange sahayavum kooduthal aavashyamullavareyum swargathilekku aanayikkaname.</p>
+          <p class="text-center font-bold mt-4 text-pink-300">Parishudha japamalayude raajni, njangalkkuvendi apekshikkaname.</p>
+        </div>
+
+        <div class="bg-pink-900/20 border border-pink-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-2">Santhoshakaramaya Divyarahasyangal</h3>
+          <p class="text-center text-pink-300 mb-6 text-sm">(Thinkal, Shani divasangali chollunnu.)</p>
+          <ol class="list-decimal list-outside pl-5 space-y-6 text-purple-100">
+            <li class="pl-2">Parishudha daivamathavu garbham dharichu eeshomishihaye prasavikkumenna mangalavartha gabriyel malakha daivakalpanayal ariyichu ennu dhyanikkuka.<br><span class="text-pink-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Parishudha daivamathavu, eleeshwa garbhiniyaya vivaram kettappol aa punyavathiye chennukandu moonnu masatholam avalkku shushrusha cheythu ennu dhyanikkuka.<br><span class="text-pink-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Parishudha daivamathavu thante udarathil ulbhavicha daivakumaranne prasavippan kalamayappol bethlehem nagariyil pathiraykku prasavichu oru thozhukkootil kidathi ennu dhyanikkuka.<br><span class="text-pink-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Parishudha daivamathavu thante shudheekaranathinte naal vannappol eeshomishihaye devalayathil konduchennu daivathinu kazhchavachu shimayon enna mahathmavinte karangalil elppichu ennu dhyanikkuka.<br><span class="text-pink-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Parishudha daivamathavu thante divyakumaranu panthrandu vayassayirikke moonnu divasam avidathe kanathe anveshichittu moonnam naal devalayathil vachu vedashasthrikalumayi tharkkichirikkeyil avide kandethi ennu dhyanikkuka.<br><span class="text-pink-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+          </ol>
+        </div>
+
+        <div class="bg-indigo-900/20 border border-indigo-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-2">Prakashathinte Divyarahasyangal</h3>
+          <p class="text-center text-indigo-300 mb-6 text-sm">(Vyazhazhchakalil chollunnu)</p>
+          <ol class="list-decimal list-outside pl-5 space-y-6 text-purple-100">
+            <li class="pl-2">Nammude karthaveeshomishiha jordan nadiyil vachu snapakayohannante karangalil ninnu mammodisa sweekarichappol swargam thurakkappedukayum parishudhathmavu pravinte roopathil avidathemel ezhunnalli varikayum cheythu ennu dhyanikkuka.<br><span class="text-indigo-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Nammude karthaveeshomishiha kanayil vachu vivahavirunninte avasarathil parishudha ammayude madhyasthathal vellam veenjakki thante adyathe albhutham pravarthichu ennu dhyanikkuka.<br><span class="text-indigo-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Nammude karthaveeshomishiha jordanile mammodisaykkum marubhoomiyile orukkathinum shesham daivarajyathinte aagamanathekkurichulla suvishesham prasangikkuvan arambhichu ennu dhyanikkuka.<br><span class="text-indigo-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Nammude karthaveeshomishiha thabor malamukalil vachu thante priyappetta shishyanmarude sannidhyathil roopantharappettu thante swargeeyamahathvam avarkku velippeduthi ennu dhyanikkuka.<br><span class="text-indigo-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Nammude karthaveeshomishiha sehiyon oottushalayil vachu shishyanmarude padangal kazhukukayum avarkku snehathinte puthiya kalpana nalkukayum cheytha shesham avidathe sandehathinte shashvathasmarakamaya vishudha kurbana sthapichu ennu dhyanikkuka.<br><span class="text-indigo-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+          </ol>
+        </div>
+
+        <div class="bg-red-900/20 border border-red-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-2">Dukhakaramaya Divya Rahasyangal</h3>
+          <p class="text-center text-red-300 mb-6 text-sm">(Chovva, Velli divasangali chollunnu)</p>
+          <ol class="list-decimal list-outside pl-5 space-y-6 text-purple-100">
+            <li class="pl-2">Nammude karthaveeshomishiha poonkavanathil prarthichirikkumbol chora viyarthu ennu dhyanikkuka.<br><span class="text-red-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Nammude karthaveeshomishiha peelathosinte veettil vachu chammattikalal adikkappettu ennu dhyanikkuka.<br><span class="text-red-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Nammude karthaveeshomishihaye yoodanmar mulmudi dharipichu ennu dhyanikkuka.<br><span class="text-red-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Nammude karthaveeshomishiha maranathinu vidhikkappettathinushesham thanikku adhikam apamanavum vyakulavumundakuvan vendi avidathe thirutholinmel bharamulla kurishumaram chumathappettu ennu dhyanikkuka.<br><span class="text-red-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Nammude karthaveeshomishiha gagulthamalayil chennappol vyakulasamudrathil muzhukiya parishudha mathavinte mumbake thiruvasthrangalurinjadukkappettu, kurishinmel tharaykkappettu ennu dhyanikkuka.<br><span class="text-red-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+          </ol>
+        </div>
+
+        <div class="bg-yellow-900/20 border border-yellow-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-2">Mahimayude Divyarahasyangal</h3>
+          <p class="text-center text-yellow-300 mb-6 text-sm">(Budhan, Njanyar divasangali chollunnu)</p>
+          <ol class="list-decimal list-outside pl-5 space-y-6 text-purple-100">
+            <li class="pl-2">Nammude karthaveeshomishiha peedasahichu marichathinte moonnam naal jayasanthoshangalode uyirthezhunnalli ennu dhyanikkuka.<br><span class="text-yellow-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Nammude karthaveeshomishiha thante uyirppinte shesham nalpatham naal albhuthakaramaya mahimayodum jayathodum koode thante divyamathavum shishyarum kandukondu nilkkumbol swargarohanam cheythu ennu dhyanikkuka.<br><span class="text-yellow-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Nammude karthaveeshomishiha pithavaya daivathinte valathubhagathu ezhunnalliyirikkumbol sehiyon oottushalayil dhyanichirunna kanyakamathavinte melum shleehanmarude melum parishudhathmavine ayachu ennu dhyanikkuka.<br><span class="text-yellow-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Nammude karthaveeshomishiha uyirthezhunnelli kurakkalam kazhinjappol kanyakamathavu ee lokathilninnu malakhamaral swargathilekku adukkappettu ennu dhyanikkuka.<br><span class="text-yellow-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+            <li class="pl-2">Parishudha daivamathavu, paralokathethiya udane thante divyakumaranal swargathinteyum bhoomiyudeyum raajniyayi mudi dharikkappettu ennu dhyanikkuka.<br><span class="text-yellow-400 font-bold block text-right mt-2">1. Swarga. 10. Nanma. 1. Thrithva.</span></li>
+          </ol>
+        </div>
+
+        <div class="bg-purple-900/30 border border-purple-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-4">Japamala Samarppanam</h3>
+          <p class="text-justify text-purple-100 italic leading-relaxed">
+            Mukhyadoothanaya vishudha mikhayele, daivadoothanmaraya vishudha gabriyele, vishudha rappayele, mahathmavaya vishudha yauseppe, shleehanmaraya vishudha pathrose, mar paulose, mar yohannane, njangalude pithavaya mar thomma, njangal valiya papikalayirikkunnuvengilum njangal japicha ee prarthana ningalude keerthanangalodukoode onnayi cherthu parishudha daivamathavinte thruppadathingal kazhchavaykkuvan ningalodu njangal prarthikkunnu.
+          </p>
+        </div>
+
+
+        <div class="bg-blue-900/20 border border-blue-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-6">Mathavinte Luthiniya</h3>
+          <div class="text-purple-100 text-sm md:text-base leading-loose max-w-xl mx-auto rounded-lg bg-black/20 p-6 border border-white/5 font-serif">
+            <p>Karthave anugrahikkaname <span class="text-blue-300 font-semibold">(Karthave...)</span></p>
+            <p>Mishihaye anugrahikkaname <span class="text-blue-300 font-semibold">(Mishihaye...)</span></p>
+            <p>Karthave anugrahikkaname <span class="text-blue-300 font-semibold">(Karthave...)</span></p>
+            <p>Mishihaye njangalude prarthana kelkkaname <span class="text-blue-300 font-semibold">(Mishihaye...)</span></p>
+            <p>Mishihaye njangalude prarthana kaikkollaname <span class="text-blue-300 font-semibold">(Mishihaye...)</span></p>
+
+            <div class="my-4 border-t border-white/10"></div>
+
+            <p>Swargasthanaya pithavaya daivame <span class="text-blue-300 font-semibold">(Njangale anugrahikkaname)</span></p>
+            <p>Bhulokarakshakanaya puthranaya daivame <span class="text-blue-300 font-semibold">(Njangale anugrahikkaname)</span></p>
+            <p>Parishudhathmavaya daivame <span class="text-blue-300 font-semibold">(Njangale anugrahikkaname)</span></p>
+            <p>Ekadaivamaya parishudha thrithvame <span class="text-blue-300 font-semibold">(Njangale anugrahikkaname)</span></p>
+
+            <div class="my-4 border-t border-white/10"></div>
+
+            <p class="text-center text-blue-300 font-bold mb-4">"Njangalkkuvendi apekshikkaname"</p>
+            
+            <p>Parishudha mariyame...</p>
+            <p>Daivathinte parishudha janani...</p>
+            <p>Kanyakalkku makudamaya nirmmala kanyake...</p>
+            <p>Mishihayude mathave...</p>
+            <p>Daivavaraprasadathinte mathave...</p>
+            <p>Prathyashayude mathave...</p>
+            <p>Ettavum nirmmalayaya mathave...</p>
+            <p>Athyantha virakthayaya mathave...</p>
+            <p>Kalankamatta kanyakayaya mathave...</p>
+            <p>Kanyathvathinu bhangam varatha mathave...</p>
+            <p>Snehathinu ettam yogyayaya mathave...</p>
+            <p>Albhutathinu vishayamaya mathave...</p>
+            <p>Sadupadeshathinte mathave...</p>
+            <p>Srushtavinte mathave...</p>
+            <p>Thirusabhayude mathave...</p>
+            <p>Karunayude mathave...</p>
+            <p>Rakshakante mathave...</p>
+            <p>Ettam vivekamathiyaya kanyake...</p>
+            <p>Vanakkathinu ettam yogyayaya kanyake...</p>
+            <p>Sthuthikku yogyayaya kanyake...</p>
+            <p>Mahavallabhayaya kanyake...</p>
+            <p>Kanivulla kanyake...</p>
+            <p>Ettavum vishwasthayaya kanyake...</p>
+            <p>Neethiyude darppaname...</p>
+            <p>Divyajnjanathinte simhasaname...</p>
+            <p>Njangalude santhoshathinte karaname...</p>
+            <p>Aathmajnjanapooritha pathrame...</p>
+            <p>Bahumanathinte pathrame...</p>
+            <p>Athbhuthakaramaya bhakthiyude pathrame...</p>
+            <p>Divyarahasyam niranjirikkunna rosapushpame...</p>
+            <p>Davidinte kottaye...</p>
+            <p>Nirmmaladantham kondulla kottaye...</p>
+            <p>Swarnalayame...</p>
+            <p>Vagdanathinte pedakame...</p>
+            <p>Swargathinte vathile...</p>
+            <p>Ushakala nakshathrame...</p>
+            <p>Rogikalude arokkyame...</p>
+            <p>Papikalude sankethame...</p>
+            <p>Kudiyettakkarude aswasame...</p>
+            <p>Peeditharude aswasame...</p>
+            <p>Kristhyanikalude sahayame...</p>
+            <p>Malakhamarude raajni...</p>
+            <p>Poorvapithakkanmarude raajni...</p>
+            <p>Deerghadarshikalude raajni...</p>
+            <p>Shleehanmarude raajni...</p>
+            <p>Vedasakshikalude raajni...</p>
+            <p>Vandakanmarude raajni...</p>
+            <p>Kudumbangalude raajni...</p>
+            <p>Kanyakakalude raajni...</p>
+            <p>Sakalavishudharudeyum raajni...</p>
+            <p>Amalolbhavayaya raajni...</p>
+            <p>Swargaropithayaya raajni...</p>
+            <p>Parishudhajapamalayude raajni...</p>
+            <p>Karmmalasabhayude alankaramaya raajni...</p>
+            <p>Samadhanathinte raajni...</p>
+
+            <div class="my-4 border-t border-white/10"></div>
+
+            <p class="mt-4">Lokathinte papangal neekkunna divyakunjade <br><span class="text-blue-300 font-semibold">(Karthave njangalude papangal kshamikkaname)</span></p>
+            <p class="mt-4">Lokathinte papangal neekkunna divyakunjade <br><span class="text-blue-300 font-semibold">(Karthave njangalude prarthana kelkkaname)</span></p>
+            <p class="mt-4">Lokathinte papangal neekkunna divyakunjade <br><span class="text-blue-300 font-semibold">(Karthave njangale anugrahikkaname)</span></p>
+          </div>
+        </div>
+
+      `,
+      malayalamText: `
+        <h2 class="text-2xl font-bold mb-4 text-center">പരിശുദ്ധ കന്യകാമാതാവിന്റെ ജപമാല</h2>
+
+        <h3 class="text-xl text-pink-400 font-bold mt-6 mb-2">പ്രാരംഭ പ്രാർത്ഥന</h3>
+        <p class="mb-4 text-justify">അളവില്ലാത്ത സകല നന്മ സ്വരൂപനായിരിക്കുന്ന സർവ്വേശ്വരാ കർത്താവേ, നിസ്സാരരും നന്ദികെട്ട പാപികളുമായ ഞങ്ങൾ നിസ്സീമപ്രതാപവാനായ അങ്ങേ സന്നിധിയിൽ പ്രാർത്ഥിക്കുവാൻ അയോഗ്യരാകുന്നു. എങ്കിലും അങ്ങേ അനന്തമായ ദയയിൽ ശരണപ്പെട്ടുകൊണ്ട്, പരിശുദ്ധ ദൈവമാതാവിന്റെ സ്തുതിക്കായി ജപമാല യർപ്പിക്കുവാൻ ഞങ്ങൾ ആഗ്രഹിക്കുന്നു. ഈ അർപ്പണം ഭക്തിയോടും ശ്രദ്ധയോടും കൂടെ ചെയ്യുന്നതിനു കർത്താവേ, ഞങ്ങളെ അനുഗ്രഹിക്കണമേ.</p>
+
+        <h3 class="text-xl text-pink-400 font-bold mt-6 mb-2">സർവ്വശക്തനായ പിതാവും.......</h3>
+        <p class="text-right text-pink-300 font-bold mb-2">1. സ്വർഗ.</p>
+
+        <p class="mb-4 text-justify">പിതാവായ ദൈവത്തിന്റെ മകളായിരിക്കുന്ന പരിശുദ്ധ മറിയമേ, ഞങ്ങളിൽ ദൈവവിശ്വാസമെന്ന പുണ്യമുണ്ടായി ഫലം ചെയ്യുന്നതിന് അങ്ങേ തിരുക്കുമാരനോട് അപേക്ഷിക്കണമേ.</p>
+        <p class="text-right text-pink-300 font-bold mb-2">1. നന്മ.</p>
+
+        <p class="mb-4 text-justify">പുത്രനായ ദൈവത്തിന്റെ മാതാവായിരിക്കുന്ന പരിശുദ്ധ മറിയമേ, ഞങ്ങളിൽ ദൈവശരണമെന്ന പുണ്യമുണ്ടായി വളരുന്നതിന് അങ്ങേ തിരുക്കുമാരനോട് അപേക്ഷിക്കണമേ.</p>
+        <p class="text-right text-pink-300 font-bold mb-2">1. നന്മ.</p>
+
+        <p class="mb-4 text-justify">പരിശുദ്ധാത്മാവായ ദൈവത്തിന് ഏറ്റവും പ്രിയമുള്ള പരിശുദ്ധ മറിയമേ, ഞങ്ങളിൽ ദൈവസ്നേഹമെന്ന പുണ്യമുണ്ടായി വർദ്ധിക്കുന്നതിന് അങ്ങേ തിരുക്കുമാരനോട് അപേക്ഷിക്കണമേ.</p>
+        <p class="text-right text-pink-300 font-bold mb-2">1. നന്മ. 1. ത്രിത്വ.</p>
+
+        <div class="bg-red-900/20 border border-red-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-4">കൊന്തയുടെ ഓരോ ദശകവും കഴിഞ്ഞ് ചൊല്ലുന്ന ഫാത്തിമാ സുകൃതജപം</h3>
+          <p class="text-center italic text-purple-100">ഓ! എന്റെ ഈശോയേ, ഞങ്ങളുടെ പാപങ്ങൾ ക്ഷമിക്കണമേ, നരകാഗ്നിയിൽ നിന്നു ഞങ്ങളെ രക്ഷിക്കണമേ. എല്ലാ ആത്മാക്കളെയും പ്രത്യേകം അങ്ങേ സഹായവും കൂടുതൽ ആവശ്യമുള്ളവരെയും സ്വർഗ്ഗത്തിലേക്ക് ആനയിക്കണമേ.</p>
+          <p class="text-center font-bold mt-4 text-pink-300">പരിശുദ്ധ ജപമാലയുടെ രാജ്ഞീ, ഞങ്ങൾക്കുവേണ്ടി അപേക്ഷിക്കണമേ.</p>
+        </div>
+
+        <div class="bg-pink-900/20 border border-pink-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-2">സന്തോഷകരമായ ദിവ്യരഹസ്യങ്ങൾ</h3>
+          <p class="text-center text-pink-300 mb-6 text-sm">(തിങ്കൾ, ശനി ദിവസങ്ങളിൽ ചൊല്ലുന്നു.)</p>
+          <ol class="list-decimal list-outside pl-5 space-y-6 text-purple-100">
+            <li class="pl-2">പരിശുദ്ധ ദൈവമാതാവ് ഗർഭം ധരിച്ച് ഈശോമിശിഹായെ പ്രസവിക്കുമെന്ന മംഗളവാർത്ത ഗ്രബിയേൽ മാലാഖ ദൈവകല്പനയാൽ അറിയിച്ചു എന്നു ധ്യാനിക്കുക.<br><span class="text-pink-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">പരിശുദ്ധ ദൈവമാതാവ്, എലീശ്വാ ഗർഭിണിയായ വിവരം കേട്ടപ്പോൾ ആ പുണ്യവതിയെ ചെന്നുകണ്ട് മൂന്നു മാസത്തോളം അവൾക്കു ശുശ്രൂഷ ചെയ്തു എന്നു ധ്യാനിക്കുക.<br><span class="text-pink-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">പരിശുദ്ധ ദൈവമാതാവ് തന്റെ ഉദരത്തിൽ ഉത്ഭവിച്ച ദൈവകുമാരനെ പ്രസവിപ്പാൻ കാലമായപ്പോൾ ബെത്‍ലഹം നഗരിയിൽ പാതിരായ്ക്കു പ്രസവിച്ച് ഒരു തൊഴുക്കൂട്ടിൽ കിടത്തി എന്നു ധ്യാനിക്കുക.<br><span class="text-pink-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">പരിശുദ്ധ ദൈവമാതാവ് തന്റെ ശുദ്ധീകരണത്തിന്റെ നാൾ വന്നപ്പോൾ ഈശോമിശിഹായെ ദേവാലയത്തിൽ കൊണ്ടുചെന്നു ദൈവത്തിനു കാഴ്ചവച്ച് ശിമയോൻ എന്ന മഹാത്മാവിന്റെ കരങ്ങളിൽ ഏല്പിച്ചു എന്നു ധ്യാനിക്കുക.<br><span class="text-pink-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">പരിശുദ്ധ ദൈവമാതാവ് തന്റെ ദിവ്യകുമാരനു പന്ത്രണ്ടു വയസ്സായിരിക്കെ മൂന്നു ദിവസം അവിടത്തെ കാണാതെ അന്വേഷിച്ചിട്ട് മൂന്നാം നാൾ ദേവാലയത്തിൽ വച്ച് വേദശാസ്ത്രികളുമായി തർക്കിച്ചിരിക്കെയിൽ അവിടെ കണ്ട്െത്തി എന്നു ധ്യാനിക്കുക.<br><span class="text-pink-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+          </ol>
+        </div>
+
+        <div class="bg-indigo-900/20 border border-indigo-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-2">പ്രകാശത്തിന്റെ ദിവ്യരഹസ്യങ്ങൾ</h3>
+          <p class="text-center text-indigo-300 mb-6 text-sm">(വ്യാഴാഴ്ചകളിൽ ചൊല്ലുന്നു)</p>
+          <ol class="list-decimal list-outside pl-5 space-y-6 text-purple-100">
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹാ ജോർദാൻ നദിയിൽ വച്ച് സ്നാപകയോഹന്നാന്റെ കരങ്ങളിൽ നിന്ന് മാമ്മോദീസാ സ്വീകരിച്ചപ്പോൾ സ്വർഗം തുറക്കപ്പെടുകയും പരിശുദ്ധാത്മാവ് പ്രാവിന്റെ രൂപത്തിൽ അവിടത്തെമേൽ എഴുന്നള്ളി വരികയും ചെയ്തു എന്നു ധ്യാനിക്കുക.<br><span class="text-indigo-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹാ കാനായിൽ വച്ച് വിവാഹവിരുന്നിന്റെ അവസരത്തിൽ പരിശുദ്ധ അമ്മയുടെ മദ്ധ്യസ്ഥത്താൽ വെള്ളം വീഞ്ഞാക്കി തന്റെ ആദ്യത്തെ അൽഭുതം പ്രവർത്തിച്ചു എന്നു ധ്യാനിക്കുക.<br><span class="text-indigo-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹാ ജോർദാനിലെ മാമ്മോദീസായ്ക്കും മരുഭൂമിയിലെ ഒരുക്കത്തിനും ശേഷം ദൈവരാജ്യത്തിന്റെ ആഗമനത്തെക്കുറിച്ചുള്ള സുവിശേഷം പ്രസംഗിക്കുവാൻ ആരംഭിച്ചു എന്നു ധ്യാനിക്കുക.<br><span class="text-indigo-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹാ താബോർ മലമുകളിൽ വച്ച് തന്റെ പ്രിയപ്പെട്ട ശിഷ്യന്മാരുടെ സാന്നിദ്ധ്യത്തിൽ രൂപാന്തരപ്പെട്ട് തന്റെ സ്വർഗ്ഗീയമഹത്വം അവർക്ക് വെളിപ്പെടുത്തി എന്നു ധ്യാനിക്കുക.<br><span class="text-indigo-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹാ സെഹിയോൻ ഊട്ടുശാലയിൽ വച്ച് ശിഷ്യന്മാരുടെ പാദങ്ങൾ കഴുകുകയും അവർക്ക് സ്നേഹത്തിന്റെ പുതിയ കല്പന നൽകുകയും ചെയ്ത ശേഷം അവിടത്തെ സന്ദേഹത്തിന്റെ ശാശ്വതസ്മാരകമായ വിശുദ്ധ കുർബാന സ്ഥാപിച്ചു എന്നു ധ്യാനിക്കുക.<br><span class="text-indigo-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+          </ol>
+        </div>
+
+        <div class="bg-red-900/20 border border-red-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-2">ദുഃഖകരമായ ദിവ്യ രഹസ്യങ്ങൾ</h3>
+          <p class="text-center text-red-300 mb-6 text-sm">(ചൊവ്വ, വെള്ളി ദിവസങ്ങളിൽ ചൊല്ലുന്നു)</p>
+          <ol class="list-decimal list-outside pl-5 space-y-6 text-purple-100">
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹാ പൂങ്കാവനത്തിൽ പ്രാർത്ഥിച്ചിരിക്കുമ്പോൾ ചോര വിയർത്തു എന്നു ധ്യാനിക്കുക.<br><span class="text-red-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹാ പീലാത്തോസിന്റെ വീട്ടിൽ വച്ചു ചമ്മട്ടികളാൽ അടിക്കപ്പെട്ടു എന്നു ധ്യാനിക്കുക.<br><span class="text-red-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹായെ യൂദന്മാർ മുൾമുടി ധരിപ്പിച്ചു എന്നു ധ്യാനിക്കുക.<br><span class="text-red-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹാ മരണത്തിനു വിധിക്കപ്പെട്ടതിനുശേഷം തനിക്ക് അധികം അപമാനവും വ്യാകുലവുമുണ്ടാകുവാൻ വേണ്ടി അവിടത്തെ തിരുത്തോളിന്മേൽ ഭാരമുള്ള കുരിശുമരം ചുമത്തപ്പെട്ടുഎന്നു ധ്യാനിക്കുക.<br><span class="text-red-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹാ ഗാഗുൽത്താമലയിൽ ചെന്നപ്പോൾ വ്യാകുലസമുദ്രത്തിൽ മുഴുകിയ പരിശുദ്ധ മാതാവിന്റെ മുമ്പാകെ തിരുവസ്ത്രങ്ങളുരിഞ്ഞെടുക്കപ്പെട്ട്, കുരിശിന്മേൽ തറയ്ക്കപ്പെട്ടുഎന്നു ധ്യാനിക്കുക.<br><span class="text-red-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+          </ol>
+        </div>
+
+        <div class="bg-yellow-900/20 border border-yellow-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-2">മഹിമയുടെ ദിവ്യരഹസ്യങ്ങൾ</h3>
+          <p class="text-center text-yellow-300 mb-6 text-sm">(ബുധൻ, ഞായർ ദിവസങ്ങളിൽ ചൊല്ലുന്നു)</p>
+          <ol class="list-decimal list-outside pl-5 space-y-6 text-purple-100">
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹാ പീഡസഹിച്ചു മരിച്ചതിന്റെ മൂന്നാം നാൾ ಜയസന്തോഷങ്ങളോടെ ഉയിർത്തെഴുന്നള്ളി എന്നു ധ്യാനിക്കുക.<br><span class="text-yellow-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹാ തന്റെ ഉയിർപ്പിന്റെ ശേഷം നാല്പതാം നാൾ അത്ഭുതകരമായ മഹിമയോടും ജയത്തോടും കൂടെ തന്റെ ദിവ്യമാതാവും ശിഷ്യരും കണ്ടുകൊണ്ടു നിൽക്കുമ്പോൾ സ്വർഗാരോഹണം ചെയ്തു എന്നു ധ്യാനിക്കുക.<br><span class="text-yellow-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹാ പിതാവായ ദൈവത്തിന്റെ വലത്തുഭാഗത്ത് എഴുന്നള്ളിയിരിക്കുമ്പോൾ സെഹിയോൻ ഊട്ടുശാലയിൽ ധ്യാനിച്ചിരുന്ന കന്യകാമാതാവിന്റെ മേലും ശ്ലീഹന്മാരുടെ മേലും പരിശുദ്ധാത്മാവിനെ അയച്ചു എന്നു ധ്യാനിക്കുക.<br><span class="text-yellow-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">നമ്മുടെ കർത്താവീശോമിശിഹാ ഉയിർത്തെഴുന്നെള്ളി കുറേക്കാലം കഴിഞ്ഞപ്പോൾ കന്യകാമാതാവ് ഈ ലോകത്തിൽനിന്ന് മാലാഖമാരാൽ സ്വർഗത്തിലേക്ക് എടുക്കപ്പെട്ടു എന്നു ധ്യാനിക്കുക.<br><span class="text-yellow-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+            <li class="pl-2">പരിശുദ്ധ ദൈവമാതാവ്, പരലോകത്തെത്തിയ ഉടനെ തന്റെ ദിവ്യകുമാരനാൽ സ്വർഗത്തിന്റെയും ഭൂമിയുടെയും രാജ്ഞിയായി മുടി ധരിക്കപ്പെട്ടു എന്നു ധ്യാനിക്കുക.<br><span class="text-yellow-400 font-bold block text-right mt-2">1. സ്വർഗ. 10. നന്മ. 1. ത്രിത്വ.</span></li>
+          </ol>
+        </div>
+
+          <div class="bg-purple-900/30 border border-purple-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-4">ജപമാല സമർപ്പണം</h3>
+          <p class="text-justify text-purple-100 italic leading-relaxed">
+            മുഖ്യദൂതനായ വി. മിഖായേലേ, ദൈവദൂതന്മാരായ വി. ഗബ്രിയേലേ, വി. റപ്പായേലേ, മഹാത്മാവായ വി. യൗസേപ്പേ, ശ്ലീഹന്മാരായ വി. പത്രോസേ, മാർ പൗലോസേ, മാർ യോഹന്നാനേ, ഞങ്ങളുടെ പിതാവായ മാർ തോമ്മാ, ഞങ്ങൾ വലിയ പാപികളായിരിക്കുന്നുവെങ്കിലും ഞങ്ങൾ ജപിച്ച ഈ പ്രാർത്ഥന നിങ്ങളുടെ കീർത്തനങ്ങളോടുകൂടെ ഒന്നായി ചേർത്തു പരിശുദ്ധ ദൈവമാതാവിന്റെ തൃപ്പാദത്തിങ്കൽ കാഴ്ചവയ്ക്കുവാൻ നിങ്ങളോടു ഞങ്ങൾ പ്രാർത്ഥിക്കുന്നു.
+          </p>
+        </div>
+
+        <div class="bg-blue-900/20 border border-blue-500/30 p-5 rounded-xl mt-8 mb-6">
+          <h3 class="text-xl font-bold text-center text-white mb-6">മാതാവിന്റെ ലുത്തിനിയ</h3>
+          <div class="text-purple-100 text-sm md:text-base leading-loose max-w-xl mx-auto rounded-lg bg-black/20 p-6 border border-white/5 font-malayalam">
+            <p>കർത്താവേ അനുഗ്രഹിക്കണമേ <span class="text-blue-300 font-semibold">(കർത്താവെ...)</span></p>
+            <p>മിശിഹായേ അനുഗ്രഹിക്കണമേ <span class="text-blue-300 font-semibold">(മിശിഹായേ...)</span></p>
+            <p>കർത്താവേ അനുഗ്രഹിക്കണമേ <span class="text-blue-300 font-semibold">(കർത്താവേ...)</span></p>
+            <p>മിശിഹായേ ഞങ്ങളുടെ പ്രാർത്ഥന കേൾക്കണമേ <span class="text-blue-300 font-semibold">(മിശിഹായേ...)</span></p>
+            <p>മിശിഹായേ ഞങ്ങളുടെ പ്രാർത്ഥന കൈക്കൊള്ളണമേ <span class="text-blue-300 font-semibold">(മിശിഹായേ...)</span></p>
+
+            <div class="my-4 border-t border-white/10"></div>
+
+            <p>സ്വർഗ്ഗസ്ഥനായ പിതാവായ ദൈവമേ <span class="text-blue-300 font-semibold">(ഞങ്ങളെ അനുഗൃഹിക്കണമേ)</span></p>
+            <p>ഭൂലോകരക്ഷകനായ പുത്രനായ ദൈവമേ <span class="text-blue-300 font-semibold">(ഞങ്ങളെ അനുഗൃഹിക്കണമേ)</span></p>
+            <p>പരിശുദ്ധാത്മാവായ ദൈവമേ <span class="text-blue-300 font-semibold">(ഞങ്ങളെ അനുഗൃഹിക്കണമേ)</span></p>
+            <p>ഏകദൈവമായ പരിശുദ്ധ ത്രിത്വമേ <span class="text-blue-300 font-semibold">(ഞങ്ങളെ അനുഗൃഹിക്കണമേ)</span></p>
+
+            <div class="my-4 border-t border-white/10"></div>
+
+            <p class="text-center text-blue-300 font-bold mb-4">"ഞങ്ങൾക്കുവേണ്ടി അപേക്ഷിക്കണമേ"</p>
+            
+            <p>പരിശുദ്ധ മറിയമേ...</p>
+            <p>ദൈവത്തിന്റെ പരിശുദ്ധ ജനനി...</p>
+            <p>കന്യകകൾക്കു മകുടമായ നിർമ്മല കന്യകേ...</p>
+            <p>മിശിഹായുടെ മാതാവേ...</p>
+            <p>ദൈവവരപ്രസാദത്തിന്റെ മാതാവേ...</p>
+            <p>പ്രത്യാശയുടെ മാതാവേ...</p>
+            <p>ഏറ്റവും നിർമ്മലയായ മാതാവേ...</p>
+            <p>അത്യന്ത വിരക്തയായ മാതാവേ...</p>
+            <p>കളങ്കമറ്റ കന്യകയായ മാതാവേ...</p>
+            <p>കന്യാത്വത്തിനു ഭംഗം വരാത്ത മാതാവേ...</p>
+            <p>സ്നേഹത്തിന് ഏറ്റം യോഗ്യയായ മാതാവേ...</p>
+            <p>അത്ഭുതത്തിനു വിഷയമായ മാതാവേ...</p>
+            <p>സദുപദേശത്തിന്റെ മാതാവേ...</p>
+            <p>സൃഷ്ടാവിന്റെ മാതാവേ...</p>
+            <p>തിരുസഭയുടെ മാതാവേ...</p>
+            <p>കരുണയുടെ മാതാവേ...</p>
+            <p>രക്ഷകന്റെ മാതാവേ...</p>
+            <p>ഏറ്റം വിവേകമതിയായ കന്യകേ...</p>
+            <p>വണക്കത്തിന് ഏറ്റം യോഗ്യയായ കന്യകേ...</p>
+            <p>സ്തുതിക്കു യോഗ്യയായ കന്യകേ...</p>
+            <p>മഹാവല്ലഭയായ കന്യകേ...</p>
+            <p>കനിവുള്ള കന്യകേ...</p>
+            <p>ഏറ്റവും വിശ്വസ്തയായ കന്യകേ...</p>
+            <p>നീതിയുടെ ദർപ്പണമേ...</p>
+            <p>ദിവ്യജ്ഞാനത്തിന്റെ സിംഹാസനമേ...</p>
+            <p>ഞങ്ങളുടെ സന്തോഷത്തിന്റെ കാരണമേ...</p>
+            <p>ആത്മജ്ഞാന പൂരിത പാത്രമേ...</p>
+            <p>ബഹുമാനത്തിന്റെ പാത്രമേ...</p>
+            <p>അദ്ഭുതകരമായ ഭക്തിയുടെ പാത്രമേ...</p>
+            <p>ദിവ്യരഹസ്യം നിറഞ്ഞിരിക്കുന്ന റോസാപുഷ്പമേ...</p>
+            <p>ദാവീദിന്റെ കോട്ടയെ...</p>
+            <p>നിർമ്മലദന്തം കൊണ്ടുള്ള കോട്ടയെ...</p>
+            <p>സ്വർണാലയമേ...</p>
+            <p>വാഗ്ദാനത്തിന്റെ പേടകമേ...</p>
+            <p>സ്വർഗ്ഗത്തിന്റെ വാതിലെ...</p>
+            <p>ഉഷ:കാല നക്ഷത്രമേ...</p>
+            <p>രോഗികളുടെ ആരോഗ്യമേ...</p>
+            <p>പാപികളുടെ സങ്കേതമേ...</p>
+            <p>കുടിയേറ്റക്കാരുടെ ആശ്വാസമേ...</p>
+            <p>പീഡിതരുടേ ആശ്വാസമേ...</p>
+            <p>ക്രിസ്ത്യാനികളുടെ സഹായമേ...</p>
+            <p>മാലാഖമാരുടെ രാജ്ഞി...</p>
+            <p>പൂർവപിതാക്കന്മാരുടെ രാജ്ഞി...</p>
+            <p>ദീർഘദർശികളുടെ രാജ്ഞി...</p>
+            <p>ശ്ലീഹന്മാരുടെ രാജ്ഞി...</p>
+            <p>വേദസാക്ഷികളുടെ രാജ്ഞി...</p>
+            <p>വന്ദകൻമാരുടെ രാജ്ഞി...</p>
+            <p>കുടുംബങ്ങളുടെ രാജ്ഞി...</p>
+            <p>കന്യകകളുടെ രാജ്ഞി...</p>
+            <p>സകലവിശുദ്ധരുടെയും രാജ്ഞി...</p>
+            <p>അമലോത്ഭവയായ രാജ്ഞി...</p>
+            <p>സ്വര്ഗാരോപിതയായ രാജ്ഞി...</p>
+            <p>പരിശുദ്ധജപമാലയുടെ രാജ്ഞി...</p>
+            <p>കർമ്മലസഭയുടെ അലങ്കാരമായ രാജ്ഞി...</p>
+            <p>സമാധാനത്തിന്റെ രാജ്ഞി...</p>
+
+            <div class="my-4 border-t border-white/10"></div>
+
+            <p class="mt-4">ലോകത്തിന്റെ പാപങ്ങൾ നീക്കുന്ന ദിവ്യകുഞ്ഞാടെ <br><span class="text-blue-300 font-semibold">(കർത്താവേ ഞങളുടെ പാപങ്ങൾ ക്ഷമിക്കണമേ)</span></p>
+            <p class="mt-4">ലോകത്തിന്റെ പാപങ്ങൾ നീക്കുന്ന ദിവ്യകുഞ്ഞാടെ <br><span class="text-blue-300 font-semibold">(കർത്താവേ ഞങ്ങളുടെ പ്രാർത്ഥന കേൾക്കണമേ)</span></p>
+            <p class="mt-4">ലോകത്തിന്റെ പാപങ്ങൾ നീക്കുന്ന ദിവ്യകുഞ്ഞാടെ <br><span class="text-blue-300 font-semibold">(കർത്താവേ ഞങ്ങളെ അനുഗ്രഹിക്കേണമേ)</span></p>
+          </div>
+        </div>
+
+
+      `
     },
     { 
       slug: "divine-mercy", 
       title: "Divine Mercy Chaplet", 
-      englishText: "Eternal Father, I offer you the Body and Blood, Soul and Divinity of Your Dearly Beloved Son, Our Lord, Jesus Christ...",
       manglishText: "Nithya pithave, ente papangalkkum lokam muzhuvanumulla papangalkkum pariharamaayi...",
       malayalamText: "നിത്യ പിതാവേ, എന്റെ പാപങ്ങൾക്കും ലോകം മുഴുവനുമുള്ള പാപങ്ങൾക്കും പരിഹാരമായി..."
     },
     { 
       slug: "morning-prayer", 
       title: "Morning Prayer", 
-      englishText: "O my God, I offer Thee all my prayers, works, joys, and sufferings of this day...",
       manglishText: "Ente daivame, innathe ente ella prarthanakalum, pravrithikalum, santhoshangalum...",
       malayalamText: "എന്റെ ദൈവമേ, ഇന്നത്തെ എന്റെ എല്ലാ പ്രാർത്ഥനകളും, പ്രവൃത്തികളും, സന്തോഷങ്ങളും..."
     },
     { 
       slug: "evening-prayer", 
       title: "Evening Prayer", 
-      englishText: "Visit, we beseech Thee, O Lord, this dwelling, and drive far from it all snares of the enemy...",
       manglishText: "Karthave, ee bhavanatthe sandarshikkaname, shathruvukalude ella aakramangalum...",
       malayalamText: "കർത്താവേ, ഈ ഭവനത്തെ സന്ദർശിക്കണമേ, ശത്രുക്കളുടെ എല്ലാ ആക്രമണങ്ങളും..."
     }
@@ -63,29 +387,75 @@ const { prayer } = Astro.props;
 
         <div class="space-y-12">
           
-          <!-- Malayalam Section -->
-          <section class="bg-white/5 p-6 md:p-8 rounded-2xl border border-white/5 relative group">
-            <span class="absolute -top-3 left-6 bg-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow border border-pink-500">Malayalam</span>
-            <p class="text-xl md:text-2xl text-white leading-relaxed font-malayalam">
-              {prayer.malayalamText}
-            </p>
-          </section>
+          <!-- Language Toggle -->
+          <div class="flex flex-wrap justify-center mb-8 gap-3 md:gap-4">
+            <button id="btn-malayalam" class="px-5 py-2 rounded-full bg-pink-600 font-bold text-white shadow-lg transition-all border border-pink-500 transform hover:scale-105 active:scale-95 text-sm md:text-base">Malayalam</button>
+            <button id="btn-manglish" class="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 font-bold text-purple-200 transition-all border border-white/20 transform hover:scale-105 active:scale-95 text-sm md:text-base">Manglish</button>
+          </div>
 
-          <!-- Manglish Section -->
-          <section class="bg-white/5 p-6 md:p-8 rounded-2xl border border-white/5 relative group">
-            <span class="absolute -top-3 left-6 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow border border-purple-500">Manglish</span>
-            <p class="text-lg md:text-xl text-purple-100 leading-relaxed italic">
-              {prayer.manglishText}
-            </p>
-          </section>
+          <!-- Text Sections -->
+          <div id="content-container" class="relative">
+            <!-- Malayalam Section -->
+            <section id="sec-malayalam" class="bg-white/5 p-6 md:p-8 rounded-2xl border border-white/5 block fade-in">
+              <div class="text-lg md:text-xl text-white leading-relaxed font-malayalam" set:html={prayer.malayalamText}></div>
+            </section>
 
-          <!-- English Section -->
-          <section class="bg-white/5 p-6 md:p-8 rounded-2xl border border-white/5 relative group">
-            <span class="absolute -top-3 left-6 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow border border-blue-500">English Translation</span>
-            <p class="text-lg md:text-xl text-purple-100 leading-relaxed font-serif">
-              {prayer.englishText}
-            </p>
-          </section>
+            <!-- Manglish Section -->
+            <section id="sec-manglish" class="bg-white/5 p-6 md:p-8 rounded-2xl border border-white/5 hidden fade-in">
+              <div class="text-lg md:text-xl text-purple-100 leading-relaxed font-serif" set:html={prayer.manglishText}></div>
+            </section>
+          </div>
+
+          <style>
+            .fade-in {
+              animation: fadeIn 0.4s ease-in-out forwards;
+            }
+            @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(5px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+          </style>
+
+          <script is:inline>
+            document.addEventListener('DOMContentLoaded', () => {
+              const btnMal = document.getElementById('btn-malayalam');
+              const btnMan = document.getElementById('btn-manglish');
+
+              const secMal = document.getElementById('sec-malayalam');
+              const secMan = document.getElementById('sec-manglish');
+
+              const activeBtnClass = 'bg-pink-600 text-white shadow-lg border-pink-500';
+              const inactiveBtnClass = 'bg-white/10 text-purple-200 border-white/20 hover:bg-white/20';
+              const baseBtnClass = 'px-5 py-2 rounded-full font-bold transition-all border transform hover:scale-105 active:scale-95 text-sm md:text-base';
+
+              function setActiveState(activeBtn, activeSec) {
+                // Reset buttons
+                [btnMal, btnMan].forEach(btn => {
+                  if(btn) btn.className = baseBtnClass + ' ' + inactiveBtnClass;
+                });
+                
+                // Set active button
+                if(activeBtn) activeBtn.className = baseBtnClass + ' ' + activeBtnClass;
+
+                // Hide all sections
+                [secMal, secMan].forEach(sec => {
+                  if(sec) {
+                    sec.classList.remove('block');
+                    sec.classList.add('hidden');
+                  }
+                });
+                
+                // Show active section
+                if(activeSec) {
+                  activeSec.classList.remove('hidden');
+                  activeSec.classList.add('block');
+                }
+              }
+
+              btnMal?.addEventListener('click', () => setActiveState(btnMal, secMal));
+              btnMan?.addEventListener('click', () => setActiveState(btnMan, secMan));
+            });
+          </script>
           
         </div>
       </div>
