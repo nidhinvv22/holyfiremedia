@@ -170,9 +170,29 @@ export function getStaticPaths() {
 }
 
 const { prayer } = Astro.props;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": prayer.title,
+  "description": `Read ${prayer.title} in Malayalam and Manglish.`,
+  "inLanguage": ["ml", "en"],
+  "url": `https://holyfiremedia.in/prayers/general/${prayer.slug}`,
+  "publisher": {
+    "@type": "Organization",
+    "name": "HolyfireMedia",
+    "url": "https://holyfiremedia.in/"
+  },
+  "mainEntityOfPage": `https://holyfiremedia.in/prayers/general/${prayer.slug}`
+};
 ---
 
-<MainLayout title={`${prayer.title} | HolyfireMedia`} description={`Read ${prayer.title}.`}>
+<MainLayout
+  title={`${prayer.title} - Malayalam & Manglish | Catholic Prayer | HolyfireMedia`}
+  description={`Read ${prayer.title} in Malayalam and Manglish. Catholic devotional prayer text with dual-language toggle.`}
+  keywords={`${prayer.title}, ${prayer.title} Malayalam, Catholic prayer, devotional prayer Malayalam, Manglish prayer text`}
+  schemaData={articleSchema}
+>
   <div class="container mx-auto px-4 py-8 md:py-16">
     <div class="max-w-4xl mx-auto">
       

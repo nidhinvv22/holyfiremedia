@@ -1,7 +1,7 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import { songs } from '../../data/songs';
-import aradhyaneFile from '../../assets/Aradhyane_Parishudhane_Ennullam_Thirayunnori_Karoke_with_chorus.mp3';
+import aradhyaneFile from '../../assets/Aradhyane_Parishudane_Ennullam_Thirayunnori_sneham.mp3';
 import previewEnullam from '../../assets/enullam_sample.MP3';
 
 export async function getStaticPaths() {
@@ -22,9 +22,30 @@ if (slug === "aradhyane-parishudhane") {
   downloadUrl = aradhyaneFile;
   previewUrl = previewEnullam;
 }
+
+const karaokeSchema = {
+  "@context": "https://schema.org",
+  "@type": "MusicComposition",
+  "name": song.title,
+  "composer": { "@type": "Person", "name": song.artist },
+  "inLanguage": "ml",
+  "description": song.description,
+  "url": `https://holyfiremedia.in/karaoke/${song.slug}`,
+  "offers": {
+    "@type": "Offer",
+    "price": song.price,
+    "priceCurrency": "INR",
+    "availability": "https://schema.org/InStock"
+  }
+};
 ---
 
-<MainLayout title={`${song.title} Karaoke Download | Malayalam Christian Karaoke`} description={song.description}>
+<MainLayout
+  title={`${song.title} Karaoke Download | Malayalam Christian Karaoke | HolyfireMedia`}
+  description={`Download ${song.title} karaoke track by ${song.artist}. Free version with chorus and premium studio instrumental available. Malayalam Christian karaoke.`}
+  keywords={`${song.title} karaoke, ${song.artist} karaoke, Malayalam Christian karaoke download, ${song.title} instrumental, Catholic devotional karaoke`}
+  schemaData={karaokeSchema}
+>
   <div class="container mx-auto px-4 py-16">
     <div class="text-center max-w-3xl mx-auto mb-16">
       <a href="/karaoke" class="inline-flex items-center text-pink-400 hover:text-pink-300 transition-colors mb-8 group">

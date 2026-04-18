@@ -12,9 +12,27 @@ export async function getStaticPaths() {
 }
 
 const { song } = Astro.props;
+
+const lyricsSchema = {
+  "@context": "https://schema.org",
+  "@type": "MusicComposition",
+  "name": song.title,
+  "composer": { "@type": "Person", "name": song.artist },
+  "inLanguage": ["ml", "en"],
+  "url": `https://holyfiremedia.in/lyrics/${song.slug}`,
+  "lyrics": {
+    "@type": "CreativeWork",
+    "text": song.lyrics?.manglish?.substring(0, 200) || ""
+  }
+};
 ---
 
-<MainLayout title={`${song.title} Lyrics`} description={`Read ${song.title} lyrics in Manglish and Malayalam.`}>
+<MainLayout
+  title={`${song.title} Lyrics - Malayalam & Manglish | ${song.artist} | HolyfireMedia`}
+  description={`Read ${song.title} lyrics by ${song.artist} in Malayalam and Manglish. Complete song lyrics for this Malayalam Christian devotional song.`}
+  keywords={`${song.title} lyrics, ${song.title} lyrics Malayalam, ${song.title} Manglish lyrics, ${song.artist} song lyrics, Malayalam Christian song lyrics`}
+  schemaData={lyricsSchema}
+>
   <div class="container mx-auto px-4 py-16">
     <div class="max-w-5xl mx-auto">
       <a href="/lyrics" class="inline-flex items-center text-pink-400 hover:text-pink-300 transition-colors mb-8 group">

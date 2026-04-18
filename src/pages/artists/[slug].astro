@@ -55,9 +55,30 @@ const pageTitle = artist.seoTitle || `${artist.name} | HolyfireMedia`;
 const pageDescription = artist.seoDescription || `Listen to songs and explore the discography of ${artist.name}.`;
 const bioParas = artist.bio ? artist.bio.split('\n\n') : [];
 const extendedParas = artist.extendedDescription ? artist.extendedDescription.split('\n\n') : [];
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": artist.name,
+  "description": artist.bio || pageDescription,
+  "url": `https://holyfiremedia.in/artists/${artist.slug}`,
+  "image": artist.useFrImage ? "https://holyfiremedia.in/fr_joseph_mukkatt.webp" : undefined,
+  "sameAs": [],
+  "jobTitle": "Christian Music Artist",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "HolyfireMedia"
+  }
+};
 ---
 
-<MainLayout title={pageTitle} description={pageDescription}>
+<MainLayout
+  title={pageTitle}
+  description={pageDescription}
+  image={artistImage}
+  keywords={`${artist.name} songs, ${artist.name} lyrics, ${artist.name} karaoke, Malayalam Christian songs ${artist.name}, Catholic homily Malayalam`}
+  schemaData={personSchema}
+>
   <!-- Pass JSON stringified array to client script -->
   <script is:inline define:vars={{ playlist: decoratedSongs }}>
     window.artistPlaylist = playlist;

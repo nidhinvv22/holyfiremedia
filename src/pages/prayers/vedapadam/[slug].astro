@@ -178,9 +178,29 @@ export function getStaticPaths() {
 }
 
 const { prayer } = Astro.props;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": prayer.title,
+  "description": `Read ${prayer.title} — Catholic Catechism in Malayalam and Manglish.`,
+  "inLanguage": ["ml", "en"],
+  "url": `https://holyfiremedia.in/prayers/vedapadam/${prayer.slug}`,
+  "publisher": {
+    "@type": "Organization",
+    "name": "HolyfireMedia",
+    "url": "https://holyfiremedia.in/"
+  },
+  "mainEntityOfPage": `https://holyfiremedia.in/prayers/vedapadam/${prayer.slug}`
+};
 ---
 
-<MainLayout title={`${prayer.title} | HolyfireMedia`} description={`Read ${prayer.title} in Vedapadam.`}>
+<MainLayout
+  title={`${prayer.title} - Catholic Catechism Malayalam | HolyfireMedia`}
+  description={`Read ${prayer.title} in Malayalam and Manglish. Catholic Catechism (Vedapadam) for faith formation and learning.`}
+  keywords={`${prayer.title}, Vedapadam Malayalam, Catholic catechism, church teachings Malayalam, Manglish Vedapadam`}
+  schemaData={articleSchema}
+>
   <div class="container mx-auto px-4 py-8 md:py-16">
     <div class="max-w-4xl mx-auto">
       

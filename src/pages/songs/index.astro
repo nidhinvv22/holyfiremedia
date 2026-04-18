@@ -4,7 +4,11 @@ import PlayerModal from '../../components/PlayerModal.astro';
 import { songs } from '../../data/songs';
 ---
 
-<MainLayout title="All Songs | HolyfireMedia" description="Browse all Malayalam Christian songs.">
+<MainLayout
+  title="Malayalam Christian Songs - Listen, Lyrics & Karaoke | HolyfireMedia"
+  description="Browse all Malayalam Christian devotional songs. Listen online, read lyrics in Malayalam & Manglish, and download karaoke tracks."
+  keywords="Malayalam Christian songs, devotional songs Malayalam, Catholic songs online, Christian music Malayalam, worship songs Malayalam"
+>
   <script is:inline define:vars={{ playlist: songs }}>window.songsPlaylist = playlist;</script>
   <div class="container mx-auto px-4 py-16">
     <div class="mb-12">

@@ -5,12 +5,20 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  keywords?: string;
+  schemaData?: Record<string, any>;
 }
 
 const { 
-  title = "HolyfireMedia | Proclaiming the Word of God through Music", 
-  description = "Discover Malayalam Christian songs, artists, lyrics, prayers, and karaoke tracks." 
+  title = "HolyfireMedia | Malayalam Christian Songs, Prayers, Lyrics & Karaoke", 
+  description = "Discover Malayalam Christian devotional songs, Catholic prayers in Malayalam & Manglish, Rosary, karaoke tracks, and lyrics. Your spiritual home for Syro-Malabar Catholic devotions.",
+  image,
+  keywords = "Malayalam Christian songs, Catholic prayers Malayalam, Holy Rosary Malayalam, Manglish prayers, karaoke Malayalam Christian, Syro-Malabar prayers, HolyfireMedia",
+  schemaData
 } = Astro.props;
+
+const ogImage = image ? new URL(image, Astro.url) : new URL("/holy_fire_logo.webp", Astro.url);
 
 const currentPath = Astro.url.pathname;
 const navItems = [
@@ -30,37 +38,79 @@ const navItems = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
     <meta name="generator" content={Astro.generator} />
+    <meta name="author" content="HolyfireMedia" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    
+    <!-- Theme & PWA -->
+    <meta name="theme-color" content="#581c87" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="HolyfireMedia" />
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="HolyfireMedia" />
+    <meta property="og:locale" content="en_IN" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={Astro.url.href} />
-    <meta property="og:image" content={new URL("/holy_fire_logo.webp", Astro.url)} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url.href} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL("/holy_fire_logo.webp", Astro.url)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@holyfiremedia" />
+    <meta name="twitter:url" content={Astro.url.href} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- Canonical URL -->
     <link rel="canonical" href={Astro.url.href} />
+    
+    <!-- Language alternates -->
+    <link rel="alternate" hreflang="en" href={Astro.url.href} />
+    <link rel="alternate" hreflang="ml" href={Astro.url.href} />
+    <link rel="alternate" hreflang="x-default" href={Astro.url.href} />
 
-    <!-- JSON-LD WebSite Structured Data -->
+    <!-- JSON-LD WebSite Structured Data (default) -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "HolyfireMedia",
       "url": "https://holyfiremedia.in/",
-      "description": "Discover Malayalam Christian songs, artists, lyrics, prayers, and karaoke tracks."
+      "description": "Discover Malayalam Christian songs, artists, lyrics, prayers, and karaoke tracks.",
+      "inLanguage": ["en", "ml"],
+      "publisher": {
+        "@type": "Organization",
+        "name": "HolyfireMedia",
+        "url": "https://holyfiremedia.in/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://holyfiremedia.in/holy_fire_logo.webp"
+        }
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://holyfiremedia.in/songs?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     })} />
+    
+    {/* Page-specific structured data */}
+    {schemaData && (
+      <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+    )}
     
     <link rel="icon" type="image/webp" href="/holy_fire_logo.webp" />
     <link rel="shortcut icon" href="/holy_fire_logo.webp" />
+    <link rel="apple-touch-icon" href="/holy_fire_logo.webp" />
     <meta name="msapplication-TileImage" content="/holy_fire_logo.webp" />
+    <meta name="msapplication-TileColor" content="#581c87" />
     
     <title>{title}</title>
   </head>
