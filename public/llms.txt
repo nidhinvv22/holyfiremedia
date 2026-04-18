@@ -1,0 +1,49 @@
+# HolyfireMedia
+
+> Your spiritual home for Malayalam Catholic prayers, Christian devotional songs, lyrics, and karaoke tracks.
+
+HolyfireMedia is a comprehensive Catholic devotional platform offering prayers, songs, and karaoke tracks in both Malayalam (മലയാളം) and Manglish (transliterated Malayalam in English script). The site primarily serves the Syro-Malabar Catholic community worldwide.
+
+## Content Sections
+
+- [Prayers & Devotions](https://holyfiremedia.in/prayers): Catholic prayers in Malayalam & Manglish
+  - [Japangal (Common Prayers)](https://holyfiremedia.in/prayers/japangal): Our Father, Hail Mary, Apostles' Creed, Sign of the Cross, and more
+  - [Japamalakal (Rosaries)](https://holyfiremedia.in/prayers/japamala): Holy Rosary (Japamala), Divine Mercy Chaplet (Karuna Kontha)
+  - [Vedapadam (Catechism)](https://holyfiremedia.in/prayers/vedapadam): 10 Commandments, 7 Sacraments, 5 Precepts of the Church, 14 Works of Mercy
+  - [Prarthanakal (General Prayers)](https://holyfiremedia.in/prayers/general): Prayer for Priests, Prayer for Students, Three O'Clock Prayer, Precious Blood Prayer
+  - [Madhyastha Prarthanakal (Intercessory Prayers)](https://holyfiremedia.in/prayers/madhyastha): Prayers to St. Alphonsa, St. Jude, St. Anthony, St. George, and more saints
+  - [Yama Prarthanakal (Liturgy of the Hours)](https://holyfiremedia.in/prayers/yamams): Syro-Malabar canonical hours
+- [Songs](https://holyfiremedia.in/songs): Malayalam Christian devotional songs with full lyrics
+- [Lyrics](https://holyfiremedia.in/lyrics): Song lyrics in both Malayalam script and Manglish transliteration
+- [Karaoke](https://holyfiremedia.in/karaoke): Downloadable karaoke tracks — free version with chorus, premium studio instrumental
+- [Artists](https://holyfiremedia.in/artists): Featured Catholic music artists including Fr. Joseph Mukkatt
+
+## Key Features
+
+- Dual-language toggle on every prayer page: Malayalam (മലയാളം) and Manglish
+- Complete Holy Rosary (Japamala) text with all mysteries
+- Complete Divine Mercy Chaplet (Karuna Kontha) text
+- Catholic Catechism content: 10 Commandments, 7 Sacraments, 14 Works of Mercy
+- Intercessory prayers to Indian and universal Catholic saints
+- Syro-Malabar Liturgy of the Hours (Yama Prarthanakal)
+- Song lyrics with Manglish transliteration for singing along
+- Free and premium karaoke track downloads
+
+## Frequently Asked Questions
+
+Q: What is HolyfireMedia?
+A: HolyfireMedia is a Catholic devotional platform providing Malayalam Christian prayers, songs, lyrics, and karaoke tracks in both Malayalam and Manglish.
+
+Q: What prayers are available?
+A: Common Catholic prayers (Our Father, Hail Mary, Creed), Holy Rosary, Divine Mercy Chaplet, intercessory prayers to saints, catechism teachings, and Syro-Malabar liturgical prayers.
+
+Q: What languages are supported?
+A: All content is available in Malayalam (മലയാളം) and Manglish (Malayalam transliterated in English script), with an easy toggle to switch between them.
+
+Q: Are karaoke tracks free?
+A: Each song has a free version with chorus vocals. Premium studio instrumental versions are available for purchase.
+
+## Contact
+
+- Website: https://holyfiremedia.in
+- Contact: https://holyfiremedia.in/contact
