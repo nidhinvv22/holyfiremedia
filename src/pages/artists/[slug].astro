@@ -37,12 +37,12 @@ const { artist } = Astro.props;
 // Fetch artist songs dynamically
 const artistSongs = songs.filter(s => s.artist === artist.name).map(s => ({
   ...s,
-  videoId: "dQw4w9WgXcQ" // Fallback video ID
+  videoId: s.videoId || "NJAAUEmt_so"
 }));
 
 const finalSongs = artistSongs.length > 0 ? artistSongs : [
-      { id: 1, title: `${artist.name} - Placeholder Song 1`, hasKaraoke: true, videoId: "dQw4w9WgXcQ" },
-      { id: 2, title: `${artist.name} - Placeholder Song 2`, hasKaraoke: false, videoId: "dQw4w9WgXcQ" }
+      { id: 1, title: `${artist.name} - Placeholder Song 1`, hasKaraoke: true, videoId: "NJAAUEmt_so" },
+      { id: 2, title: `${artist.name} - Placeholder Song 2`, hasKaraoke: false, videoId: "NJAAUEmt_so" }
 ];
 
 const decoratedSongs = finalSongs.map((s, index) => ({ ...s, id: index + 1, artist: artist.name }));
@@ -53,7 +53,7 @@ const artistImage = artist.useFrImage
 
 const pageTitle = artist.seoTitle || `${artist.name} | HolyfireMedia`;
 const pageDescription = artist.seoDescription || `Listen to songs and explore the discography of ${artist.name}.`;
-const bioParas = artist.bio ? artist.bio.split('\n\n') : ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."];
+const bioParas = artist.bio ? artist.bio.split('\n\n') : [];
 const extendedParas = artist.extendedDescription ? artist.extendedDescription.split('\n\n') : [];
 ---
 

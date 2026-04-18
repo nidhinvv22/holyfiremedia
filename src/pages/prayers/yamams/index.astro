@@ -1,0 +1,62 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+
+const yamams = [
+  { slug: "ramsha", title: "Ramsha (റംശാ)", time: "വൈകിട്ട് 6-9", description: "ഒന്നാം യാമം (Evening Prayer)", icon: "🌅" },
+  { slug: "leliya", title: "Leliya (ലെലിയാ)", time: "രാത്രി 9-3", description: "രണ്ടും മൂന്നും യാമങ്ങൾ (Night Prayer)", icon: "✨" },
+  { slug: "qala-d-shahra", title: "Qala d'Shahra (ഖാലാ ദ് ഷഹറാ)", time: "വെളുപ്പിന് 3-6", description: "നാലാം യാമം (Early Morning Prayer)", icon: "🌌" },
+  { slug: "sapra", title: "Sapra (സപ്രാ)", time: "രാവിലെ 6-9", description: "ഒന്നാം മണിക്കൂർ (Morning Prayer)", icon: "☀️" },
+  { slug: "quttaa", title: "Qutta'a (ഖുത്തആ)", time: "രാവിലെ 9-12", description: "മൂന്നാം മണിക്കൂർ (Third Hour Prayer)", icon: "🌤️" },
+  { slug: "endana", title: "Endana (എൻദാനാ)", time: "ഉച്ചയ്ക്ക് 12-3", description: "ആറാം മണിക്കൂർ (Sixth Hour Prayer)", icon: "🌞" },
+  { slug: "dbasha-shayin", title: "D'basha Shayin (ദ് ബസ്ശാ ശായീൻ)", time: "ഉച്ചതിരിഞ്ഞ് 3-6", description: "ഒമ്പതാം മണിക്കൂർ (Ninth Hour Prayer)", icon: "⛅" },
+];
+---
+
+<MainLayout title="Syro-Malabar Yama Prarthanakal | HolyfireMedia" description="The official Liturgy of the Hours for the Syro-Malabar Catholic Church.">
+  <div class="container mx-auto px-4 py-16">
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-6">യാമപ്രാർത്ഥനകൾ</h1>
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/20 text-yellow-300 border border-yellow-500/50 rounded-full text-sm font-semibold mb-4 mx-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+        Work In Progress (Adding prayers systematically)
+      </div>
+      <p class="text-xl text-purple-200 mt-2">
+        Syro-Malabar Liturgy of the Hours
+      </p>
+    </div>
+
+    <!-- Back to Prayers Breadcrumb -->
+    <div class="max-w-3xl mx-auto mb-8">
+      <a href="/prayers" class="text-pink-300 hover:text-pink-400 font-medium flex items-center gap-1 group w-max">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Prayers
+      </a>
+    </div>
+
+    <div class="space-y-4 max-w-3xl mx-auto">
+      {yamams.map((item) => (
+        <a href={`/prayers/yamams/${item.slug}`} class="block group">
+          <div class="flex items-center gap-6 bg-gradient-to-r from-indigo-900/40 to-purple-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl hover:bg-white/10 hover:border-pink-500/30 hover:scale-[1.02] transition-all duration-300">
+            <div class="text-4xl bg-white/5 p-3 rounded-xl border border-white/5">
+              {item.icon}
+            </div>
+            <div class="flex-1">
+              <h2 class="text-xl sm:text-2xl font-bold text-white mb-1 group-hover:text-pink-300 transition-colors">{item.title}</h2>
+              <p class="text-purple-200 text-sm hidden sm:block">{item.description}</p>
+            </div>
+            <div class="text-right flex flex-col items-end">
+              <span class="text-sm font-semibold text-pink-400 bg-pink-500/10 px-3 py-1 rounded-full mb-1">
+                {item.time}
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white/50 group-hover:text-pink-300 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</MainLayout>

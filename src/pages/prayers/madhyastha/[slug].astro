@@ -1,0 +1,222 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+
+export function getStaticPaths() {
+  const madhyasthaList = [
+    { 
+      slug: "st-alphonsa", 
+      title: "St. Alphonsa (വി. അൽഫോൻസാമ്മ)",
+      manglishText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Parishudhathmave ezhunnalli varaname ange danangal nalki njangale vishwasathilurappikkename. Swarggarajyathekurichulla prathyashayil njangale nayikkaname, njangalude hrudayangale daivasnehagnijwalayal jwalippikkaname. Vi. Alphonsammaye vishudhiyude marggathiloode angu nayichathupole, njangaleyum nervazhikatti nadathaname. Elimayilum vinayathilum vishwasthathayode angekku shushroosha cheythukondu, vishudhiyilum vivekathilum valarnnu varuvan njangale anugrahikkayum cheyyaname.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Vi. Alphonsayude sukruthayogyathayalum madhyasthathalum njangalude ella prarthanakalum niyogangalum prathyekichu <span class="text-pink-300 font-medium">(avashyam parayuka)</span> sadhichuthannu anugrahikkaname. Nithym pithavum puthranum parishudhathmavumaya sarveshwara ennekum. Amen.
+          </p>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6 font-malayalam">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            പരിശുദ്ധാത്മാവേ എഴുന്നള്ളി വരണമേ അങ്ങേ ദാനങ്ങൾ നൽകി ഞങ്ങളെ വിശ്വാസത്തിലുറപ്പിക്കണമേ. സ്വർഗ്ഗരാജ്യത്തെക്കുറിച്ചുള്ള പ്രത്യാശയിൽ ഞങ്ങളെ നയിക്കണമേ, ഞങ്ങളുടെ ഹൃദയങ്ങളെ ദൈവസ്നേഹാഗ്നിജ്വാലയാൽ ജ്വലിപ്പിക്കണമേ. വി. അൽഫോൻസാമ്മയെ വിശുദ്ധിയുടെ മാർഗ്ഗത്തിലൂടെ അങ്ങ് നയിച്ചതുപോലെ, ഞങ്ങളെയും നേർവഴികാട്ടി നടത്തണമേ. എളിമയിലും വിനയത്തിലും വിശ്വസ്തതയോടെ അങ്ങേയ്ക്ക് ശുശ്രൂഷ ചെയ്തുകൊണ്ട്, വിശുദ്ധിയിലും വിവേകത്തിലും വളർന്നു വരുവാൻ ഞങ്ങളെ അനുഗ്രഹിക്കുകയും ചെയ്യണമേ.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            വി. അൽഫോൻസായുടെ സുകൃതയോഗ്യതയാലും മദ്ധ്യസ്ഥത്താലും ഞങ്ങളുടെ എല്ലാ പ്രാർത്ഥനകളും നിയോഗങ്ങളും പ്രത്യേകിച്ച് <span class="text-pink-300 font-medium">(ആവശ്യം പറയുക)</span> സാധിച്ചുതന്നു അനുഗ്രഹിക്കണമേ. നിത്യം പിതാവും പുത്രനും പരിശുദ്ധാത്മാവുമായ സർവേശ്വരാ എന്നേക്കും. ആമ്മേൻ.
+          </p>
+        </div>
+      `
+    },
+    { 
+      slug: "st-jude", 
+      title: "St. Jude (വി. യൂദാശ്ലീഹാ)",
+      manglishText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6">
+          <p class="text-center italic text-purple-300 text-lg md:text-xl font-medium mb-8">
+            (Asadhyakaryangalude madhyasthathinayi onpadhu divasam onpadhu thavana cholluka)
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Mishihayude snehithanum vishwastha dasanumaya vishudha yudashleehaye, ettavum kashtappedunna enikku vendi apeikshikkename. Yathoru sahayavum phalasidhiyilakathe varunna sandarbhathilum ettavum thwarithavum gocharavumaya sahayam cheyyunnathinu angekku visheshavidhiyayi kittiyirikkunna anugrahathe angu upayogikkaname. Njangalude ella avashyangalum vishishya <span class="text-pink-300 font-medium">(ivide avashyam parayuka)</span> ange sahayam njangalapeikshikkunnu.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Bhagyappetta yudashleehaye, angayude ee anugrahathe njangal sada orkkumennum ange sthuthikale lokamengum ariyikkumennum njangal vagdanam cheyyunnu. Amen
+          </p>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6 font-malayalam">
+          <p class="text-center italic text-purple-300 text-lg md:text-xl font-medium mb-8">
+            (അസാധ്യകാര്യങ്ങളുടെ മദ്ധ്യസ്ഥത്തിനായി ഒൻപതു ദിവസം ഒൻപതു തവണ ചൊല്ലുക)
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            മിശിഹായുടെ സ്നേഹിതനും വിശ്വസ്ത ദാസനുമായ വിശുദ്ധ യൂദാശ്ലീഹായേ, ഏറ്റവും കഷ്ടപ്പെടുന്ന എനിക്കു വേണ്ടി അപേക്ഷിക്കേണമേ. യാതൊരു സഹായവും ഫലസിദ്ധിയിലാതെ വരുന്ന സന്ദർഭത്തിലും ഏറ്റവും ത്വരിതവും ഗോചരവുമായ സഹായം ചെയ്യുന്നതിന് അങ്ങേക്ക് വിശേഷവിധിയായി കിട്ടിയിരിക്കുന്ന അനുഗ്രഹത്തെ അങ്ങ് ഉപയോഗിക്കണമേ. ഞങ്ങളുടെ എല്ലാ ആവശ്യങ്ങളും വിശിഷ്യ <span class="text-pink-300 font-medium">(ഇവിടെ ആവശ്യം പറയുക)</span> അങ്ങേ സഹായം ഞങ്ങളപേക്ഷിക്കുന്നു.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            ഭാഗ്യപ്പെട്ട യൂദാശ്ലീഹായേ, അങ്ങയുടെ ഈ അനുഗ്രഹത്തെ ഞങ്ങൾ സദാ ഓർക്കുമെന്നും അങ്ങേ സ്തുതികളെ ലോകമെങ്ങും അറിയിക്കുമെന്നും ഞങ്ങൾ വാഗ്ദാനം ചെയ്യുന്നു. ആമ്മേൻ
+          </p>
+        </div>
+      `
+    },
+    { 
+      slug: "st-anthony", 
+      title: "St. Anthony (വി. അന്തോണീസ്)",
+      manglishText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Mahathmavaya vi. anthonise! Ange madhyasthathayal maranavum abudhavum, vividha anarthangalum, pishachum, samkramika rogangalum neengipokunnuvennorkkaname. Angu vazhiyayi rogikal sukham prapikkukayum, samudram shanthathappedukayum, karagruhavasikal thangalude bandhanathil ninnu vimochikkappedukayum, amgaheenar thangalude avayavangalude shakthi prapikkukayum, nashichupoya vasthukkal thirike labhikkappedukayum cheyyunnu. Angayodu apekshikkunnavarude ella apekshakalum angu kelkkunnu. Angayude apekshakalal bhayankaramaya apathukal illathakunnu.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Akayal, athbhuthapravarthakanaya maha punyavane! Paripoornna vishwasathode njan ange pakkal abhayam thedunnu. Njan angayodu apeikshikkunna <span class="text-pink-300 font-medium">(avashyangal parayuka)</span> anugraham enikku nalki angayude vallabhathwam angu kanikkaname. Amen.
+          </p>
+          <div class="bg-indigo-900/30 border border-indigo-500/30 p-6 rounded-2xl mt-8 text-center">
+            <p class="text-purple-200 text-lg md:text-xl font-medium">1 Swargga. 1 Nanma. 1 Thrithwa.</p>
+          </div>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6 font-malayalam">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            മഹാത്മാവായ വി. അന്തോണീസേ! അങ്ങേ മദ്ധ്യസ്ഥതയാൽ മരണവും അബദ്ധവും, വിവിധ അനർത്ഥങ്ങളും, പിശാചും, സാംക്രമിക രോഗങ്ങളും നീങ്ങിപോകുന്നുവെന്നോർക്കണമേ. അങ്ങു വഴിയായി രോഗികൾ സുഖം പ്രാപിക്കുകയും, സമുദ്രം ശാന്തതപ്പെടുകയും, കാരാഗൃഹവാസികൾ തങ്ങളുടെ ബന്ധനത്തിൽ നിന്നു വിമോചിക്കപ്പെടുകയും, അംഗഹീനർ തങ്ങളുടെ അവയവങ്ങളുടെ ശക്തി പ്രാപിക്കുകയും, നശിച്ചുപോയ വസ്തുക്കൾ തിരികെ ലഭിക്കപ്പെടുകയും ചെയ്യുന്നു. അങ്ങയോട് അപേക്ഷിക്കുന്നവരുടെ എല്ലാ അപേക്ഷകളും അങ്ങ് കേൾക്കുന്നു. അങ്ങയുടെ അപേക്ഷകളാൽ ഭയങ്കരമായ ആപത്തുകൾ ഇല്ലാതാകുന്നു.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            ആകയാൽ, അത്ഭുതപ്രവർത്തകനായ മഹാ പുണ്യവാനേ! പരിപൂർണ്ണ വിശ്വാസത്തോടെ ഞാൻ അങ്ങേ പക്കൽ അഭയം തേടുന്നു. ഞാൻ അങ്ങയോട് അപേക്ഷിക്കുന്ന <span class="text-pink-300 font-medium">(ആവശ്യങ്ങൾ പറയുക)</span> അനുഗ്രഹം എനിക്ക് നൽകി അങ്ങയുടെ വല്ലഭത്വം അങ്ങു കാണിക്കണമേ. ആമ്മേൻ.
+          </p>
+          <div class="bg-indigo-900/30 border border-indigo-500/30 p-6 rounded-2xl mt-8 text-center">
+            <p class="text-purple-200 text-lg md:text-xl font-medium">1 സ്വർഗ്ഗ. 1 നന്മ. 1 ത്രിത്വ.</p>
+          </div>
+        </div>
+      `
+    },
+    { slug: "st-chavara", title: "St. Kuriakose Elias Chavara (വി. ചാവറ അച്ചൻ)" },
+    { 
+      slug: "bl-mariam-thresia", 
+      title: "Bl. Mariam Thresia (വാ. മറിയം ത്രേസ്യാ)",
+      manglishText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Sarvva nanma swaroopiyaya thrithaika daivame, ange nereyulla snehathal kathi jwalikkukayum suvisheshopadeshangale swantham jeevithaniyamamayi sweekkarichu agathikalkkum aartharkkum athaniyakukayum kudumbangale kraisthava chaithanyathal nirakkuvan jeevitham samarpikkukayum cheytha ange vishwasthadasiyaya vazhthappetta mariyam thresya vishudhayayi thirusabhayil vanangappeduvan krupacheyyaname.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Parishudha kanyakamariyame, vishudha yauseppu pithave, vazhthappetta mariyam thresyayude madhyastham vazhi njangal apeikshikkunna ee prathyeka anugraham eeshoyil ninnum njangalkku labhichu tharaname. Amen
+          </p>
+          <div class="bg-indigo-900/30 border border-indigo-500/30 p-6 rounded-2xl mt-8 text-center">
+            <p class="text-purple-200 text-lg md:text-xl font-medium">1 Swargga. 1 Nanma. 1 Thrithwa.</p>
+          </div>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6 font-malayalam">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            സർവ്വ നന്മ സ്വരൂപിയായ ത്രിതൈക ദൈവമേ, അങ്ങേ നേരെയുള്ള സ്നേഹത്താൽ കത്തി ജ്വലിക്കുകയും സുവിശേഷോപദേശങ്ങളെ സ്വന്തം ജീവിതനിയമമായി സ്വീകരിച്ച് അഗതികൾക്കും ആർത്തർക്കും അത്താണിയാകുകയും കുടുംബങ്ങളെ ക്രൈസ്തവ ചൈതന്യത്താൽ നിറക്കുവാൻ ജീവിതം സമർപ്പിക്കുകയും ചെയ്ത അങ്ങേ വിശ്വസ്തദാസിയായ വാഴ്ത്തപ്പെട്ട മറിയം ത്രേസ്യ വിശുദ്ധയായി തിരുസഭയിൽ വണങ്ങപ്പെടുവാൻ കൃപചെയ്യണമേ.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            പരിശുദ്ധ കന്യകമറിയമേ, വിശുദ്ധ യൗസേപ്പ് പിതാവേ, വാഴ്ത്തപ്പെട്ട മറിയം ത്രേസ്യയുടെ മദ്ധ്യസ്ഥം വഴി ഞങ്ങൾ അപേക്ഷിക്കുന്ന ഈ പ്രത്യേക അനുഗ്രഹം ഈശോയിൽ നിന്നുംങ്ങൾക്ക് ലഭിച്ചു തരണമേ. ആമ്മേൻ
+          </p>
+          <div class="bg-indigo-900/30 border border-indigo-500/30 p-6 rounded-2xl mt-8 text-center">
+            <p class="text-purple-200 text-lg md:text-xl font-medium">1 സ്വർഗ്ഗ. 1 നന്മ. 1 ത്രിത്വ.</p>
+          </div>
+        </div>
+      `
+    },
+    { slug: "st-george", title: "St. George (വി. ഗീവർഗ്ഗീസ് സഹദാ)" },
+    { slug: "st-sebastian", title: "St. Sebastian (വി. സെബസ്ത്യാനോസ്)" },
+    { slug: "st-benedict", title: "St. Benedict (വി. ബനഡിക്ടോസ്)" },
+    { slug: "st-anna", title: "St. Anna (വി. അന്നാമ്മ)" },
+    { slug: "st-michael", title: "St. Michael the Archangel (വി. മിഖായേൽ മാലാഖ)" }
+  ];
+
+  return madhyasthaList.map((y) => ({
+    params: { slug: y.slug },
+    props: { 
+        prayer: {
+            ...y,
+            manglishText: y.manglishText || "<p class='text-center italic text-purple-200 mt-10'>Work In Progress: Adding content...</p>",
+            malayalamText: y.malayalamText || "<p class='text-center italic text-purple-200 mt-10'>Work In Progress: Adding content...</p>"
+        } 
+    },
+  }));
+}
+
+const { prayer } = Astro.props;
+---
+
+<MainLayout title={`${prayer.title} | HolyfireMedia`} description={`Intercessory prayer to ${prayer.title}.`}>
+  <div class="container mx-auto px-4 py-8 md:py-16">
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- Sticky Header -->
+      <div class="sticky top-[73px] z-40 bg-purple-900/90 backdrop-blur-xl border-b border-white/10 md:static md:bg-transparent md:border-none pt-4 pb-4 md:pt-0 mb-6 md:mb-12">
+        <a href="/prayers/madhyastha" class="inline-flex items-center text-pink-300 hover:text-pink-400 font-medium mb-4 group transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Madhyastha Prarthanakal
+        </a>
+
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <h1 class="text-3xl md:text-5xl font-extrabold text-white">{prayer.title}</h1>
+          
+          <!-- Language Toggle View -->
+          <div class="inline-flex bg-black/40 p-1 rounded-xl border border-white/10 w-full sm:w-auto">
+            <button 
+              id="btn-malayalam" 
+              class="flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all"
+              onclick="setActiveState('malayalam')"
+            >
+              മലയാളം (Malayalam)
+            </button>
+            <button 
+              id="btn-manglish" 
+              class="flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all"
+              onclick="setActiveState('manglish')"
+            >
+              Manglish
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="bg-indigo-900/30 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden min-h-[50vh]">
+        
+        <div id="content-malayalam" class="animate-fade-in text-white/90 text-lg leading-relaxed">
+          <Fragment set:html={prayer.malayalamText} />
+        </div>
+        
+        <div id="content-manglish" class="hidden text-white/90 text-lg leading-relaxed font-sans">
+          <Fragment set:html={prayer.manglishText} />
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script is:inline>
+    // Handles toggling logic client-side
+    function setActiveState(language) {
+      const btnMalayalam = document.getElementById('btn-malayalam');
+      const btnManglish = document.getElementById('btn-manglish');
+      const contentMalayalam = document.getElementById('content-malayalam');
+      const contentManglish = document.getElementById('content-manglish');
+
+      if (!btnMalayalam || !btnManglish || !contentMalayalam || !contentManglish) return;
+
+      if (language === 'malayalam') {
+        btnMalayalam.className = 'flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all';
+        btnManglish.className = 'flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all';
+        
+        contentMalayalam.classList.remove('hidden');
+        contentMalayalam.classList.add('animate-fade-in');
+        contentManglish.classList.add('hidden');
+      } else {
+        btnMalayalam.className = 'flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all';
+        btnManglish.className = 'flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all';
+        
+        contentManglish.classList.remove('hidden');
+        contentManglish.classList.add('animate-fade-in');
+        contentMalayalam.classList.add('hidden');
+      }
+    }
+  </script>
+</MainLayout>

@@ -1,0 +1,63 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+
+const vedapadam = [
+  { slug: "daivakalpanakal", title: "Daivakalpanakal Pathu", description: "ദൈവകല്പനകൾ പത്ത് - The Ten Commandments", icon: "🔟" },
+  { slug: "thirussabhayude-kalpanakal", title: "Thirussabhayude Kalpanakal Anju", description: "തിരുസ്സഭയുടെ കല്പനകൾ അഞ്ച് - 5 Precepts of the Church", icon: "⛪" },
+  { slug: "koodashakal", title: "Koodashakal Ezhu", description: "കൂദാശകൾ ഏഴ് - The Seven Sacraments", icon: "🕊️" },
+  { slug: "karunnyapravarthikal", title: "Karunnyapravarthikal Pathinalu", description: "കാരുണ്യപ്രവൃത്തികൾ പതിനാല് - 14 Works of Mercy", icon: "❤️" },
+  { slug: "suvisheshabhagyangal", title: "Suvisheshabhagyangal Ettu", description: "സുവിശേഷഭാഗ്യങ്ങൾ എട്ട് - The Eight Beatitudes", icon: "✨" },
+  { slug: "daivalakshanangal", title: "Daivalakshanangal", description: "ദൈവലക്ഷണങ്ങൾ - Attributes of God", icon: "🌟" },
+  { slug: "daivikapunyangal", title: "Daivikapunyangal Moonnu", description: "ദൈവികപുണ്യങ്ങൾ മൂന്ന് - 3 Theological Virtues", icon: "🙏" },
+  { slug: "nalla-kumbasaram", title: "Nalla Kumbasarathinu Venda Karyangal", description: "നല്ല കുമ്പസാരത്തിനു വേണ്ട കാര്യങ്ങൾ - For a Good Confession", icon: "💭" },
+  { slug: "parishudha-kurbana-yogyatha", title: "Parishudha Kurbana Yogyathayode", description: "പരിശുദ്ധ കുർബ്ബാന യോഗ്യതയോടെ - Worthy Holy Communion", icon: "🥖" },
+  { slug: "parishudharoopi-danangal", title: "Parishudharoopiyude Danangal Ezhu", description: "പരിശുദ്ധാരൂപിയുടെ ദാനങ്ങൾ ഏഴ് - 7 Gifts of the Holy Spirit", icon: "🔥" },
+  { slug: "parishudharoopi-phalangal", title: "Parishudharoopiyude Phalangal", description: "പരിശുദ്ധാരൂപിയുടെ ഫലങ്ങൾ പന്ത്രണ്ട് - 12 Fruits of the Holy Spirit", icon: "🍇" },
+  { slug: "moolapapangal", title: "Moolapapangalum Avaykkethiraya...", description: "മൂലപാപങ്ങളും അവയ്ക്കെതിരായ... - Capital Sins", icon: "⚖️" }
+];
+---
+
+<MainLayout title="Vedapadam | HolyfireMedia" description="A collection of Catechism (Vedapadam) in Malayalam.">
+  <div class="container mx-auto px-4 py-8 md:py-16">
+    <div class="max-w-3xl mx-auto text-center mb-12">
+      <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-6">വേദപാഠം (Catechism)</h1>
+      <p class="text-xl text-purple-200 mt-2">
+        Teachings, beliefs, and commandments of the Catholic Church.
+      </p>
+    </div>
+
+    <!-- Back to Prayers Breadcrumb -->
+    <div class="max-w-3xl mx-auto mb-8">
+      <a href="/prayers" class="text-pink-300 hover:text-pink-400 font-medium flex items-center gap-1 group w-max">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Devotions
+      </a>
+    </div>
+
+    <div class="space-y-4 max-w-3xl mx-auto">
+      {vedapadam.map((item) => (
+        <a href={`/prayers/vedapadam/${item.slug}`} class="block group">
+          <div class="flex items-center gap-6 bg-gradient-to-r from-indigo-900/40 to-purple-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl hover:bg-white/10 hover:border-pink-500/30 hover:scale-[1.02] transition-all duration-300">
+            <div class="text-4xl bg-white/5 p-3 rounded-xl border border-white/5 flex items-center justify-center">
+              {item.icon}
+            </div>
+            <div class="flex-1">
+              <h2 class="text-xl sm:text-2xl font-bold text-white mb-1 group-hover:text-pink-300 transition-colors">{item.title}</h2>
+              <p class="text-purple-200 text-sm hidden sm:block">{item.description}</p>
+            </div>
+            <div class="text-right flex flex-col items-end">
+              <span class="text-sm font-semibold text-pink-400 bg-pink-500/10 px-3 py-1 rounded-full mb-1">
+                Read
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white/50 group-hover:text-pink-300 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</MainLayout>

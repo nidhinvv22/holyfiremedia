@@ -1,0 +1,169 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+
+export function getStaticPaths() {
+  const yamams = [
+    { 
+      slug: "ramsha", 
+      title: "Ramsha - Evening Prayer (റംശാ)",
+      manglishText: `
+        <h3 class="text-xl text-pink-400 font-bold mt-6 mb-2">Karmakramam</h3>
+        <p class="mb-4 text-justify text-purple-200 italic">Karmmikan samadhanam (kaikasthoori) nalkikkondu aarambhikkunnu.</p>
+
+        <p class="mb-4 text-justify font-semibold">Athyunnathamam swarlokathil sarveshanu sthuthigeetham. (3)</p>
+        <p class="mb-4 text-justify font-semibold text-green-400">Bhoomiyilengum marthyanu shanthi prathyashayumanekkum. (3)</p>
+
+        <p class="mb-4 text-justify leading-relaxed">Swargasthanaya njangalude pithave, (samoohavum chernnu) angayude namam poojithamakaname. Angayude rajyam varaname. Angu parishudhan, parishudhan, parishudhan.</p>
+
+        <p class="mb-4 text-justify leading-relaxed">Swargasthanaya njangalude pithave, angayude mahathwathal swargavum bhoomiyum niranjirikkunnu. Malakhamarum manushyarum angu parishudhan, parishudhan, parishudhan ennu udghoshikkunnu.</p>
+
+        <p class="mb-4 text-justify leading-relaxed">Swargasthanaya njangalude pithave, angayude namam poojithamakaname. Angayude rajyam varaname. Angayude thirumanassu swargathileppole bhoomiyilumakaname.</p>
+
+        <p class="mb-4 text-justify leading-relaxed">Njangalkku avashyamaya aaharam innu njangalkku tharaname. Njangalude kadakkarodu njangal kshamichathupole njangalude kadangalum papangalum njangalodum kshamikkaname. Njangal prelobhanathil veezhan idayakaruthe. Dushtaroopiyil ninnu njangale rakshikkaname.</p>
+
+        <p class="mb-4 text-justify leading-relaxed">Enthukondennal, rajyavum shakthiyum mahathwavum ennekum angayudethakunnu. Amen.</p>
+
+        <p class="mb-4 text-justify font-bold">Pithavinum puthranum parishudhathmavinum sthuthi.</p>
+
+        <p class="mb-4 text-justify font-semibold text-green-400">Aadimuthal ennekum amen.</p>
+
+        <p class="mb-4 text-justify leading-relaxed">Swargasthanaya njangalude pithave, (samoohavum chernnu) angayude namam poojithamakaname. Angayude rajyam varaname. Angu parishudhan, parishudhan, parishudhan.</p>
+
+        <p class="mb-4 text-justify leading-relaxed">Swargasthanaya njangalude pithave, angayude mahathwathal swargavum bhoomiyum niranjirikkunnu. Malakhamarum manushyarum angu parishudhan, parishudhan, parishudhan ennu udghoshikkunnu.</p>
+
+        <div class="mt-8 mb-4 bg-blue-900/20 border border-blue-500/30 p-4 rounded-xl text-center">
+            <p class="font-bold text-blue-300 text-lg">Namukku prarthikkam, samadhanam nammodukoode.</p>
+        </div>
+      `,
+      malayalamText: `
+        <h3 class="text-xl text-pink-400 font-bold mt-6 mb-2">കർമ്മക്രമം</h3>
+        <p class="mb-4 text-justify text-purple-200 italic">കാർമ്മികൻ സമാധാനം (കൈക്കസ്തൂരി) നൽകിക്കൊണ്ട് ആരംഭിക്കുന്നു.</p>
+
+        <p class="mb-4 text-justify font-semibold">അത്യുന്നതമാം സ്വർലോകത്തിൽ സർവേശനു സ്തുതിഗീതം. (3)</p>
+        <p class="mb-4 text-justify font-semibold text-green-400">ഭൂമിയിലെങ്ങും മർത്യനു ശാന്തി പ്രത്യാശയുമാണേക്കും. (3)</p>
+
+        <p class="mb-4 text-justify leading-relaxed">സ്വർഗ്ഗസ്ഥനായ ഞങ്ങളുടെ പിതാവേ, (സമൂഹവും ചേർന്ന്) അങ്ങയുടെ നാമം പൂജിതമാകണമേ. അങ്ങയുടെ രാജ്യം വരണമേ. അങ്ങു പരിശുദ്ധൻ, പരിശുദ്ധൻ, പരിശുദ്ധൻ.</p>
+
+        <p class="mb-4 text-justify leading-relaxed">സ്വർഗ്ഗസ്ഥനായ ഞങ്ങളുടെ പിതാവേ, അങ്ങയുടെ മഹത്വത്താൽ സ്വർഗ്ഗവും ഭൂമിയും നിറഞ്ഞിരിക്കുന്നു. മാലാഖമാരും മനുഷ്യരും അങ്ങു പരിശുദ്ധൻ, പരിശുദ്ധൻ, പരിശുദ്ധൻ എന്ന് ഉദ്ഘോഷിക്കുന്നു.</p>
+
+        <p class="mb-4 text-justify leading-relaxed">സ്വർഗ്ഗസ്ഥനായ ഞങ്ങളുടെ പിതാവേ, അങ്ങയുടെ നാമം പൂജിതമാകണമേ. അങ്ങയുടെ രാജ്യം വരണമേ. അങ്ങയുടെ തിരുമനസ്സ് സ്വർഗ്ഗത്തിലെപ്പോലെ ഭൂമിയിലുമാകണമേ.</p>
+
+        <p class="mb-4 text-justify leading-relaxed">ഞങ്ങൾക്ക് ആവശ്യമായ ആഹാരം ഇന്ന് ഞങ്ങൾക്ക് തരണമേ. ഞങ്ങളുടെ കടക്കാരോട് ഞങ്ങൾ ക്ഷമിച്ചതുപോലെ ഞങ്ങളുടെ കടങ്ങളും പാപങ്ങളും ഞങ്ങളോടും ക്ഷമിക്കണമേ. ഞങ്ങൾ പ്രലോഭനത്തിൽ വീഴാൻ ഇടയാകരുതേ. ദുഷ്ടാരൂപിയിൽനിന്നു ഞങ്ങളെ രക്ഷിക്കണമേ.</p>
+
+        <p class="mb-4 text-justify leading-relaxed">എന്തുകൊണ്ടെന്നാൽ, രാജ്യവും ശക്തിയും മഹത്വവും എന്നേക്കും അങ്ങയുടേതാകുന്നു. ആമ്മേൻ.</p>
+
+        <p class="mb-4 text-justify font-bold">പിതാവിനും പുത്രനും പരിശുദ്ധാത്മാവിനും സ്തുതി.</p>
+
+        <p class="mb-4 text-justify font-semibold text-green-400">ആദിമുതൽ എന്നേക്കും ആമ്മേൻ.</p>
+
+        <p class="mb-4 text-justify leading-relaxed">സ്വർഗ്ഗസ്ഥനായ ഞങ്ങളുടെ പിതാവേ, (സമൂഹവും ചേർന്ന്) അങ്ങയുടെ നാമം പൂജിതമാകണമേ. അങ്ങയുടെ രാജ്യം വരണമേ. അങ്ങു പരിശുദ്ധൻ, പരിശുദ്ധൻ, പരിശുദ്ധൻ.</p>
+
+        <p class="mb-4 text-justify leading-relaxed">സ്വർഗ്ഗസ്ഥനായ ഞങ്ങളുടെ പിതാവേ, അങ്ങയുടെ മഹത്വത്താൽ സ്വർഗ്ഗവും ഭൂമിയും നിറഞ്ഞിരിക്കുന്നു. മാലാഖമാരും മനുഷ്യരും അങ്ങു പരിശുദ്ധൻ, പരിശുദ്ധൻ, പരിശുദ്ധൻ എന്ന് ഉദ്ഘോഷിക്കുന്നു.</p>
+
+        <div class="mt-8 mb-4 bg-blue-900/20 border border-blue-500/30 p-4 rounded-xl text-center">
+            <p class="font-bold text-blue-300 text-lg">നമുക്കു പ്രാർത്ഥിക്കാം, സമാധാനം നമ്മോടുകൂടെ.</p>
+        </div>
+      `
+    },
+    // The following Yamams are placeholders until text is provided
+    { slug: "leliya", title: "Leliya - Night Prayer (ലെലിയാ)", manglishText: "<p>Work In Progress...</p>", malayalamText: "<p>Work In Progress...</p>" },
+    { slug: "qala-d-shahra", title: "Qala d'Shahra (ഖാലാ ദ് ഷഹറാ)", manglishText: "<p>Work In Progress...</p>", malayalamText: "<p>Work In Progress...</p>" },
+    { slug: "sapra", title: "Sapra - Morning Prayer (സപ്രാ)", manglishText: "<p>Work In Progress...</p>", malayalamText: "<p>Work In Progress...</p>" },
+    { slug: "quttaa", title: "Qutta'a (ഖുത്തആ)", manglishText: "<p>Work In Progress...</p>", malayalamText: "<p>Work In Progress...</p>" },
+    { slug: "endana", title: "Endana (എൻദാനാ)", manglishText: "<p>Work In Progress...</p>", malayalamText: "<p>Work In Progress...</p>" },
+    { slug: "dbasha-shayin", title: "D'basha Shayin (ദ് ബസ്ശാ ശായീൻ)", manglishText: "<p>Work In Progress...</p>", malayalamText: "<p>Work In Progress...</p>" }
+  ];
+
+  return yamams.map((y) => ({
+    params: { slug: y.slug },
+    props: { prayer: y },
+  }));
+}
+
+const { prayer } = Astro.props;
+---
+
+<MainLayout title={`${prayer.title} | HolyfireMedia`} description={`Read and pray the ${prayer.title} Liturgy of the Hours.`}>
+  <div class="container mx-auto px-4 py-8 md:py-16">
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- Sticky Header -->
+      <div class="sticky top-[73px] z-40 bg-purple-900/90 backdrop-blur-xl border-b border-white/10 md:static md:bg-transparent md:border-none pt-4 pb-4 md:pt-0 mb-6 md:mb-12">
+        <a href="/prayers/yamams" class="inline-flex items-center text-pink-300 hover:text-pink-400 font-medium mb-4 group transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Yamams
+        </a>
+
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <h1 class="text-3xl md:text-5xl font-extrabold text-white">{prayer.title}</h1>
+          
+          <!-- Language Toggle View -->
+          <div class="inline-flex bg-black/40 p-1 rounded-xl border border-white/10 w-full sm:w-auto">
+            <button 
+              id="btn-malayalam" 
+              class="flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all"
+              onclick="setActiveState('malayalam')"
+            >
+              മലയാളം (Malayalam)
+            </button>
+            <button 
+              id="btn-manglish" 
+              class="flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all"
+              onclick="setActiveState('manglish')"
+            >
+              Manglish
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="bg-indigo-900/30 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden min-h-[50vh]">
+        
+        <div id="content-malayalam" class="animate-fade-in text-white/90 text-lg leading-relaxed">
+          <Fragment set:html={prayer.malayalamText} />
+        </div>
+        
+        <div id="content-manglish" class="hidden text-white/90 text-lg leading-relaxed font-sans">
+          <Fragment set:html={prayer.manglishText} />
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script is:inline>
+    // Handles toggling logic client-side
+    function setActiveState(language) {
+      const btnMalayalam = document.getElementById('btn-malayalam');
+      const btnManglish = document.getElementById('btn-manglish');
+      const contentMalayalam = document.getElementById('content-malayalam');
+      const contentManglish = document.getElementById('content-manglish');
+
+      if (!btnMalayalam || !btnManglish || !contentMalayalam || !contentManglish) return;
+
+      if (language === 'malayalam') {
+        // Active Button
+        btnMalayalam.className = 'flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all';
+        // Inactive Button
+        btnManglish.className = 'flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all';
+        
+        contentMalayalam.classList.remove('hidden');
+        contentMalayalam.classList.add('animate-fade-in');
+        contentManglish.classList.add('hidden');
+      } else {
+        // Inactive Button
+        btnMalayalam.className = 'flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all';
+        // Active Button
+        btnManglish.className = 'flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all';
+        
+        contentManglish.classList.remove('hidden');
+        contentManglish.classList.add('animate-fade-in');
+        contentMalayalam.classList.add('hidden');
+      }
+    }
+  </script>
+</MainLayout>

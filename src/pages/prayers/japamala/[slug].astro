@@ -1,5 +1,5 @@
 ---
-import MainLayout from '../../layouts/MainLayout.astro';
+import MainLayout from '../../../layouts/MainLayout.astro';
 
 export function getStaticPaths() {
   const prayers = [
@@ -338,22 +338,60 @@ export function getStaticPaths() {
       `
     },
     { 
-      slug: "divine-mercy", 
-      title: "Divine Mercy Chaplet", 
-      manglishText: "Nithya pithave, ente papangalkkum lokam muzhuvanumulla papangalkkum pariharamaayi...",
-      malayalamText: "നിത്യ പിതാവേ, എന്റെ പാപങ്ങൾക്കും ലോകം മുഴുവനുമുള്ള പാപങ്ങൾക്കും പരിഹാരമായി..."
-    },
-    { 
-      slug: "morning-prayer", 
-      title: "Morning Prayer", 
-      manglishText: "Ente daivame, innathe ente ella prarthanakalum, pravrithikalum, santhoshangalum...",
-      malayalamText: "എന്റെ ദൈവമേ, ഇന്നത്തെ എന്റെ എല്ലാ പ്രാർത്ഥനകളും, പ്രവൃത്തികളും, സന്തോഷങ്ങളും..."
-    },
-    { 
-      slug: "evening-prayer", 
-      title: "Evening Prayer", 
-      manglishText: "Karthave, ee bhavanatthe sandarshikkaname, shathruvukalude ella aakramangalum...",
-      malayalamText: "കർത്താവേ, ഈ ഭവനത്തെ സന്ദർശിക്കണമേ, ശത്രുക്കളുടെ എല്ലാ ആക്രമണങ്ങളും..."
+      slug: "karuna-kontha", 
+      title: "Karunayude Japamala (Divine Mercy Chaplet)", 
+      manglishText: `
+        <h2 class="text-2xl font-bold mb-4 text-center">Karunayude Japamala</h2>
+        <p class="mb-6 text-center text-purple-200">Pithavinteyum puthranteyum parishudhathmavinteyum namathil, Amen.<br><span class="text-pink-300 font-bold block mt-2">1 Swarga. 1 Nanma.</span></p>
+
+        <h3 class="text-xl text-pink-400 font-bold mt-8 mb-4 text-center">Vishwasapramanam</h3>
+        <p class="mb-4 text-justify leading-relaxed">Sarvashakthanaya pithavum aakashathinteyum bhoomiyudeyum srushtavumaya daivathil njan vishwasikkunnu. Aviduthe ekaputhranum njangalude karthavumaya eeshomishihayilum njan vishwasikkunnu. Ee puthran parishudhathmavinal garbhasthanayi kanyakamariyathilninnu pirannu; panthiyos peelathosinte kalathu peedakal sahichu, kurishil tharaykkappettu, marichu adakkappettu; pathalathilekkirangi, marichavarude idayilninnu moonnamnaal uyirthu; swargathilekkezunnalli, sarvashakthiyulla pithavinte valathubhaghathu irikkunnu; avidunnu jeevichirikkunnavareyum marichavareyum vidhikkan varumennum njan vishwasikkunnu. Parishudhathmavilum njan vishwasikkunnu. Vishudha katholikkasabhayilum, punyavanmarude aikyathilum, papangalude mochanathilum, shareerathinte uyirppilum, nithyamaya jeevithathilum njan vishwasikkunnu. Amen.</p>
+
+        <div class="bg-indigo-900/20 border border-indigo-500/30 p-5 rounded-xl mt-8 mb-6 relative">
+          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-indigo-900 text-indigo-300 px-3 py-1 rounded-full text-xs font-bold border border-indigo-500/50">Valiya Mani</div>
+          <p class="text-justify pt-3 text-purple-100">Nithyapithave, njangalude papangalkkum lokam muzhuvanumulla papangalkkum pariharamayi njangalude nadhanum rakshakanum ange ettam vatsalyamulla puthranumaya eeshomishihayude shareeravum rakthavum aathmavum daivathwavum angekku njan samarppikkunnu.</p>
+          <p class="text-right text-indigo-300 font-bold mt-2 text-sm">(1 Pravashyam)</p>
+        </div>
+
+        <div class="bg-pink-900/20 border border-pink-500/30 p-5 rounded-xl mt-6 mb-6 relative">
+          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-pink-900 text-pink-300 px-3 py-1 rounded-full text-xs font-bold border border-pink-500/50">Cheriya Manikal</div>
+          <p class="text-justify pt-3 text-purple-100 font-medium leading-relaxed">Eeshoyude athidarunamaya peedanubhavathekkurichu / <br><span class="text-pink-200">njangaludeyum lokam muzhuvanteyum mel karunayayirikkaname.</span></p>
+          <p class="text-right text-pink-300 font-bold mt-2 text-sm">(10 Pravashyam)</p>
+        </div>
+
+        <div class="bg-blue-900/20 border border-blue-500/30 p-5 rounded-xl mt-8 mb-6">
+          <p class="text-center text-blue-100 font-medium leading-relaxed">Parishudhanaya daivame, parishudhanaya balavane, parishudhanaya amarthyane, njangaludeyum lokam muzhuvanteyum mel karunayayirikkaname.</p>
+          <p class="text-center text-blue-300 font-bold mt-2 text-sm">(3 Pravashyam)</p>
+        </div>
+
+        <p class="text-center text-yellow-300 font-bold mt-8 mb-4">(Ingane 5 pravashyam cholluka)</p>
+      `,
+      malayalamText: `
+        <h2 class="text-2xl font-bold mb-4 text-center">കരുണയുടെ ജപമാല</h2>
+        <p class="mb-6 text-center text-purple-200">പിതാവിന്റെയും പുത്രന്റെയും പരിശുദ്ധാത്മാവിന്റെയും നാമത്തിൽ, ആമ്മേൻ.<br><span class="text-pink-300 font-bold block mt-2">1 സ്വർഗ്ഗ. 1 നന്മ.</span></p>
+
+        <h3 class="text-xl text-pink-400 font-bold mt-8 mb-4 text-center">വിശ്വാസപ്രമാണം</h3>
+        <p class="mb-4 text-justify leading-relaxed">സർവ്വശക്തനായ പിതാവും ആകാശത്തിന്റെയും ഭൂമിയുടെയും സൃഷ്ടാവുമായ ദൈവത്തിൽ ഞാൻ വിശ്വസിക്കുന്നു. അവിടുത്തെ ഏകപുത്രനും ഞങ്ങളുടെ കർത്താവുമായ ഈശോമിശിഹായിലും ഞാൻ വിശ്വസിക്കുന്നു. ഈ പുത്രൻ പരിശുദ്ധാത്മാവിനാൽ ഗർഭസ്ഥനായി കന്യകാമറിയത്തിൽനിന്നു പിറന്നു; പന്തിയോസ് പീലാത്തോസിന്റെ കാലത്ത് പീഡകൾ സഹിച്ച്, കുരിശിൽ തറയ്ക്കപ്പെട്ട്, മരിച്ച് അടക്കപ്പെട്ടു; പാതാളത്തിലേക്കിറങ്ങി, മരിച്ചവരുടെ ഇടയിൽനിന്നു മൂന്നാംനാൾ ഉയിർത്തു; സ്വർഗ്ഗത്തിലേക്കെഴുന്നള്ളി, സർവ്വശക്തിയുള്ള പിതാവിന്റെ വലത്തുഭാഗത്ത് ഇരിക്കുന്നു; അവിടുന്ന് ജീവിച്ചിരിക്കുന്നവരെയും മരിച്ചവരെയും വിധിക്കാൻ വരുമെന്നും ഞാൻ വിശ്വസിക്കുന്നു. പരിശുദ്ധാത്മാവിലും ഞാൻ വിശ്വസിക്കുന്നു. വിശുദ്ധ കത്തോലിക്കാസഭയിലും, പുണ്യവാന്മാരുടെ ഐക്യത്തിലും, പാപങ്ങളുടെ മോചനത്തിലും, ശരീരത്തിന്റെ ഉയിർപ്പിലും, നിത്യമായ ജീവിതത്തിലും ഞാൻ വിശ്വസിക്കുന്നു. ആമ്മേൻ.</p>
+
+        <div class="bg-indigo-900/20 border border-indigo-500/30 p-5 rounded-xl mt-8 mb-6 relative">
+          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-indigo-900 text-indigo-300 px-3 py-1 rounded-full text-xs font-bold border border-indigo-500/50">വലിയ മണി</div>
+          <p class="text-justify pt-3 text-purple-100">നിത്യപിതാവേ, ഞങ്ങളുടെ പാപങ്ങൾക്കും ലോകം മുഴുവനുമുള്ള പാപങ്ങൾക്കും പരിഹാരമായി ഞങ്ങളുടെ നാഥനും രക്ഷകനും അങ്ങേ ഏറ്റം വാത്സല്യമുള്ള പുത്രനുമായ ഈശോമിശിഹായുടെ ശരീരവും രക്തവും ആത്മാവും ദൈവത്വവും അങ്ങേക്ക് ഞാൻ സമർപ്പിക്കുന്നു.</p>
+          <p class="text-right text-indigo-300 font-bold mt-2 text-sm">(1 പ്രാവശ്യം)</p>
+        </div>
+
+        <div class="bg-pink-900/20 border border-pink-500/30 p-5 rounded-xl mt-6 mb-6 relative">
+          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-pink-900 text-pink-300 px-3 py-1 rounded-full text-xs font-bold border border-pink-500/50">ചെറിയ മണികൾ</div>
+          <p class="text-justify pt-3 text-purple-100 font-medium leading-relaxed">ഈശോയുടെ അതിദാരുണമായ പീഡാനുഭവത്തെക്കുറിച്ച്/ <br><span class="text-pink-200">ഞങ്ങളുടെയും ലോകം മുഴുവൻ്റെയും മേൽ കരുണയായിരിക്കണമേ.</span></p>
+          <p class="text-right text-pink-300 font-bold mt-2 text-sm">(10 പ്രാവശ്യം)</p>
+        </div>
+
+        <div class="bg-blue-900/20 border border-blue-500/30 p-5 rounded-xl mt-8 mb-6">
+          <p class="text-center text-blue-100 font-medium leading-relaxed">പരിശുദ്ധനായ ദൈവമേ, പരിശുദ്ധനായ ബലവാനേ, പരിശുദ്ധനായ അമർത്യനേ, ഞങ്ങളുടെയും ലോകം മുഴുവൻ്റെയും മേൽ കരുണയായിരിക്കണമേ.</p>
+          <p class="text-center text-blue-300 font-bold mt-2 text-sm">(3 പ്രാവശ്യം)</p>
+        </div>
+
+        <p class="text-center text-yellow-300 font-bold mt-8 mb-4">(ഇങ്ങനെ 5 പ്രാവശ്യം ചൊല്ലുക)</p>
+      `
     }
   ];
   
@@ -372,11 +410,11 @@ const { prayer } = Astro.props;
   <div class="container mx-auto px-4 py-16">
     <div class="max-w-4xl mx-auto">
       <!-- Back Button -->
-      <a href="/prayers" class="inline-flex items-center text-purple-300 hover:text-pink-400 mb-8 transition-colors">
+      <a href="/prayers/japamala" class="inline-flex items-center text-purple-300 hover:text-pink-400 mb-8 transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
-        Back to Devotions
+        Back to Japamalakal
       </a>
 
       <!-- Content Container -->

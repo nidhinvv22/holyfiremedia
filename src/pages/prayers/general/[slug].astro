@@ -1,0 +1,254 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+
+export function getStaticPaths() {
+  const generalList = [
+    { 
+      slug: "prayer-for-priests", 
+      title: "Vaidikarkkuvendiyulla Prarthana (Prayer for Priests)",
+      manglishText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Nithya purohithanaya eesho, ange dasanmaraya vaidikarkku yathorapathum varathe ange thiru hrudayathil abhayam nalkaname. Ange parishudhamaya shareeram divasanthorum edukkunna avarude abhishiktha karangale malinamakathe kakkaname. Ange vilayeriya thirurakthathal nanayunna avarude navukale nirmmalamayi kathukollaname. Shreshtamaya ange paurohithyathinte mahaneeyamudra pathichirikkunna avarude hrudayangale lokavasthukkalil ninnu akattukayum vishudhamayi kathukollukayum cheyyaname. Ange divyasneham avare lokathantrangalil ninnu samrakshikkatte. Avarude prayathnangal phalasamrudhamayi bhavikkatte. Avarude shushroosha labhikkunnavar ihathil avarude aanandavum aashwasavum parathil nithyasaubhagyathinte makudavum aayitheeratte. Amen.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Lokarakshakanaya eesho, ange purohithareyum vaidika shushrooshakareyum shudheekarikkename. Vaidikarude rajniyaya mariyame, vaidikarkkuvendi prarthikkaname.
+          </p>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6 font-malayalam">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            നിത്യ പുരോഹിതനായ ഈശോ, അങ്ങേ ദാസന്മാരായ വൈദികർക്ക് യാതൊരാപത്തും വരാതെ അങ്ങേ തിരു ഹൃദയത്തിൽ അഭയം നൽകണമേ. അങ്ങേ പരിശുദ്ധമായ ശരീരം ദിവസന്തോറും എടുക്കുന്ന അവരുടെ അഭിഷിക്ത കരങ്ങളെ മലിനമാക്കാതെ കാക്കണമേ. അങ്ങേ വിലയേറിയ തിരുരക്തത്താൽ നനയുന്ന അവരുടെ നാവുകളെ നിർമ്മലമായി കാത്തുകൊള്ളണമേ. ശ്രേഷ്ഠമായ അങ്ങേ പൗരോഹിത്യത്തിന്റെ മഹനീയമുദ്ര പതിച്ചിരിയ്ക്കുന്ന അവരുടെ ഹൃദയങ്ങളെ ലോകവസ്തുക്കളിൽ നിന്ന് അകറ്റുകയും വിശുദ്ധമായി കാത്തുകൊള്ളുകയും ചെയ്യണമേ. അങ്ങേ ദിവ്യസ്നേഹം അവരെ ലോകതന്ത്രങ്ങളിൽ നിന്നു സംരക്ഷിക്കട്ടെ. അവരുടെ പ്രയത്നങ്ങൾ ഫലസമൃദ്ധമായി ഭവിക്കട്ടെ. അവരുടെ ശുശ്രൂഷ ലഭിക്കുന്നവർ ഇഹത്തിൽ അവരുടെ ആനന്ദവും ആശ്വാസവും പരത്തിൽ നിത്യസൗഭാഗ്യത്തിന്റെ മകുടവും ആയിത്തീരട്ടെ. ആമ്മേൻ.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            ലോകരക്ഷകനായ ഈശോ, അങ്ങേ പുരോഹിതരെയും വൈദിക ശുശ്രൂഷകരെയും ശുദ്ധീകരിക്കേണമേ. വൈദികരുടെ രാജ്ഞിയായ മറിയമേ, വൈദികർക്കുവേണ്ടി പ്രാർത്ഥിക്കണമേ.
+          </p>
+        </div>
+      `
+    },
+    { 
+      slug: "precious-blood", 
+      title: "Thiruraktha Samrakshana Prarthana (Precious Blood)",
+      manglishText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Kalvariyil enikkuvendi rakthamchinthi maricha yeshuve, enne vilakoduthu vangiya yeshuve, aviduthe amoolyalaya thiruraktham enne sakala papangalil ninnum rakshikkumallo. Ente panchendriyangaleyum, chintha, bhavana, budhi, ormma, kalpanashakthi, ichashakthi ivayeyum aviduthe thirurakthathal oro nimishavum, kazhukaname, vishudheekarikkaname. Njan irikkumbozhum, kidakkumbozhum, oro pravarthi cheyyumbozhum, sancharikkumbozhum, aviduthe thirurakthathinte valiya samrakshanam nirantharam enikku nalkaname. Angane njan saathante kudilathanthrangale ethirthukondu aviduthe pathayil sancharikkuvanum eppozhum aviduthodukoode aayirikkuvanum idayakatte. Amen.
+          </p>
+          <div class="bg-red-900/20 border border-red-500/30 p-6 rounded-2xl mt-8 text-center">
+            <p class="text-red-200 text-lg md:text-2xl font-medium leading-loose">
+              Yeshuve, aviduthe amoolyalaya thirurakthathal oro nimishavum enne kazhukaname.
+            </p>
+            <p class="text-red-400 font-bold mt-2">(3 Pravashyam)</p>
+          </div>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6 font-malayalam">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            കാൽവരിയിൽ എനിക്കുവേണ്ടി രക്തംചിന്തി മരിച്ച യേശുവേ, എന്നെ വിലകൊടുത്തു വാങ്ങിയ യേശുവേ, അവിടുത്തെ അമൂല്യമായ തിരുരക്തം എന്നെ സകല പാപങ്ങളിൽ നിന്നും രക്ഷിക്കുമല്ലോ. എന്റെ പഞ്ചേന്ദ്രിയങ്ങളെയും, ചിന്ത, ഭാവന, ബുദ്ധി, ഓർമ്മ, കല്പനാശക്തി, ഇച്ഛാശക്തി ഇവയെയും അവിടുത്തെ തിരുരക്തത്താൽ ഓരോ നിമിഷവും, കഴുകണമേ, വിശുദ്ധീകരിക്കണമേ. ഞാൻ ഇരിക്കുമ്പോഴും, കിടക്കുമ്പോഴും, ഓരോ പ്രവർത്തി ചെയ്യുമ്പോഴും, സഞ്ചരിക്കുമ്പോഴും, അവിടുത്തെ തിരുരക്തത്തിന്റെ വലിയ സംരക്ഷണം നിരന്തരം എനിക്കു നൽകണമേ. അങ്ങനെ ഞാൻ സാത്താന്റെ കുടിലതന്ത്രങ്ങളെ എതിർത്തുകൊണ്ട് അവിടുത്തെ പാതയിൽ സഞ്ചരിക്കുവാനും എപ്പോഴും അവിടുത്തോടുകൂടെ ആയിരിക്കുവാനും ഇടയാകട്ടെ. ആമ്മേൻ.
+          </p>
+          <div class="bg-red-900/20 border border-red-500/30 p-6 rounded-2xl mt-8 text-center">
+            <p class="text-red-200 text-lg md:text-2xl font-medium leading-loose">
+              യേശുവേ, അവിടുത്തെ അമൂല്യമായ തിരുരക്തത്താൽ ഓരോ നിമിഷവും എന്നെ കഴുകണമേ.
+            </p>
+            <p class="text-red-400 font-bold mt-2">(3 പ്രാവശ്യം)</p>
+          </div>
+        </div>
+      `
+    },
+    { 
+      slug: "prayer-to-mother-mary", 
+      title: "Mathavinodulla Samrakshana Prarthana (Prayer of Protection to Mother Mary)",
+      manglishText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Daivamathavaya parishudha kanyamariyame, manushyakulam muzhuventeyum mathavum madhyasthayum sahayavum samrakshakayumakuvan daivam munkootti thiranjeduthirikkunna angaye njangal vanangunnu. Njangalude kudumbathinte mathavum samrakshakayumayi innu njangal angaye sweekarikkunnu. Amme, angayude shakthamaya samrakshanathal athmeeyavum shareerikavumaya ella aapathukalil ninnum prathyekichu paishachika shakthikalude upadravangal, agnibadha, jalapralayam, idiminnal, kodunkattu, bhoomikulukkam, vahanapakadangal ennivayil ninnum, kallanmar, akramikal ennivaril ninnum njangaleyum njangalude bhavanangaleyum samrakshikkaname.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Ee bhavanathil vasikkunna ellavarum angayude swanthamayathukondu ella athyahithangalil ninnum shareerika asukhangalil ninnum njangale samrakshikkaname. Ettam pradhanamayi papam varjjikkunnathinum ellakaryathilum daiveshtam niravettikondu daivanugrahathil jeevikkunnathinum ennekumayi angekku prathishtikkappettirikkunna njangal ellavarkkumayi ange thirukkumaranodu prarthikkename. Amen.
+          </p>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6 font-malayalam">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            ദൈവമാതാവായ പരിശുദ്ധ കന്യാമറിയമേ, മനുഷ്യകുലം മുഴുവന്റേയും മാതാവും മദ്ധ്യസ്ഥയും സഹായവും സംരക്ഷകയുമാകുവാൻ ദൈവം മുൻകൂട്ടി തിരഞ്ഞെടുത്തിരിക്കുന്ന അങ്ങയെ ഞങ്ങൾ വണങ്ങുന്നു. ഞങ്ങളുടെ കുടുംബത്തിന്റെ മാതാവും സംരക്ഷകയുമായി ഇന്ന് ഞങ്ങൾ അങ്ങയെ സ്വീകരിക്കുന്നു. അമ്മേ, അങ്ങയുടെ ശക്തമായ സംരക്ഷണത്താൽ ആത്മീയവും ശാരീരികവുമായ എല്ലാ ആപത്തുകളിൽ നിന്നും പ്രത്യേകിച്ച് പൈശാചിക ശക്തികളുടെ ഉപദ്രവങ്ങൾ, അഗ്നിബാധ, ജലപ്രളയം, ഇടിമിന്നൽ, കൊടുങ്കാറ്റ്, ഭൂമികുലുക്കം, വാഹനാപകടങ്ങൾ എന്നിവയിൽനിന്നും, കള്ളന്മാർ, അക്രമികൾ എന്നിവരിൽനിന്നും ഞങ്ങളെയും ഞങ്ങളുടെ ഭവനങ്ങളെയും സംരക്ഷിക്കണമേ.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            ഈ ഭവനത്തിൽ വസിക്കുന്ന എല്ലാവരും അങ്ങയുടെ സ്വന്തമായതുകൊണ്ട് എല്ലാ അത്യാഹിതങ്ങളിൽ നിന്നും ശാരീരിക അസുഖങ്ങളിൽ നിന്നും ഞങ്ങളെ സംരക്ഷിക്കണമേ. ഏറ്റം പ്രധാനമായി പാപം വർജ്ജിക്കുന്നതിനും എല്ലാകാര്യത്തിലും ദൈവേഷ്ടം നിറവേറ്റിക്കൊണ്ട് ദൈവാനുഗ്രഹത്തിൽ ജീവിക്കുന്നതിനും എന്നേക്കുമായി അങ്ങേക്കു പ്രതിഷ്ഠിക്കപ്പെട്ടിരിക്കുന്ന ഞങ്ങൾ എല്ലാവർക്കുമായി അങ്ങേ തിരുക്കുമാരനോടു പ്രാർത്ഥിക്കേണമേ. ആമ്മേൻ.
+          </p>
+        </div>
+      `
+    },
+    { slug: "guardian-angel", title: "Kaval Malakhayodulla Prarthana" },
+    { slug: "maundy-thursday", title: "Pesahavyazham Appammurikkal" },
+    { 
+      slug: "three-oclock-prayer", 
+      title: "Moonnumani Japam (Three O'Clock Prayer)",
+      manglishText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6">
+          <p class="text-center italic text-purple-300 text-lg md:text-xl font-medium mb-8">
+            (Uchakazhinju moonnumanikku chollavunna uchithamaya prarthanakal)
+          </p>
+          <p class="text-center text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100">
+            Yeshuve, samasthalokathinum jeevante uravidavum karunayude kadalum thurannukondanallo angu maranam kaivarichathu. Jeevante sambharaniyum ananthakarunyathinte uravidavumaya yeshuve, sarvvalokatheyum avidunnu aavaranam cheyyaname. Angayude anugrahangal poornnamayi choriyaname.
+          </p>
+          <div class="bg-red-900/20 border border-red-500/30 p-6 rounded-2xl mt-8">
+            <p class="text-center text-red-200 text-lg md:text-2xl font-medium leading-loose">
+              Yeshuvinte hrudayathil ninnum njangalkkuvendi karunasrothassayi ozhukiyirangiya thirurakthame, thirujalame njan angil sharanappedunnu.
+            </p>
+          </div>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6 font-malayalam">
+          <p class="text-center italic text-purple-300 text-lg md:text-xl font-medium mb-8">
+            (ഉച്ചകഴിഞ്ഞ് മൂന്നുമണിക്ക് ചൊല്ലാവുന്ന ഉചിതമായ പ്രാർത്ഥനകൾ)
+          </p>
+          <p class="text-center text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100">
+            യേശുവേ, സമസ്തലോകത്തിനും ജീവന്റെ ഉറവിടവും കരുണയുടെ കടലും തുറന്നുകൊണ്ടാണല്ലോ അങ്ങ് മരണം കൈവരിച്ചത്. ജീവന്റെ സംഭരണിയും അനന്തകാരുണ്യത്തിന്റെ ഉറവിടവുമായ യേശുവേ, സർവ്വലോകത്തേയും അവിടുന്ന് ആവരണം ചെയ്യണമേ. അങ്ങയുടെ അനുഗ്രഹങ്ങൾ പൂർണ്ണമായി ചൊരിയണമേ.
+          </p>
+          <div class="bg-red-900/20 border border-red-500/30 p-6 rounded-2xl mt-8">
+            <p class="text-center text-red-200 text-lg md:text-2xl font-medium leading-loose">
+              യേശുവിന്റെ ഹൃദയത്തിൽ നിന്നും ഞങ്ങൾക്കുവേണ്ടി കരുണാസ്രോതസ്സായി ഒഴുകിയിറങ്ങിയ തിരുരക്തമേ, തിരുജലമേ ഞാൻ അങ്ങിൽ ശരണപ്പെടുന്നു.
+            </p>
+          </div>
+        </div>
+      `
+    },
+    { 
+      slug: "students-prayer", 
+      title: "Vidyarthikalude Prarthana (Prayer for Students)",
+      manglishText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Parishudhathmavaya daivame, ennil vannu nirayename, ente manassineyum budhiyeyum chinthayeyum vikara vicharangaleyum vishudheekarikkename.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            'Eesho prayathilum njanathilum daivathinteyum manushyarudeyum preethiyilum valarnnuvannathupole' njanum aayitheerunnathinu, ange mahathwathinothavidham ente dauthym nirvahikkunnathinavashyamaya njanam, budhi, arivu, aalochana, aathmadhairyam, bhakthi, daivabhayam ennee danangalum phalangalum ennil choriyename. Parishudha amme, malakhamare, vishudhare enikkuvendi madhyasthyam vahikkename.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Eeshoye, ente sahapadikaleyum gurubhoothareyum mathapithakkanmareyum sahodarangaleyum anugrahikkename. Nithym pithavum puthranum parishudhathmavumaya sarvveshwara. Amen.
+          </p>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8 space-y-6 font-malayalam">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            പരിശുദ്ധാത്മാവായ ദൈവമേ, എന്നിൽ വന്ന് നിറയേണമേ, എന്റെ മനസ്സിനെയും ബുദ്ധിയെയും ചിന്തയെയും വികാര വിചാരങ്ങളെയും വിശുദ്ധീകരിക്കേണമേ.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            'ഈശോ പ്രായത്തിലും ജ്ഞാനത്തിലും ദൈവത്തിന്റെയും മനുഷ്യരുടെയും പ്രീതിയിലും വളർന്നുവന്നതുപോലെ' ഞാനും ആയിത്തീരുന്നതിന്, അങ്ങേ മഹത്വത്തിനൊത്തവിധം എന്റെ ദൗത്യം നിർവ്വഹിക്കുന്നതിനാവശ്യമായ ജ്ഞാനം, ബുദ്ധി, അറിവ്, ആലോചന, ആത്മധൈര്യം, ഭക്തി, ദൈവഭയം എന്നീ ദാനങ്ങളും ഫലങ്ങളും എന്നിൽ ചൊരിയേണമേ. പരിശുദ്ധ അമ്മേ, മാലാഖമാരേ, വിശുദ്ധരേ എനിക്കുവേണ്ടി മാധ്യസ്ഥ്യം വഹിക്കേണമേ.
+          </p>
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            ഈശോയേ, എന്റെ സഹപാഠികളെയും ഗുരുഭൂതരേയും മാതാപിതാക്കന്മാരെയും സഹോദരങ്ങളെയും അനുഗ്രഹിക്കേണമേ. നിത്യം പിതാവും പുത്രനും പരിശുദ്ധാത്മാവുമായ സർവ്വേശ്വരാ. ആമ്മേൻ.
+          </p>
+        </div>
+      `
+    },
+    { slug: "st-francis-assisi", title: "St. Francis Assisiyude Prarthana" },
+    { slug: "job-seekers", title: "Thozhilanveshakarude Prarthana" },
+    { slug: "couples-prayer", title: "Dambathikalude Prarthana" },
+    { slug: "childless-prayer", title: "Makkalillathavarkkuvendiyulla Prarthana" },
+    { slug: "parents-prayer-for-children", title: "Makkalkkuvendiyulla Mathapithakkalude..." },
+    { slug: "family-prayer", title: "Kudumbathinu Vendiyulla Prarthana" },
+    { slug: "before-sleep", title: "Urangum Munpu" },
+    { slug: "pregnant-women", title: "Garbhinikalude Japam" }
+  ];
+
+  return generalList.map((y) => ({
+    params: { slug: y.slug },
+    props: { 
+        prayer: {
+            ...y,
+            manglishText: y.manglishText || "<p class='text-center italic text-purple-200 mt-10'>Work In Progress: Adding content...</p>",
+            malayalamText: y.malayalamText || "<p class='text-center italic text-purple-200 mt-10'>Work In Progress: Adding content...</p>"
+        } 
+    },
+  }));
+}
+
+const { prayer } = Astro.props;
+---
+
+<MainLayout title={`${prayer.title} | HolyfireMedia`} description={`Read ${prayer.title}.`}>
+  <div class="container mx-auto px-4 py-8 md:py-16">
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- Sticky Header -->
+      <div class="sticky top-[73px] z-40 bg-purple-900/90 backdrop-blur-xl border-b border-white/10 md:static md:bg-transparent md:border-none pt-4 pb-4 md:pt-0 mb-6 md:mb-12">
+        <a href="/prayers/general" class="inline-flex items-center text-pink-300 hover:text-pink-400 font-medium mb-4 group transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Prarthanakal
+        </a>
+
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <h1 class="text-3xl md:text-5xl font-extrabold text-white">{prayer.title}</h1>
+          
+          <!-- Language Toggle View -->
+          <div class="inline-flex bg-black/40 p-1 rounded-xl border border-white/10 w-full sm:w-auto">
+            <button 
+              id="btn-malayalam" 
+              class="flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all"
+              onclick="setActiveState('malayalam')"
+            >
+              മലയാളം (Malayalam)
+            </button>
+            <button 
+              id="btn-manglish" 
+              class="flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all"
+              onclick="setActiveState('manglish')"
+            >
+              Manglish
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="bg-indigo-900/30 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden min-h-[50vh]">
+        
+        <div id="content-malayalam" class="animate-fade-in text-white/90 text-lg leading-relaxed">
+          <Fragment set:html={prayer.malayalamText} />
+        </div>
+        
+        <div id="content-manglish" class="hidden text-white/90 text-lg leading-relaxed font-sans">
+          <Fragment set:html={prayer.manglishText} />
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script is:inline>
+    // Handles toggling logic client-side
+    function setActiveState(language) {
+      const btnMalayalam = document.getElementById('btn-malayalam');
+      const btnManglish = document.getElementById('btn-manglish');
+      const contentMalayalam = document.getElementById('content-malayalam');
+      const contentManglish = document.getElementById('content-manglish');
+
+      if (!btnMalayalam || !btnManglish || !contentMalayalam || !contentManglish) return;
+
+      if (language === 'malayalam') {
+        btnMalayalam.className = 'flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all';
+        btnManglish.className = 'flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all';
+        
+        contentMalayalam.classList.remove('hidden');
+        contentMalayalam.classList.add('animate-fade-in');
+        contentManglish.classList.add('hidden');
+      } else {
+        btnMalayalam.className = 'flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all';
+        btnManglish.className = 'flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all';
+        
+        contentManglish.classList.remove('hidden');
+        contentManglish.classList.add('animate-fade-in');
+        contentMalayalam.classList.add('hidden');
+      }
+    }
+  </script>
+</MainLayout>

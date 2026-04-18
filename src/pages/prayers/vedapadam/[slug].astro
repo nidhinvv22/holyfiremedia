@@ -1,0 +1,266 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+
+export function getStaticPaths() {
+  const vedapadamList = [
+    { 
+      slug: "daivakalpanakal", 
+      title: "Daivakalpanakal Pathu (10 Commandments)",
+      manglishText: `
+        <div class="max-w-3xl mx-auto space-y-8 p-4">
+          <ol class="list-decimal list-inside space-y-4 text-purple-100 text-lg md:text-xl leading-relaxed">
+            <li>Ninte karthavaya daivam njanakunnu. Njannallathe mattoru daivam ninakkundakaruthu.</li>
+            <li>Daivathinte thirunamam vrudha prayogikkaruthu.</li>
+            <li>Karthavinte divasam parishudhamayi aacharikkanam.</li>
+            <li>Mathapithakkanmare bahumanikkanam.</li>
+            <li>Kollaruthu.</li>
+            <li>Vyabhicharam cheyyaruthu.</li>
+            <li>Moshtikkaruthu.</li>
+            <li>Kallasakshi parayaruthu.</li>
+            <li>Anyante bharyaye mohikkaruthu.</li>
+            <li>Anyante vasthukkal mohikkaruthu.</li>
+          </ol>
+          
+          <div class="bg-indigo-900/40 p-6 rounded-2xl border border-indigo-500/30 mt-8">
+            <p class="text-pink-300 font-bold mb-4 text-lg md:text-xl">Ee pathu kalpanakale randu kalpanakalil sangrahikkam:</p>
+            <ol class="list-decimal list-inside space-y-3 text-purple-100 text-lg md:text-xl">
+              <li>Ellattinum upariyayi daivathe snehikkanam.</li>
+              <li>Thanneppole mattullavareyum snehikkanam.</li>
+            </ol>
+          </div>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto space-y-8 p-4 font-malayalam">
+          <ol class="list-decimal list-inside space-y-4 text-purple-100 text-lg md:text-xl leading-relaxed">
+            <li>നിന്റെ കർത്താവായ ദൈവം ഞാനാകുന്നു. ഞാനല്ലാതെ മറ്റൊരു ദൈവം നിനക്കുണ്ടാകരുത്.</li>
+            <li>ദൈവത്തിന്റെ തിരുനാമം വൃഥാ പ്രയോഗിക്കരുത്.</li>
+            <li>കർത്താവിന്റെ ദിവസം പരിശുദ്ധമായി ആചരിക്കണം.</li>
+            <li>മാതാപിതാക്കന്മാരെ ബഹുമാനിക്കണം.</li>
+            <li>കൊല്ലരുത്.</li>
+            <li>വ്യഭിചാരം ചെയ്യരുത്.</li>
+            <li>മോഷ്ടിക്കരുത്.</li>
+            <li>കള്ളസാക്ഷി പറയരുത്.</li>
+            <li>അന്യന്റെ ഭാര്യയെ മോഹിക്കരുത്.</li>
+            <li>അന്യന്റെ വസ്തുക്കൾ മോഹിക്കരുത്.</li>
+          </ol>
+          
+          <div class="bg-indigo-900/40 p-6 rounded-2xl border border-indigo-500/30 mt-8">
+            <p class="text-pink-300 font-bold mb-4 text-lg md:text-xl">ഈ പത്തു കല്പനകളെ രണ്ടു കല്പനകളിൽ സംഗ്രഹിക്കാം:</p>
+            <ol class="list-decimal list-inside space-y-3 text-purple-100 text-lg md:text-xl">
+              <li>എല്ലാറ്റിനും ഉപരിയായി ദൈവത്തെ സ്നേഹിക്കണം.</li>
+              <li>തന്നെപ്പോലെ മറ്റുള്ളവരെയും സ്നേഹിക്കണം.</li>
+            </ol>
+          </div>
+        </div>
+      `
+    },
+    { 
+      slug: "thirussabhayude-kalpanakal", 
+      title: "Thirussabhayude Kalpanakal Anju (5 Precepts of the Church)",
+      manglishText: `
+        <div class="max-w-4xl mx-auto p-4">
+          <ol class="list-decimal list-outside ml-6 space-y-6 text-purple-100 text-lg md:text-xl leading-relaxed">
+            <li class="pl-2">Njayarazhchakalilum kadamulla thirunalukalilum divya baliyil poornnamayum sajeevamayum pankukollanam. Aa divasangalil vilakkappetta velakal cheyyaruthu.</li>
+            <li class="pl-2">Aandilorikkalenkilum anuranjana koodasha sweekarikkayum (kumbasarikkayum) pesahakalathu parishudha kurbana ulkkollukayum venam.</li>
+            <li class="pl-2">Nishchayikkappetta divasangalil upavasikkayum vilakkappetta bhakshanasadhanangal varjjikkayum cheyyanam.</li>
+            <li class="pl-2">Vilakkappetta kalathu vivaham akhoshikkayo thirussabha vilakkiyirikkunna aalukalumayi vivaham nadathukayo cheyyaruthu.</li>
+            <li class="pl-2">Devalayathinum devalaya shushrooshakarkkum vaidikadhyakshan nishchayichittulla pathavaravum mattu oharikalum kodukkanam.</li>
+          </ol>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-4xl mx-auto p-4 font-malayalam">
+          <ol class="list-decimal list-outside ml-6 space-y-6 text-purple-100 text-lg md:text-xl leading-relaxed">
+            <li class="pl-2">ഞായറാഴ്ചകളിലും കടമുള്ള തിരുനാളുകളിലും ദിവ്യ ബലിയിൽ പൂർണ്ണമായും സജീവമായും പങ്കുകൊള്ളണം. ആ ദിവസങ്ങളിൽ വിലക്കപ്പെട്ട വേലകൾ ചെയ്യരുത്.</li>
+            <li class="pl-2">ആണ്ടിലൊരിക്കലെങ്കിലും അനുരഞ്ജന കൂദാശ സ്വീകരിക്കുകയും (കുമ്പസാരിക്കുകയും) പെസഹാകാലത്ത് പരിശുദ്ധ കുർബാന ഉൾക്കൊള്ളുകയും വേണം.</li>
+            <li class="pl-2">നിശ്ചയിക്കപ്പെട്ട ദിവസങ്ങളിൽ ഉപവസിക്കുകയും വിലക്കപ്പെട്ട ഭക്ഷണസാധനങ്ങൾ വർജ്ജിക്കുകയും ചെയ്യണം.</li>
+            <li class="pl-2">വിലക്കപ്പെട്ട കാലത്ത് വിവാഹം ആഘോഷിക്കുകയോ തിരുസ്സഭ വിലക്കിയിരിക്കുന്ന ആളുകളുമായി വിവാഹം നടത്തുകയോ ചെയ്യരുത്.</li>
+            <li class="pl-2">ദേവാലയത്തിനും ദേവാലയ ശുശ്രൂഷകർക്കും വൈദികാദ്ധ്യക്ഷൻ നിശ്ചയിച്ചിട്ടുള്ള പതവാരവും മറ്റ് ഓഹരികളും കൊടുക്കണം.</li>
+          </ol>
+        </div>
+      `
+    },
+    { 
+      slug: "koodashakal", 
+      title: "Koodashakal Ezhu (7 Sacraments)",
+      manglishText: `
+        <div class="max-w-xl mx-auto p-4 flex justify-center">
+          <ol class="list-decimal list-inside space-y-4 text-purple-100 text-2xl leading-relaxed font-bold">
+            <li>Mammodisa <span class="text-sm font-normal text-purple-300 ml-2">(Baptism)</span></li>
+            <li>Sthairyalepanam <span class="text-sm font-normal text-purple-300 ml-2">(Confirmation)</span></li>
+            <li>Kurbana <span class="text-sm font-normal text-purple-300 ml-2">(Holy Eucharist)</span></li>
+            <li>Kumbasaram <span class="text-sm font-normal text-purple-300 ml-2">(Confession)</span></li>
+            <li>Rogilepanam <span class="text-sm font-normal text-purple-300 ml-2">(Anointing of the Sick)</span></li>
+            <li>Thiruppattam <span class="text-sm font-normal text-purple-300 ml-2">(Holy Orders)</span></li>
+            <li>Vivaham <span class="text-sm font-normal text-purple-300 ml-2">(Matrimony)</span></li>
+          </ol>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-xl mx-auto p-4 flex justify-center font-malayalam">
+          <ol class="list-decimal list-inside space-y-4 text-purple-100 text-2xl leading-relaxed font-bold">
+            <li>മാമ്മോദീസാ</li>
+            <li>സ്ഥൈര്യലേപനം</li>
+            <li>കുർബാന</li>
+            <li>കുമ്പസാരം</li>
+            <li>രോഗീലേപനം</li>
+            <li>തിരുപ്പട്ടം</li>
+            <li>വിവാഹം</li>
+          </ol>
+        </div>
+      `
+    },
+    { 
+      slug: "karunnyapravarthikal", 
+      title: "Karunnyapravarthikal Pathinalu (14 Works of Mercy)",
+      manglishText: `
+        <div class="max-w-4xl mx-auto p-4 flex justify-center">
+          <ol class="list-decimal list-inside space-y-4 text-purple-100 text-lg md:text-xl leading-relaxed">
+            <li>Vishakkunnavarkku bhakshanam kodukkunnathu.</li>
+            <li>Dahikkunnavarkku kudikkan kodukkunnathu.</li>
+            <li>Vasthramillathavarkku vasthram kodukkunnathu.</li>
+            <li>Parppidamillathavarkku parppidam kodukkunnathu.</li>
+            <li>Rogikaleyum thadavukareyum sandarshikkunnathu.</li>
+            <li>Avashare sahayikkunnathu.</li>
+            <li>Arivillathavare padhippikkunnathu.</li>
+            <li>Samshayamullavarude samshayam theerkkunnathu.</li>
+            <li>Dukhithare aashwasipikkunnathu.</li>
+            <li>Thettu cheyyunnavare thiruthunnathu.</li>
+            <li>Upadravangal kshamikkunnathu.</li>
+            <li>Anyarude kuravukal kshamayode sahikkunnathu.</li>
+            <li>Marichavare adakkunnathu.</li>
+            <li>Jeevichirikkunnavarkkum marichavarkkum vendi prarthikkunnathu.</li>
+          </ol>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-4xl mx-auto p-4 flex justify-center font-malayalam">
+          <ol class="list-decimal list-inside space-y-4 text-purple-100 text-lg md:text-xl leading-relaxed">
+            <li>വിശക്കുന്നവർക്ക് ഭക്ഷണം കൊടുക്കുന്നത്.</li>
+            <li>ദാഹിക്കുന്നവർക്ക് കുടിക്കാൻ കൊടുക്കുന്നത്.</li>
+            <li>വസ്ത്രമില്ലാത്തവർക്ക് വസ്ത്രം കൊടുക്കുന്നത്.</li>
+            <li>പാർപ്പിടമില്ലാത്തവർക്ക് പാർപ്പിടം കൊടുക്കുന്നത്.</li>
+            <li>രോഗികളെയും തടവുകാരെയും സന്ദർശിക്കുന്നത്.</li>
+            <li>അവശരെ സഹായിക്കുന്നത്.</li>
+            <li>അറിവില്ലാത്തവരെ പഠിപ്പിക്കുന്നത്.</li>
+            <li>സംശയമുള്ളവരുടെ സംശയം തീർക്കുന്നത്.</li>
+            <li>ദുഃഖിതരെ ആശ്വസിപ്പിക്കുന്നത്.</li>
+            <li>തെറ്റ് ചെയ്യുന്നവരെ തിരുത്തുന്നത്.</li>
+            <li>ഉപദ്രവങ്ങൾ ക്ഷമിക്കുന്നത്.</li>
+            <li>അന്യരുടെ കുറവുകൾ ക്ഷമയോടെ സഹിക്കുന്നത്.</li>
+            <li>മരിച്ചവരെ അടക്കുന്നത്.</li>
+            <li>ജീവിച്ചിരിക്കുന്നവർക്കും മരിച്ചവർക്കും വേണ്ടി പ്രാർത്ഥിക്കുന്നത്.</li>
+          </ol>
+        </div>
+      `
+    },
+    { slug: "suvisheshabhagyangal", title: "Suvisheshabhagyangal Ettu" },
+    { slug: "daivalakshanangal", title: "Daivalakshanangal" },
+    { slug: "daivikapunyangal", title: "Daivikapunyangal Moonnu" },
+    { slug: "nalla-kumbasaram", title: "Nalla Kumbasarathinu Venda Karyangal" },
+    { slug: "parishudha-kurbana-yogyatha", title: "Parishudha Kurbana Yogyathayode" },
+    { slug: "parishudharoopi-danangal", title: "Parishudharoopiyude Danangal Ezhu" },
+    { slug: "parishudharoopi-phalangal", title: "Parishudharoopiyude Phalangal" },
+    { slug: "moolapapangal", title: "Moolapapangalum Avaykkethiraya Punyangalum" }
+  ];
+
+  return vedapadamList.map((y) => ({
+    params: { slug: y.slug },
+    props: { 
+        prayer: {
+            ...y,
+            manglishText: y.manglishText || "<p class='text-center italic text-purple-200 mt-10'>Work In Progress: Adding content...</p>",
+            malayalamText: y.malayalamText || "<p class='text-center italic text-purple-200 mt-10'>Work In Progress: Adding content...</p>"
+        } 
+    },
+  }));
+}
+
+const { prayer } = Astro.props;
+---
+
+<MainLayout title={`${prayer.title} | HolyfireMedia`} description={`Read ${prayer.title} in Vedapadam.`}>
+  <div class="container mx-auto px-4 py-8 md:py-16">
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- Sticky Header -->
+      <div class="sticky top-[73px] z-40 bg-purple-900/90 backdrop-blur-xl border-b border-white/10 md:static md:bg-transparent md:border-none pt-4 pb-4 md:pt-0 mb-6 md:mb-12">
+        <a href="/prayers/vedapadam" class="inline-flex items-center text-pink-300 hover:text-pink-400 font-medium mb-4 group transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Vedapadam
+        </a>
+
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <h1 class="text-3xl md:text-5xl font-extrabold text-white">{prayer.title}</h1>
+          
+          <!-- Language Toggle View -->
+          <div class="inline-flex bg-black/40 p-1 rounded-xl border border-white/10 w-full sm:w-auto">
+            <button 
+              id="btn-malayalam" 
+              class="flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all"
+              onclick="setActiveState('malayalam')"
+            >
+              മലയാളം (Malayalam)
+            </button>
+            <button 
+              id="btn-manglish" 
+              class="flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all"
+              onclick="setActiveState('manglish')"
+            >
+              Manglish
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="bg-indigo-900/30 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden min-h-[50vh]">
+        
+        <div id="content-malayalam" class="animate-fade-in text-white/90 text-lg leading-relaxed">
+          <Fragment set:html={prayer.malayalamText} />
+        </div>
+        
+        <div id="content-manglish" class="hidden text-white/90 text-lg leading-relaxed font-sans">
+          <Fragment set:html={prayer.manglishText} />
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script is:inline>
+    // Handles toggling logic client-side
+    function setActiveState(language) {
+      const btnMalayalam = document.getElementById('btn-malayalam');
+      const btnManglish = document.getElementById('btn-manglish');
+      const contentMalayalam = document.getElementById('content-malayalam');
+      const contentManglish = document.getElementById('content-manglish');
+
+      if (!btnMalayalam || !btnManglish || !contentMalayalam || !contentManglish) return;
+
+      if (language === 'malayalam') {
+        // Active Button
+        btnMalayalam.className = 'flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all';
+        // Inactive Button
+        btnManglish.className = 'flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all';
+        
+        contentMalayalam.classList.remove('hidden');
+        contentMalayalam.classList.add('animate-fade-in');
+        contentManglish.classList.add('hidden');
+      } else {
+        // Inactive Button
+        btnMalayalam.className = 'flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all';
+        // Active Button
+        btnManglish.className = 'flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all';
+        
+        contentManglish.classList.remove('hidden');
+        contentManglish.classList.add('animate-fade-in');
+        contentMalayalam.classList.add('hidden');
+      }
+    }
+  </script>
+</MainLayout>

@@ -1,0 +1,241 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+
+export function getStaticPaths() {
+  const japangalList = [
+    { 
+      slug: "kurishadayalam-cheruth", 
+      title: "Kurishadayalam (Cheruth)",
+      manglishText: `
+        <div class="flex flex-col items-center justify-center min-h-[30vh]">
+          <p class="text-center text-xl md:text-3xl font-medium leading-loose text-white tracking-wide">
+            Pithavinteyum puthranteyum <span class="text-pink-400 mx-2 text-2xl">✠</span> parishudhathmavinteyum namathil,<br>
+            <span class="text-pink-300 font-bold mt-6 block text-2xl md:text-4xl">Amen.</span>
+          </p>
+        </div>
+      `,
+      malayalamText: `
+        <div class="flex flex-col items-center justify-center min-h-[30vh]">
+          <p class="text-center text-xl md:text-3xl font-medium leading-loose text-white tracking-wide font-malayalam">
+            പിതാവിന്റെയും പുത്രന്റെയും <span class="text-pink-400 mx-2 text-2xl">✠</span> പരിശുദ്ധാത്മാവിന്റെയും നാമത്തിൽ,<br>
+            <span class="text-pink-300 font-bold mt-6 block text-2xl md:text-4xl">ആമ്മേൻ.</span>
+          </p>
+        </div>
+      `
+    },
+    { 
+      slug: "kurishadayalam-valuth", 
+      title: "Kurishadayalam (Valuth)",
+      manglishText: `
+        <div class="flex flex-col items-center justify-center min-h-[40vh]">
+          <div class="max-w-2xl mx-auto space-y-6 text-center text-lg md:text-2xl leading-relaxed text-purple-100">
+            <p>Vishudha kurishinte <span class="text-pink-400 font-bold mx-2">✠</span> adayalathal</p>
+            <p>njangalude <span class="text-pink-400 font-bold mx-2">✠</span> shathrukkalil ninnu</p>
+            <p>njangale rakshikkaname <span class="text-pink-400 font-bold mx-2">✠</span> njangalude</p>
+            <p>thampurane, pithavinteyum puthranteyum</p>
+            <p><span class="text-pink-400 font-bold mx-2">✠</span> parishudhathmavinteyum namathil,</p>
+            <p class="text-pink-300 font-bold mt-8 text-2xl md:text-4xl">Amen.</p>
+          </div>
+        </div>
+      `,
+      malayalamText: `
+        <div class="flex flex-col items-center justify-center min-h-[40vh]">
+          <div class="max-w-2xl mx-auto space-y-6 text-center text-lg md:text-2xl leading-relaxed text-purple-100 font-malayalam">
+            <p>വിശുദ്ധ കുരിശിന്റെ <span class="text-pink-400 font-bold mx-2">✠</span> അടയാളത്താൽ</p>
+            <p>ഞങ്ങളുടെ <span class="text-pink-400 font-bold mx-2">✠</span> ശത്രുക്കളിൽ നിന്നു</p>
+            <p>ഞങ്ങളെ രക്ഷിക്കണമെ <span class="text-pink-400 font-bold mx-2">✠</span> ഞങ്ങളുടെ</p>
+            <p>തമ്പുരാനേ, പിതാവിന്റെയും പുത്രന്റെയും</p>
+            <p><span class="text-pink-400 font-bold mx-2">✠</span> പരിശുദ്ധാത്മാവിന്റെയും നാമത്തിൽ,</p>
+            <p class="text-pink-300 font-bold mt-8 text-2xl md:text-4xl">ആമ്മേൻ.</p>
+          </div>
+        </div>
+      `
+    },
+    { 
+      slug: "thrithva-sthuthi", 
+      title: "Thrithva Sthuthi",
+      manglishText: `
+        <div class="flex flex-col items-center justify-center min-h-[30vh]">
+          <div class="max-w-2xl mx-auto space-y-4 text-center text-lg md:text-2xl leading-relaxed text-purple-100">
+            <p>Pithavinum puthranum <span class="text-pink-400 font-bold mx-2">✠</span> parishudhathmavinum sthuthi.</p>
+            <p>Aadiyileppole ippozhum eppozhum ennekkum,</p>
+            <p class="text-pink-300 font-bold mt-6 text-2xl md:text-4xl">Amen.</p>
+          </div>
+        </div>
+      `,
+      malayalamText: `
+        <div class="flex flex-col items-center justify-center min-h-[30vh]">
+          <div class="max-w-2xl mx-auto space-y-4 text-center text-lg md:text-2xl leading-relaxed text-purple-100 font-malayalam">
+            <p>പിതാവിനും പുത്രനും <span class="text-pink-400 font-bold mx-2">✠</span> പരിശുദ്ധാത്മാവിനും സ്തുതി.</p>
+            <p>ആദിയിലേപ്പോലെ ഇപ്പോഴും എപ്പോഴും എന്നേക്കും,</p>
+            <p class="text-pink-300 font-bold mt-6 text-2xl md:text-4xl">ആമ്മേൻ.</p>
+          </div>
+        </div>
+      `
+    },
+    { 
+      slug: "swargasthanaya-pithave", 
+      title: "Swargasthanaya Pithave",
+      manglishText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 mb-8 indent-8">
+            Swargasthanaya njangalude pithave, angayude namam poojithamakaname; angayude rajyam varaname. Angayude thirumanassu swargathileppole bhoomiyilumakaname. Annannu venda aaharam innum njangalkku tharaname. Njangalodu thettu cheyyunnavarodu njangal kshamikkunnathupole njangalude thettukal njangalodum kshamikkename; njangale prelobhanathil ulppedutharuthe, thinmayilninnum njangale rakshikkaname.
+          </p>
+          <p class="text-center text-pink-300 font-bold text-2xl md:text-4xl">Amen.</p>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 mb-8 indent-8 font-malayalam">
+            സ്വർഗ്ഗസ്ഥനായ ഞങ്ങളുടെ പിതാവേ, അങ്ങയുടെ നാമം പൂജിതമാകണമേ; അങ്ങയുടെ രാജ്യം വരണമേ. അങ്ങയുടെ തിരുമനസ്സ് സ്വർഗ്ഗത്തിലെപ്പോലെ ഭൂമിയിലുമാകണമേ. അന്നന്നു വേണ്ട ആഹാരം ഇന്നും ഞങ്ങൾക്കു തരണമേ. ഞങ്ങളോടു തെറ്റു ചെയ്യുന്നവരോട് ഞങ്ങൾ ക്ഷമിക്കുന്നതുപോലെ ഞങ്ങളുടെ തെറ്റുകൾ ഞങ്ങളോടും ക്ഷമിക്കേണമേ; ഞങ്ങളെ പ്രലോഭനത്തിൽ ഉൾപ്പെടുത്തരുതേ, തിന്മയിൽനിന്നും ഞങ്ങളെ രക്ഷിക്കണമേ.
+          </p>
+          <p class="text-center text-pink-300 font-bold text-2xl md:text-4xl">ആമ്മേൻ.</p>
+        </div>
+      `
+    },
+    { 
+      slug: "nanma-niranja-mariyam", 
+      title: "Nanma Niranja Mariyam",
+      manglishText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 mb-8 indent-8">
+            Nanmaniranja mariyame, swasthi! karthavu angayodukoode; sthreekalil angu anugrahikkappettavalakunnu, angayude udarathin phalamaya eesho anugrahikkappettavanakunnu. Parishudha mariyame, thampurante amme, papikalaya njangalkkuvendi ippozhum njangalude maranasamayathum thampuranodu apekshikkaname.
+          </p>
+          <p class="text-center text-pink-300 font-bold text-2xl md:text-4xl">Amen.</p>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 mb-8 indent-8 font-malayalam">
+            നന്മനിറഞ്ഞ മറിയമേ, സ്വസ്തി! കർത്താവ് അങ്ങയോടുകൂടെ; സ്ത്രീകളിൽ അങ്ങു അനുഗ്രഹിക്കപ്പെട്ടവളാകുന്നു, അങ്ങയുടെ ഉദരത്തിൻ ഫലമായ ഈശോ അനുഗ്രഹിക്കപ്പെട്ടവനാകുന്നു. പരിശുദ്ധ മറിയമേ, തമ്പുരാന്റെ അമ്മേ, പാപികളായ ഞങ്ങൾക്കുവേണ്ടി ഇപ്പോഴും ഞങ്ങളുടെ മരണസമയത്തും തമ്പുരാനോട് അപേക്ഷിക്കണമേ.
+          </p>
+          <p class="text-center text-pink-300 font-bold text-2xl md:text-4xl">ആമ്മേൻ.</p>
+        </div>
+      `
+    },
+    { 
+      slug: "vishwasapramanam", 
+      title: "Vishwasapramanam",
+      manglishText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 mb-8 indent-8">
+            Sarvashakthanaya pithavum aakashathinteyum bhoomiyudeyum srushtavumaya daivathil njan vishwasikkunnu. Aviduthe ekaputhranum njangalude karthavumaya eeshomishihayilum njan vishwasikkunnu. Ee puthran parishudhathmavinal garbhasthanayi kanyakamariyathilninnu pirannu; panthiyos peelathosinte kalathu peedakal sahichu, kurishil tharaykkappettu, marichu adakkappettu; pathalathilekkirangi, marichavarude idayilninnu moonnamnaal uyirthu; swargathilekkezunnalli, sarvashakthiyulla pithavinte valathubhaghathu irikkunnu; avidunnu jeevichirikkunnavareyum marichavareyum vidhikkan varumennum njan vishwasikkunnu. Parishudhathmavilum njan vishwasikkunnu. Vishudha katholikkasabhayilum, punyavanmarude aikyathilum, papangalude mochanathilum, shareerathinte uyirppilum, nithyamaya jeevithathilum njan vishwasikkunnu.
+          </p>
+          <p class="text-center text-pink-300 font-bold text-2xl md:text-4xl">Amen.</p>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 mb-8 indent-8 font-malayalam">
+            സർവ്വശക്തനായ പിതാവും ആകാശത്തിന്റെയും ഭൂമിയുടെയും സൃഷ്ടാവുമായ ദൈവത്തിൽ ഞാൻ വിശ്വസിക്കുന്നു. അവിടുത്തെ ഏകപുത്രനും ഞങ്ങളുടെ കർത്താവുമായ ഈശോമിശിഹായിലും ഞാൻ വിശ്വസിക്കുന്നു. ഈ പുത്രൻ പരിശുദ്ധാത്മാവിനാൽ ഗർഭസ്ഥനായി കന്യകാമറിയത്തിൽനിന്നു പിറന്നു; പന്തിയോസ് പീലാത്തോസിന്റെ കാലത്ത് പീഡകൾ സഹിച്ച്, കുരിശിൽ തറയ്ക്കപ്പെട്ട്, മരിച്ച് അടക്കപ്പെട്ടു; പാതാളത്തിലേക്കിറങ്ങി, മരിച്ചവരുടെ ഇടയിൽനിന്നു മൂന്നാംനാൾ ഉയിർത്തു; സ്വർഗ്ഗത്തിലേക്കെഴുന്നള്ളി, സർവ്വശക്തിയുള്ള പിതാവിന്റെ വലത്തുഭാഗത്ത് ഇരിക്കുന്നു; അവിടുന്ന് ജീവിച്ചിരിക്കുന്നവരെയും മരിച്ചവരെയും വിധിക്കാൻ വരുമെന്നും ഞാൻ വിശ്വസിക്കുന്നു. പരിശുദ്ധാത്മാവിലും ഞാൻ വിശ്വസിക്കുന്നു. വിശുദ്ധ കത്തോലിക്കാസഭയിലും, പുണ്യവാന്മാരുടെ ഐക്യത്തിലും, പാപങ്ങളുടെ മോചനത്തിലും, ശരീരത്തിന്റെ ഉയിർപ്പിലും, നിത്യമായ ജീവിതത്തിലും ഞാൻ വിശ്വസിക്കുന്നു.
+          </p>
+          <p class="text-center text-pink-300 font-bold text-2xl md:text-4xl">ആമ്മേൻ.</p>
+        </div>
+      `
+    },
+    { slug: "thrisandhyajapangal", title: "Thrisandhyajapangal" },
+    { slug: "kumbasarathinulla-japam", title: "Kumbasarathinulla Japam" },
+    { slug: "manasthapa-prakaranam", title: "Manasthapa Prakaranam" },
+    { slug: "ethrayum-dayayulla-mathave", title: "Ethrayum Dayayulla Mathave" },
+    { slug: "parishudha-rajni", title: "Parishudha Rajni" }
+  ];
+
+  return japangalList.map((y) => ({
+    params: { slug: y.slug },
+    props: { 
+        prayer: {
+            ...y,
+            manglishText: y.manglishText || "<p class='text-center italic text-purple-200 mt-10'>Work In Progress: Adding content...</p>",
+            malayalamText: y.malayalamText || "<p class='text-center italic text-purple-200 mt-10'>Work In Progress: Adding content...</p>"
+        } 
+    },
+  }));
+}
+
+const { prayer } = Astro.props;
+---
+
+<MainLayout title={`${prayer.title} | HolyfireMedia`} description={`Read and pray the ${prayer.title}.`}>
+  <div class="container mx-auto px-4 py-8 md:py-16">
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- Sticky Header -->
+      <div class="sticky top-[73px] z-40 bg-purple-900/90 backdrop-blur-xl border-b border-white/10 md:static md:bg-transparent md:border-none pt-4 pb-4 md:pt-0 mb-6 md:mb-12">
+        <a href="/prayers/japangal" class="inline-flex items-center text-pink-300 hover:text-pink-400 font-medium mb-4 group transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Japangal
+        </a>
+
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <h1 class="text-3xl md:text-5xl font-extrabold text-white">{prayer.title}</h1>
+          
+          <!-- Language Toggle View -->
+          <div class="inline-flex bg-black/40 p-1 rounded-xl border border-white/10 w-full sm:w-auto">
+            <button 
+              id="btn-malayalam" 
+              class="flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all"
+              onclick="setActiveState('malayalam')"
+            >
+              മലയാളം (Malayalam)
+            </button>
+            <button 
+              id="btn-manglish" 
+              class="flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all"
+              onclick="setActiveState('manglish')"
+            >
+              Manglish
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="bg-indigo-900/30 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden min-h-[50vh]">
+        
+        <div id="content-malayalam" class="animate-fade-in text-white/90 text-lg leading-relaxed">
+          <Fragment set:html={prayer.malayalamText} />
+        </div>
+        
+        <div id="content-manglish" class="hidden text-white/90 text-lg leading-relaxed font-sans">
+          <Fragment set:html={prayer.manglishText} />
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script is:inline>
+    // Handles toggling logic client-side
+    function setActiveState(language) {
+      const btnMalayalam = document.getElementById('btn-malayalam');
+      const btnManglish = document.getElementById('btn-manglish');
+      const contentMalayalam = document.getElementById('content-malayalam');
+      const contentManglish = document.getElementById('content-manglish');
+
+      if (!btnMalayalam || !btnManglish || !contentMalayalam || !contentManglish) return;
+
+      if (language === 'malayalam') {
+        // Active Button
+        btnMalayalam.className = 'flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all';
+        // Inactive Button
+        btnManglish.className = 'flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all';
+        
+        contentMalayalam.classList.remove('hidden');
+        contentMalayalam.classList.add('animate-fade-in');
+        contentManglish.classList.add('hidden');
+      } else {
+        // Inactive Button
+        btnMalayalam.className = 'flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all';
+        // Active Button
+        btnManglish.className = 'flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all';
+        
+        contentManglish.classList.remove('hidden');
+        contentManglish.classList.add('animate-fade-in');
+        contentMalayalam.classList.add('hidden');
+      }
+    }
+  </script>
+</MainLayout>

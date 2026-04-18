@@ -1,9 +1,11 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
+import PlayerModal from '../../components/PlayerModal.astro';
 import { songs } from '../../data/songs';
 ---
 
 <MainLayout title="All Songs | HolyfireMedia" description="Browse all Malayalam Christian songs.">
+  <script is:inline define:vars={{ playlist: songs }}>window.songsPlaylist = playlist;</script>
   <div class="container mx-auto px-4 py-16">
     <div class="mb-12">
       <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">All Songs</h1>
@@ -37,7 +39,7 @@ import { songs } from '../../data/songs';
 
       <div class="divide-y divide-white/5">
         {songs.map((song, index) => (
-          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 items-center hover:bg-white/5 transition-colors group">
+          <div onclick={`window.openGlobalPlayer(window.songsPlaylist, ${index})`} class="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 items-center hover:bg-white/5 border border-transparent hover:border-pink-500/20 transition-all duration-300 group cursor-pointer rounded-2xl">
             <div class="col-span-1 text-center font-bold text-purple-400 hidden md:block">{index + 1}</div>
             
             <div class="col-span-12 md:col-span-5 flex items-center gap-3">
@@ -58,12 +60,12 @@ import { songs } from '../../data/songs';
             
             <div class="col-span-12 md:col-span-2 flex gap-2 justify-end">
               {song.hasLyrics && (
-                <a href={`/lyrics/${song.slug}`} class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded transition-colors">
+                <a href={`/lyrics/${song.slug}`} onclick="event.stopPropagation()" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded transition-colors">
                   Lyrics
                 </a>
               )}
               {song.hasKaraoke && (
-                <a href={`/karaoke/${song.slug}`} class="px-3 py-1.5 bg-pink-600 hover:bg-pink-500 text-white text-sm font-medium rounded shadow-md transition-transform hover:scale-105">
+                <a href={`/karaoke/${song.slug}`} onclick="event.stopPropagation()" class="px-3 py-1.5 bg-pink-600 hover:bg-pink-500 text-white text-sm font-medium rounded shadow-md transition-transform hover:scale-105">
                   Karaoke
                 </a>
               )}
@@ -73,4 +75,5 @@ import { songs } from '../../data/songs';
       </div>
     </div>
   </div>
+  <PlayerModal />
 </MainLayout>

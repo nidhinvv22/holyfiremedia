@@ -11,6 +11,7 @@ export const songs = [
     duration: "4:32",
     hasKaraoke: true,
     hasLyrics: true,
+    videoId: "NJAAUEmt_so",
     lyrics: {
       manglish: `ennulam thirayunori sneham ni mathrame
 enn ninavilum kanavilum ay nirayunnoren deyvame
@@ -96,6 +97,7 @@ anayunnu njan thirumumbilay alivode enne nokkaname`,
     duration: "4:00",
     hasKaraoke: false,
     hasLyrics: true,
+    videoId: "7aVrtNj0jZs",
     lyrics: {
       manglish: `Nadhamay Roopamay
 Snehamaay Sathyamayi
@@ -173,6 +175,7 @@ Nithya Roopmae Aradhana`,
     duration: "4:00",
     hasKaraoke: false,
     hasLyrics: true,
+    videoId: "L5jN1aveRRA",
     lyrics: {
       manglish: `Kurbanayay Theerna Snehame
 Kurbanayil Vazhum Albudhamae
