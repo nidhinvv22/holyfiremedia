@@ -12,6 +12,7 @@ export async function getStaticPaths() {
 }
 
 const { song } = Astro.props;
+const artistHref = song.artistSlug ? `/artists/${song.artistSlug}` : "/artists";
 
 const lyricsSchema = {
   "@context": "https://schema.org",
@@ -20,6 +21,11 @@ const lyricsSchema = {
   "composer": { "@type": "Person", "name": song.artist },
   "inLanguage": ["ml", "en"],
   "url": `https://holyfiremedia.in/lyrics/${song.slug}`,
+  "creator": {
+    "@type": "Person",
+    "name": song.artist,
+    "url": song.artistSlug ? `https://holyfiremedia.in/artists/${song.artistSlug}/` : "https://holyfiremedia.in/artists/"
+  },
   "lyrics": {
     "@type": "CreativeWork",
     "text": song.lyrics?.manglish?.substring(0, 200) || ""
@@ -43,7 +49,9 @@ const lyricsSchema = {
       </a>
 
       <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">{song.title}</h1>
-      <p class="text-xl text-purple-300 mb-12">By {song.artist}</p>
+      <p class="text-xl text-purple-300 mb-12">
+        By <a href={artistHref} class="hover:text-pink-300 transition-colors underline decoration-pink-400/40 underline-offset-4">{song.artist}</a>
+      </p>
 
       {song.lyrics ? (
         <div class="bg-indigo-900/30 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl relative">

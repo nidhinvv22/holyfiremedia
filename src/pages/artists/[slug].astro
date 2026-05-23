@@ -3,27 +3,9 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import PlayerModal from '../../components/PlayerModal.astro';
 import frJosephImg from '../../assets/fr_joseph_mukkatt.webp';
 import { songs } from '../../data/songs';
+import { artists } from '../../data/artists';
 
 export function getStaticPaths() {
-  const artists = [
-    { 
-      id: 1, 
-      name: "Fr. Joseph Mukkatt", 
-      slug: "fr-joseph-mukkatt",
-      seoTitle: "Fr. Joseph Mukkatt Songs, Homilies & Karaoke | HolyfireMedia",
-      seoDescription: "Listen to Malayalam Christian songs and homilies by Fr. Joseph Mukkatt. Read lyrics and download karaoke tracks for personal use.",
-      useFrImage: true,
-      bio: "Fr. Joseph Mukkatt is a Malayalam Catholic priest known for his spiritual homilies, Christian devotional songs, and faith-centered teachings. His messages focus on deepening personal faith, understanding the Word of God, and living a Christ-centered life.\n\nThrough his music and preaching, he has inspired many believers across the Malayalam Christian community. His songs and reflections are widely appreciated for their spiritual depth, simplicity, and connection to everyday life.",
-      extendedDescription: "Fr. Joseph Mukkatt shares Malayalam Christian songs, homilies, and spiritual reflections that help believers grow in faith. His content includes devotional music, gospel reflections, and teachings rooted in Catholic tradition.\n\nListeners can explore his songs, read lyrics, and access karaoke versions for personal use. His work is especially popular among those searching for Malayalam Christian devotional songs and Catholic homily Malayalam online.",
-      aboutMinistry: "Fr. Joseph Mukkatt’s ministry focuses on spreading the Word of God through music and preaching. His homilies and songs help believers reflect, pray, and grow spiritually."
-    },
-    { id: 2, name: "Artist Two", slug: "artist-2" },
-    { id: 3, name: "Artist Three", slug: "artist-3" },
-    { id: 4, name: "Artist Four", slug: "artist-4" },
-    { id: 5, name: "Artist Five", slug: "artist-5" },
-    { id: 6, name: "Artist Six", slug: "artist-6" },
-  ];
-  
   return artists.map((artist) => {
     return {
       params: { slug: artist.slug },
@@ -34,41 +16,73 @@ export function getStaticPaths() {
 
 const { artist } = Astro.props;
 
-// Fetch artist songs dynamically
-const artistSongs = songs.filter(s => s.artist === artist.name).map(s => ({
+const artistSongs = songs.filter(s => s.artistSlug === artist.slug || s.artist === artist.name).map(s => ({
   ...s,
   videoId: s.videoId || "NJAAUEmt_so"
 }));
 
-const finalSongs = artistSongs.length > 0 ? artistSongs : [
-      { id: 1, title: `${artist.name} - Placeholder Song 1`, hasKaraoke: true, videoId: "NJAAUEmt_so" },
-      { id: 2, title: `${artist.name} - Placeholder Song 2`, hasKaraoke: false, videoId: "NJAAUEmt_so" }
-];
+const decoratedSongs = artistSongs.map((s, index) => ({ ...s, id: index + 1, artist: artist.name }));
+const playerPlaylist = decoratedSongs.map((song) => ({
+  title: song.title,
+  artist: song.artist,
+  videoId: song.videoId,
+}));
+const featuredSong = decoratedSongs.find(song => song.slug === artist.featuredSongSlug) || decoratedSongs[0];
 
-const decoratedSongs = finalSongs.map((s, index) => ({ ...s, id: index + 1, artist: artist.name }));
-
-const artistImage = artist.useFrImage 
-  ? frJosephImg.src 
-  : `https://placehold.co/400x400/3b0764/ffffff?text=${artist.name.replace(/ /g, '+')}`;
+const artistImage = artist.slug === "fr-joseph-mukkatt" ? frJosephImg.src : "/holy_fire_logo.webp";
+const artistImageUrl = new URL(artistImage, Astro.url).href;
 
 const pageTitle = artist.seoTitle || `${artist.name} | HolyfireMedia`;
 const pageDescription = artist.seoDescription || `Listen to songs and explore the discography of ${artist.name}.`;
 const bioParas = artist.bio ? artist.bio.split('\n\n') : [];
 const extendedParas = artist.extendedDescription ? artist.extendedDescription.split('\n\n') : [];
+const artistLinks = artist.officialLinks || [];
+const artistSameAs = artist.sameAs?.length ? artist.sameAs : artistLinks.map((link) => link.url);
 
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": artist.name,
   "description": artist.bio || pageDescription,
-  "url": `https://holyfiremedia.in/artists/${artist.slug}`,
-  "image": artist.useFrImage ? "https://holyfiremedia.in/fr_joseph_mukkatt.webp" : undefined,
-  "sameAs": [],
+  "url": `https://holyfiremedia.in/artists/${artist.slug}/`,
+  "image": artistImageUrl,
+  "mainEntityOfPage": `https://holyfiremedia.in/artists/${artist.slug}/`,
   "jobTitle": "Christian Music Artist",
+  "knowsAbout": [
+    "Malayalam Christian songs",
+    "Catholic devotional music",
+    "Malayalam worship songs"
+  ],
+  ...(artistSameAs.length ? { "sameAs": artistSameAs } : {}),
   "worksFor": {
     "@type": "Organization",
     "name": "HolyfireMedia"
   }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://holyfiremedia.in/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Artists",
+      "item": "https://holyfiremedia.in/artists/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": artist.name,
+      "item": `https://holyfiremedia.in/artists/${artist.slug}/`
+    }
+  ]
 };
 ---
 
@@ -77,10 +91,10 @@ const personSchema = {
   description={pageDescription}
   image={artistImage}
   keywords={`${artist.name} songs, ${artist.name} lyrics, ${artist.name} karaoke, Malayalam Christian songs ${artist.name}, Catholic homily Malayalam`}
-  schemaData={personSchema}
+  schemaData={[personSchema, breadcrumbSchema]}
 >
   <!-- Pass JSON stringified array to client script -->
-  <script is:inline define:vars={{ playlist: decoratedSongs }}>
+  <script is:inline define:vars={{ playlist: playerPlaylist }}>
     window.artistPlaylist = playlist;
   </script>
 
@@ -92,7 +106,7 @@ const personSchema = {
       <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl mix-blend-screen pointer-events-none"></div>
       
       <div class="relative w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-white/20 shadow-xl overflow-hidden z-10 flex-shrink-0 bg-gradient-to-br from-indigo-900 to-purple-900 flex items-center justify-center">
-        {artist.useFrImage ? (
+        {artist.slug === "fr-joseph-mukkatt" ? (
           <img src={artistImage} alt={artist.name} class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
         ) : (
           <span class="text-6xl font-bold text-white/50">{artist.name.split(' ').map(n => n[0]).join('')}</span>
@@ -105,30 +119,65 @@ const personSchema = {
           {bioParas.map((para) => <p>{para}</p>)}
         </div>
         <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-          <button onclick="window.openGlobalPlayer(window.artistPlaylist, 0)" class="px-6 py-3 bg-pink-500 hover:bg-pink-400 text-white font-bold rounded-xl shadow-lg shadow-pink-500/30 transition-all flex items-center gap-2 transform hover:-translate-y-1 active:scale-95">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-            </svg>
-            Play All Songs
-          </button>
+          {decoratedSongs.length > 0 && (
+            <button onclick="window.openGlobalPlayer(window.artistPlaylist, 0)" class="px-6 py-3 bg-pink-500 hover:bg-pink-400 text-white font-bold rounded-xl shadow-lg shadow-pink-500/30 transition-all flex items-center gap-2 transform hover:-translate-y-1 active:scale-95">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+              </svg>
+              Play All Songs
+            </button>
+          )}
         </div>
+        {artistLinks.length > 0 && (
+          <div class="mt-6">
+            <h2 class="text-sm font-bold uppercase text-purple-300 mb-3">Official Artist Links</h2>
+            <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+              {artistLinks.map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/15 text-white font-semibold transition-colors"
+                >
+                  {link.name}
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8" />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
     
     <!-- Featured Song Section -->
-    <div class="mb-12 bg-gradient-to-r from-pink-900/30 to-purple-900/30 border border-pink-500/20 rounded-2xl p-6 md:p-8 backdrop-blur-sm shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 hover:shadow-pink-500/10 transition-shadow">
-      <div class="text-center md:text-left">
-        <span class="text-pink-400 font-bold tracking-wider text-sm uppercase mb-2 block">Featured Song</span>
-        <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">Aradhyane Parishudhane | Ennullam Thirayunnori</h2>
-        <p class="text-purple-200">Experience the spiritual depth of this beautiful devotional song by {artist.name}.</p>
+    {featuredSong && (
+      <div class="mb-12 bg-gradient-to-r from-pink-900/30 to-purple-900/30 border border-pink-500/20 rounded-2xl p-6 md:p-8 backdrop-blur-sm shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 hover:shadow-pink-500/10 transition-shadow">
+        <div class="text-center md:text-left">
+          <span class="text-pink-400 font-bold tracking-wider text-sm uppercase mb-2 block">Featured Song</span>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">
+            <a href={`/lyrics/${featuredSong.slug}`} class="hover:text-pink-300 transition-colors">
+              {featuredSong.title}
+              {featuredSong.alternateTitles?.[0] ? ` | ${featuredSong.alternateTitles[0]}` : ""}
+            </a>
+          </h2>
+          <p class="text-purple-200">Read lyrics, listen online, and download the available karaoke version by {artist.name}.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3">
+          {featuredSong.hasLyrics && (
+            <a href={`/lyrics/${featuredSong.slug}`} class="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold rounded-xl transition-colors text-center">
+              Read Lyrics
+            </a>
+          )}
+          {featuredSong.hasKaraoke && (
+            <a href={`/karaoke/${featuredSong.slug}`} class="px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-lg shadow-pink-500/30 transition-colors text-center">
+              Download Karaoke
+            </a>
+          )}
+        </div>
       </div>
-      <button onclick="window.openGlobalPlayer(window.artistPlaylist, 0)" class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-lg shadow-pink-500/30 transition-transform hover:-translate-y-1 active:scale-95 flex items-center gap-2 whitespace-nowrap">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-        </svg>
-        Play Now
-      </button>
-    </div>
+    )}
 
     {/* SEO Oriented Content Sections */}
     <div class="grid md:grid-cols-2 gap-8 mb-12">
@@ -167,7 +216,11 @@ const personSchema = {
             </button>
             
             <div>
-              <h3 class="text-lg font-bold text-white group-hover:text-pink-300 transition-colors">{song.title}</h3>
+              <h3 class="text-lg font-bold text-white group-hover:text-pink-300 transition-colors">
+                <a href={song.hasLyrics ? `/lyrics/${song.slug}` : "/songs"} onclick="event.stopPropagation()" class="hover:text-pink-300 transition-colors">
+                  {song.title}
+                </a>
+              </h3>
               {song.hasKaraoke ? (
                 <span class="text-xs font-semibold bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded shadow-sm inline-flex items-center gap-1"><span class="text-[10px]">🎤</span> Karaoke Available</span>
               ) : (
@@ -188,7 +241,7 @@ const personSchema = {
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
                   </svg>
-                  Get Karaoke Version
+                  Download Karaoke
                 </a>
                 <span class="text-[10px] text-purple-300 mt-1.5 opacity-80">Instant download after payment</span>
               </div>

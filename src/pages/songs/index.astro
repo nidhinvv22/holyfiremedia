@@ -2,14 +2,33 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import PlayerModal from '../../components/PlayerModal.astro';
 import { songs } from '../../data/songs';
+
+const playerPlaylist = songs.map((song) => ({
+  title: song.title,
+  artist: song.artist,
+  videoId: song.videoId,
+}));
+
+const songListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Malayalam Christian Songs",
+  "itemListElement": songs.map((song, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "url": `https://holyfiremedia.in/lyrics/${song.slug}/`,
+    "name": song.title
+  }))
+};
 ---
 
 <MainLayout
   title="Malayalam Christian Songs - Listen, Lyrics & Karaoke | HolyfireMedia"
   description="Browse all Malayalam Christian devotional songs. Listen online, read lyrics in Malayalam & Manglish, and download karaoke tracks."
   keywords="Malayalam Christian songs, devotional songs Malayalam, Catholic songs online, Christian music Malayalam, worship songs Malayalam"
+  schemaData={songListSchema}
 >
-  <script is:inline define:vars={{ playlist: songs }}>window.songsPlaylist = playlist;</script>
+  <script is:inline define:vars={{ playlist: playerPlaylist }}>window.songsPlaylist = playlist;</script>
   <div class="container mx-auto px-4 py-16">
     <div class="mb-12">
       <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">All Songs</h1>
@@ -58,7 +77,11 @@ import { songs } from '../../data/songs';
               </div>
             </div>
             
-            <div class="col-span-3 text-purple-200 hidden md:block truncate"><a href="/artists" class="hover:text-pink-300 transition-colors">{song.artist}</a></div>
+            <div class="col-span-3 text-purple-200 hidden md:block truncate">
+              <a href={song.artistSlug ? `/artists/${song.artistSlug}` : "/artists"} onclick="event.stopPropagation()" class="hover:text-pink-300 transition-colors">
+                {song.artist}
+              </a>
+            </div>
             
             <div class="col-span-1 text-purple-300 text-center hidden md:block">{song.duration}</div>
             

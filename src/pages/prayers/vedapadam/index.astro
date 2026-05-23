@@ -15,6 +15,15 @@ const vedapadam = [
   { slug: "parishudharoopi-phalangal", title: "Parishudharoopiyude Phalangal", description: "പരിശുദ്ധാരൂപിയുടെ ഫലങ്ങൾ പന്ത്രണ്ട് - 12 Fruits of the Holy Spirit", icon: "🍇" },
   { slug: "moolapapangal", title: "Moolapapangalum Avaykkethiraya...", description: "മൂലപാപങ്ങളും അവയ്ക്കെതിരായ... - Capital Sins", icon: "⚖️" }
 ];
+
+const publishedVedapadamSlugs = new Set([
+  "daivakalpanakal",
+  "thirussabhayude-kalpanakal",
+  "koodashakal",
+  "karunnyapravarthikal",
+]);
+
+const publishedVedapadam = vedapadam.filter((item) => publishedVedapadamSlugs.has(item.slug));
 ---
 
 <MainLayout title="Vedapadam | HolyfireMedia" description="A collection of Catechism (Vedapadam) in Malayalam.">
@@ -37,7 +46,7 @@ const vedapadam = [
     </div>
 
     <div class="space-y-4 max-w-3xl mx-auto">
-      {vedapadam.map((item) => (
+      {publishedVedapadam.map((item) => (
         <a href={`/prayers/vedapadam/${item.slug}`} class="block group">
           <div class="flex items-center gap-6 bg-gradient-to-r from-indigo-900/40 to-purple-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl hover:bg-white/10 hover:border-pink-500/30 hover:scale-[1.02] transition-all duration-300">
             <div class="text-4xl bg-white/5 p-3 rounded-xl border border-white/5 flex items-center justify-center">

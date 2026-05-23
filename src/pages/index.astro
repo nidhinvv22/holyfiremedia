@@ -2,11 +2,12 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import frJosephImg from '../assets/fr_joseph_mukkatt.webp';
 import { songs } from '../data/songs';
+import { artists } from '../data/artists';
 
-// Placeholder Data for Artists (until we move artists to data store)
-const featuredArtists = [
-  { id: 1, name: "Fr. Joseph Mukkatt", bio: "Fr. Joseph Mukkatt shares Malayalam Christian songs, homilies, and Catholic spiritual reflections.", image: frJosephImg.src, slug: "fr-joseph-mukkatt" },
-];
+const featuredArtists = artists.map((artist) => ({
+  ...artist,
+  image: artist.slug === "fr-joseph-mukkatt" ? frJosephImg.src : "/holy_fire_logo.webp",
+}));
 
 const featuredSongs = songs.slice(0, 3);
 ---

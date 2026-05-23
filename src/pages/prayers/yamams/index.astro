@@ -10,15 +10,18 @@ const yamams = [
   { slug: "endana", title: "Endana (എൻദാനാ)", time: "ഉച്ചയ്ക്ക് 12-3", description: "ആറാം മണിക്കൂർ (Sixth Hour Prayer)", icon: "🌞" },
   { slug: "dbasha-shayin", title: "D'basha Shayin (ദ് ബസ്ശാ ശായീൻ)", time: "ഉച്ചതിരിഞ്ഞ് 3-6", description: "ഒമ്പതാം മണിക്കൂർ (Ninth Hour Prayer)", icon: "⛅" },
 ];
+
+const publishedYamamSlugs = new Set(["ramsha"]);
+const publishedYamams = yamams.filter((item) => publishedYamamSlugs.has(item.slug));
 ---
 
 <MainLayout title="Syro-Malabar Yama Prarthanakal | HolyfireMedia" description="The official Liturgy of the Hours for the Syro-Malabar Catholic Church.">
   <div class="container mx-auto px-4 py-16">
     <div class="max-w-3xl mx-auto text-center mb-16">
       <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-6">യാമപ്രാർത്ഥനകൾ</h1>
-      <div class="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/20 text-yellow-300 border border-yellow-500/50 rounded-full text-sm font-semibold mb-4 mx-auto">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 rounded-full text-sm font-semibold mb-4 mx-auto">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-        Work In Progress (Adding prayers systematically)
+        Completed prayers only
       </div>
       <p class="text-xl text-purple-200 mt-2">
         Syro-Malabar Liturgy of the Hours
@@ -36,7 +39,7 @@ const yamams = [
     </div>
 
     <div class="space-y-4 max-w-3xl mx-auto">
-      {yamams.map((item) => (
+      {publishedYamams.map((item) => (
         <a href={`/prayers/yamams/${item.slug}`} class="block group">
           <div class="flex items-center gap-6 bg-gradient-to-r from-indigo-900/40 to-purple-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl hover:bg-white/10 hover:border-pink-500/30 hover:scale-[1.02] transition-all duration-300">
             <div class="text-4xl bg-white/5 p-3 rounded-xl border border-white/5">

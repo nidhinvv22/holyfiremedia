@@ -7,7 +7,8 @@ interface Props {
   description?: string;
   image?: string;
   keywords?: string;
-  schemaData?: Record<string, any>;
+  ogType?: string;
+  schemaData?: Record<string, any> | Record<string, any>[];
 }
 
 const { 
@@ -15,10 +16,12 @@ const {
   description = "Discover Malayalam Christian devotional songs, Catholic prayers in Malayalam & Manglish, Rosary, karaoke tracks, and lyrics. Your spiritual home for Syro-Malabar Catholic devotions.",
   image,
   keywords = "Malayalam Christian songs, Catholic prayers Malayalam, Holy Rosary Malayalam, Manglish prayers, karaoke Malayalam Christian, Syro-Malabar prayers, HolyfireMedia",
+  ogType = "website",
   schemaData
 } = Astro.props;
 
 const ogImage = image ? new URL(image, Astro.url) : new URL("/holy_fire_logo.webp", Astro.url);
+const schemaItems = schemaData ? (Array.isArray(schemaData) ? schemaData : [schemaData]) : [];
 
 const currentPath = Astro.url.pathname;
 const navItems = [
@@ -50,7 +53,7 @@ const navItems = [
     <meta name="apple-mobile-web-app-title" content="HolyfireMedia" />
     
     <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="HolyfireMedia" />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:title" content={title} />
@@ -72,11 +75,6 @@ const navItems = [
     <!-- Canonical URL -->
     <link rel="canonical" href={Astro.url.href} />
     
-    <!-- Language alternates -->
-    <link rel="alternate" hreflang="en" href={Astro.url.href} />
-    <link rel="alternate" hreflang="ml" href={Astro.url.href} />
-    <link rel="alternate" hreflang="x-default" href={Astro.url.href} />
-
     <!-- JSON-LD WebSite Structured Data (default) -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
@@ -93,18 +91,13 @@ const navItems = [
           "@type": "ImageObject",
           "url": "https://holyfiremedia.in/holy_fire_logo.webp"
         }
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://holyfiremedia.in/songs?q={search_term_string}",
-        "query-input": "required name=search_term_string"
       }
     })} />
     
     {/* Page-specific structured data */}
-    {schemaData && (
-      <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
-    )}
+    {schemaItems.map((item) => (
+      <script type="application/ld+json" set:html={JSON.stringify(item)} />
+    ))}
     
     <link rel="icon" type="image/webp" href="/holy_fire_logo.webp" />
     <link rel="shortcut icon" href="/holy_fire_logo.webp" />

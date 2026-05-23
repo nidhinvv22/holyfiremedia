@@ -5,7 +5,7 @@ import aradhyaneFile from '../../assets/Aradhyane_Parishudane_Ennullam_Thirayunn
 import previewEnullam from '../../assets/enullam_sample.MP3';
 
 export async function getStaticPaths() {
-  return songs.map((song) => {
+  return songs.filter((song) => song.hasKaraoke).map((song) => {
     return {
       params: { slug: song.slug },
       props: { song },
@@ -23,28 +23,128 @@ if (slug === "aradhyane-parishudhane") {
   previewUrl = previewEnullam;
 }
 
-const karaokeSchema = {
+const pageUrl = `https://holyfiremedia.in/karaoke/${song.slug}/`;
+const artistUrl = song.artistSlug ? `https://holyfiremedia.in/artists/${song.artistSlug}/` : "https://holyfiremedia.in/artists/";
+const artistHref = song.artistSlug ? `/artists/${song.artistSlug}` : "/artists";
+const songAliases = song.alternateTitles || [];
+const aliasText = songAliases.length ? ` Also searched as ${songAliases.join(", ")}.` : "";
+const previewFileUrl = previewUrl ? new URL(previewUrl, Astro.url).href : undefined;
+const [durationMinutes = 0, durationSeconds = 0] = song.duration.split(":").map(Number);
+const isoDuration = `PT${durationMinutes}M${durationSeconds}S`;
+const premiumMailto = `mailto:jmmusicdistribution@gmail.com?subject=${encodeURIComponent(`Premium karaoke request: ${song.title}`)}`;
+
+const productSchema = {
   "@context": "https://schema.org",
-  "@type": "MusicComposition",
+  "@type": "Product",
+  "name": `${song.title} Karaoke Track`,
+  "description": `Download ${song.title} karaoke by ${song.artist}. Free MP3 with chorus and premium studio instrumental version available.`,
+  "image": "https://holyfiremedia.in/holy_fire_logo.webp",
+  "brand": {
+    "@type": "Brand",
+    "name": "HolyfireMedia"
+  },
+  "category": "Digital music download",
+  "url": pageUrl,
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Free MP3 karaoke with chorus",
+      "price": "0",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "url": pageUrl
+    },
+    {
+      "@type": "Offer",
+      "name": "Premium studio instrumental karaoke",
+      "price": String(song.price),
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "url": pageUrl
+    }
+  ]
+};
+
+const musicSchema = {
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
   "name": song.title,
-  "composer": { "@type": "Person", "name": song.artist },
+  "alternateName": songAliases,
+  "byArtist": {
+    "@type": "Person",
+    "name": song.artist,
+    "url": artistUrl
+  },
   "inLanguage": "ml",
   "description": song.description,
-  "url": `https://holyfiremedia.in/karaoke/${song.slug}`,
-  "offers": {
-    "@type": "Offer",
-    "price": song.price,
-    "priceCurrency": "INR",
-    "availability": "https://schema.org/InStock"
-  }
+  "duration": isoDuration,
+  "url": pageUrl,
+  ...(previewFileUrl ? { "audio": previewFileUrl } : {})
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://holyfiremedia.in/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Karaoke",
+      "item": "https://holyfiremedia.in/karaoke/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": `${song.title} Karaoke Download`,
+      "item": pageUrl
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `Can I download ${song.title} karaoke for free?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Yes. HolyfireMedia provides a free MP3 karaoke version of ${song.title} with chorus for personal devotional practice.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Is a premium instrumental version of ${song.title} available?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Yes. A premium studio instrumental version without chorus is available for ${song.price} INR per track.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Who is the artist of ${song.title}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `${song.title} is a Malayalam Christian devotional song by ${song.artist}.`
+      }
+    }
+  ]
 };
 ---
 
 <MainLayout
-  title={`${song.title} Karaoke Download | Malayalam Christian Karaoke | HolyfireMedia`}
-  description={`Download ${song.title} karaoke track by ${song.artist}. Free version with chorus and premium studio instrumental available. Malayalam Christian karaoke.`}
-  keywords={`${song.title} karaoke, ${song.artist} karaoke, Malayalam Christian karaoke download, ${song.title} instrumental, Catholic devotional karaoke`}
-  schemaData={karaokeSchema}
+  title={`${song.title} Karaoke Download MP3 | ${song.artist} | HolyfireMedia`}
+  description={`Download ${song.title} karaoke track by ${song.artist}. Free MP3 with chorus and premium studio instrumental available for Malayalam Christian worship.${aliasText}`}
+  keywords={`${song.title} karaoke download, ${song.title} karaoke, ${song.artist} karaoke, ${songAliases.join(", ")}, Malayalam Christian karaoke download, Catholic devotional karaoke`}
+  ogType="music.song"
+  schemaData={[productSchema, musicSchema, breadcrumbSchema, faqSchema]}
 >
   <div class="container mx-auto px-4 py-16">
     <div class="text-center max-w-3xl mx-auto mb-16">
@@ -56,12 +156,23 @@ const karaokeSchema = {
       </a>
       
       <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300 drop-shadow-lg mb-6">
-        {song.title}
+        {song.title} Karaoke Download
       </h1>
-      <p class="text-2xl text-white mb-6 font-semibold">Artist: {song.artist}</p>
-      <p class="text-xl text-purple-200 leading-relaxed max-w-2xl mx-auto">
-        {song.description}
+      <p class="text-2xl text-white mb-6 font-semibold">
+        Artist: <a href={artistHref} class="hover:text-pink-300 transition-colors underline decoration-pink-400/40 underline-offset-4">{song.artist}</a>
       </p>
+      <p class="text-xl text-purple-200 leading-relaxed max-w-2xl mx-auto">
+        Download the {song.title} karaoke track for Malayalam Christian worship, singing practice, and devotional events.
+        {songAliases.length > 0 && <span> Also known as {songAliases.join(" / ")}.</span>}
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3 text-sm text-purple-100">
+        <a href={`/lyrics/${song.slug}`} class="px-4 py-2 rounded-full bg-white/10 border border-white/15 hover:bg-white/20 transition-colors">
+          Read Lyrics
+        </a>
+        <a href={artistHref} class="px-4 py-2 rounded-full bg-white/10 border border-white/15 hover:bg-white/20 transition-colors">
+          More from {song.artist}
+        </a>
+      </div>
 
       {/* Audio Preview */}
       <div class="mt-12 animate-fade-in-up">
@@ -104,12 +215,13 @@ const karaokeSchema = {
         <!-- Conditional Download Link -->
         {
           downloadUrl ? (
-            <button
-              onclick={`downloadFile('${downloadUrl}')`}
+            <a
+              href={downloadUrl}
+              download
               class="w-full mt-auto px-6 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-xl transition-colors relative z-10 text-center block"
             >
-              Download Free Karaoke
-            </button>
+              Download Free Karaoke MP3
+            </a>
           ) : (
             <button disabled class="w-full mt-auto px-6 py-4 bg-white/5 border border-white/10 text-white/50 font-semibold rounded-xl cursor-not-allowed relative z-10 text-center block">
               Download Not Available
@@ -155,13 +267,76 @@ const karaokeSchema = {
             ))}
           </ul>
 
-          <button onclick="alert('Razorpay Payment Gateway Placeholder... Initializing transaction for Premium Karaoke Track.')" class="w-full mt-auto px-6 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.6)] transition-all text-center relative z-10 block hover:scale-105 duration-300">
-            Buy Now
-          </button>
+          <a href={premiumMailto} class="w-full mt-auto px-6 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.6)] transition-all text-center relative z-10 block hover:scale-105 duration-300">
+            Order Pro Version
+          </a>
         </article>
       </div>
 
     </div>
+
+    <section class="max-w-5xl mx-auto grid lg:grid-cols-[1.2fr_0.8fr] gap-8 mb-16">
+      <article class="bg-indigo-900/40 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-sm">
+        <h2 class="text-3xl font-bold text-white mb-4">Download {song.title} Karaoke Track</h2>
+        <div class="space-y-4 text-purple-100 leading-relaxed">
+          <p>
+            This page is dedicated to the {song.title} karaoke download by {song.artist}. The free version is an MP3 karaoke track with chorus, suitable for learning the melody, practicing the song, and singing along during personal devotion.
+          </p>
+          <p>
+            The premium studio version is prepared for singers, choirs, ministries, and devotional programs that need a cleaner instrumental track without chorus. It includes high-fidelity WAV and MP3 formats.
+          </p>
+          {songAliases.length > 0 && (
+            <p>
+              People may also search this song as {songAliases.join(", ")}. All those searches refer to this same Malayalam Christian devotional karaoke track.
+            </p>
+          )}
+        </div>
+      </article>
+
+      <aside class="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-sm">
+        <h2 class="text-2xl font-bold text-white mb-5">Track Details</h2>
+        <dl class="space-y-4 text-sm md:text-base">
+          <div>
+            <dt class="text-purple-300 font-semibold">Song</dt>
+            <dd class="text-white">{song.title}</dd>
+          </div>
+          <div>
+            <dt class="text-purple-300 font-semibold">Artist</dt>
+            <dd><a href={artistHref} class="text-white hover:text-pink-300 transition-colors">{song.artist}</a></dd>
+          </div>
+          <div>
+            <dt class="text-purple-300 font-semibold">Language</dt>
+            <dd class="text-white">Malayalam</dd>
+          </div>
+          <div>
+            <dt class="text-purple-300 font-semibold">Available formats</dt>
+            <dd class="text-white">Free MP3, premium WAV + MP3</dd>
+          </div>
+          <div>
+            <dt class="text-purple-300 font-semibold">Related page</dt>
+            <dd><a href={`/lyrics/${song.slug}`} class="text-white hover:text-pink-300 transition-colors">Read {song.title} lyrics</a></dd>
+          </div>
+        </dl>
+      </aside>
+    </section>
+
+    <section class="max-w-5xl mx-auto mb-8">
+      <h2 class="text-3xl font-bold text-white mb-6 text-center">Frequently Asked Questions</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h3 class="text-lg font-bold text-white mb-3">Can I download it for free?</h3>
+          <p class="text-purple-200 text-sm leading-relaxed">Yes. The free MP3 version includes chorus and is useful for personal devotional practice.</p>
+        </article>
+        <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h3 class="text-lg font-bold text-white mb-3">Is there a no-chorus version?</h3>
+          <p class="text-purple-200 text-sm leading-relaxed">Yes. The pro studio version is a pure instrumental track prepared for singing and events.</p>
+        </article>
+        <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h3 class="text-lg font-bold text-white mb-3">Who is the artist?</h3>
+          <p class="text-purple-200 text-sm leading-relaxed">{song.title} is a Malayalam Christian devotional song by <a href={artistHref} class="text-pink-300 hover:text-pink-200">{song.artist}</a>.</p>
+        </article>
+      </div>
+    </section>
   </div>
 
   <style>
@@ -179,15 +354,4 @@ const karaokeSchema = {
       color: white;
     }
   </style>
-
-  <script is:inline>
-    function downloadFile(url) {
-      const a = document.createElement("a");
-      a.href = url;
-      a.setAttribute("download", "");
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-  </script>
 </MainLayout>

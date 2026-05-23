@@ -1,19 +1,17 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import frJosephImg from '../../assets/fr_joseph_mukkatt.webp';
+import { artists } from '../../data/artists';
+import { songs } from '../../data/songs';
 
-// Placeholder Data
-const artists = [
-  { id: 1, name: "Fr. Joseph Mukkatt", bio: "Fr. Joseph Mukkatt shares Malayalam Christian songs, homilies, and spiritual reflections that help believers grow in faith.", image: frJosephImg.src, slug: "fr-joseph-mukkatt", songCount: 4 },
-  // { id: 2, name: "Artist Two", bio: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", image: "https://placehold.co/400x400/3b0764/ffffff?text=Artist+2", slug: "artist-2", songCount: 8 },
-  // { id: 3, name: "Artist Three", bio: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.", image: "https://placehold.co/400x400/3b0764/ffffff?text=Artist+3", slug: "artist-3", songCount: 15 },
-  // { id: 4, name: "Artist Four", bio: "Duis aute irure dolor in reprehenderit in voluptate velit esse.", image: "https://placehold.co/400x400/3b0764/ffffff?text=Artist+4", slug: "artist-4", songCount: 5 },
-  // { id: 5, name: "Artist Five", bio: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.", image: "https://placehold.co/400x400/3b0764/ffffff?text=Artist+5", slug: "artist-5", songCount: 20 },
-  // { id: 6, name: "Artist Six", bio: "Officia deserunt mollit anim id est laborum.", image: "https://placehold.co/400x400/3b0764/ffffff?text=Artist+6", slug: "artist-6", songCount: 3 },
-];
+const artistCards = artists.map((artist) => ({
+  ...artist,
+  image: artist.slug === "fr-joseph-mukkatt" ? frJosephImg.src : "/holy_fire_logo.webp",
+  songCount: songs.filter((song) => song.artistSlug === artist.slug || song.artist === artist.name).length,
+}));
 ---
 
-<MainLayout title="Artists | HolyfireMedia" description="Discover talented Christian artists and their complete discography.">
+<MainLayout title="Malayalam Christian Artists | HolyfireMedia" description="Discover Malayalam Christian artists, devotional songs, lyrics, and karaoke tracks on HolyfireMedia.">
   <div class="container mx-auto px-4 py-16">
     <div class="mb-12 text-center max-w-2xl mx-auto">
       <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-6">Our Artists</h1>
@@ -23,7 +21,7 @@ const artists = [
     </div>
 
     <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-      {artists.map((artist) => (
+      {artistCards.map((artist) => (
         <a href={`/artists/${artist.slug}`} class="block group">
           <div class="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg hover:shadow-pink-500/20 hover:bg-white/10 transition-all duration-300 transform group-hover:-translate-y-2">
             <div class="relative mb-6 overflow-hidden rounded-xl">

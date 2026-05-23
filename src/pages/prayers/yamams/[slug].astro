@@ -65,16 +65,16 @@ export function getStaticPaths() {
         </div>
       `
     },
-    // The following Yamams are placeholders until text is provided
-    { slug: "leliya", title: "Leliya - Night Prayer (ലെലിയാ)", manglishText: "<p>Work In Progress...</p>", malayalamText: "<p>Work In Progress...</p>" },
-    { slug: "qala-d-shahra", title: "Qala d'Shahra (ഖാലാ ദ് ഷഹറാ)", manglishText: "<p>Work In Progress...</p>", malayalamText: "<p>Work In Progress...</p>" },
-    { slug: "sapra", title: "Sapra - Morning Prayer (സപ്രാ)", manglishText: "<p>Work In Progress...</p>", malayalamText: "<p>Work In Progress...</p>" },
-    { slug: "quttaa", title: "Qutta'a (ഖുത്തആ)", manglishText: "<p>Work In Progress...</p>", malayalamText: "<p>Work In Progress...</p>" },
-    { slug: "endana", title: "Endana (എൻദാനാ)", manglishText: "<p>Work In Progress...</p>", malayalamText: "<p>Work In Progress...</p>" },
-    { slug: "dbasha-shayin", title: "D'basha Shayin (ദ് ബസ്ശാ ശായീൻ)", manglishText: "<p>Work In Progress...</p>", malayalamText: "<p>Work In Progress...</p>" }
+    // Add remaining Yamam text here when it is ready to publish.
+    { slug: "leliya", title: "Leliya - Night Prayer (ലെലിയാ)" },
+    { slug: "qala-d-shahra", title: "Qala d'Shahra (ഖാലാ ദ് ഷഹറാ)" },
+    { slug: "sapra", title: "Sapra - Morning Prayer (സപ്രാ)" },
+    { slug: "quttaa", title: "Qutta'a (ഖുത്തആ)" },
+    { slug: "endana", title: "Endana (എൻദാനാ)" },
+    { slug: "dbasha-shayin", title: "D'basha Shayin (ദ് ബസ്ശാ ശായീൻ)" }
   ];
 
-  return yamams.map((y) => ({
+  return yamams.filter((y) => y.manglishText && y.malayalamText).map((y) => ({
     params: { slug: y.slug },
     props: { prayer: y },
   }));

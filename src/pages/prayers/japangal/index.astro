@@ -14,6 +14,17 @@ const japangal = [
   { slug: "ethrayum-dayayulla-mathave", title: "Ethrayum Dayayulla Mathave", description: "എത്രയും ദയയുള്ള മാതാവേ - The Memorare", icon: "💖" },
   { slug: "parishudha-rajni", title: "Parishudha Rajni", description: "പരിശുദ്ധ രാജ്ഞി - Hail Holy Queen", icon: "👑" },
 ];
+
+const publishedJapangalSlugs = new Set([
+  "kurishadayalam-cheruth",
+  "kurishadayalam-valuth",
+  "thrithva-sthuthi",
+  "swargasthanaya-pithave",
+  "nanma-niranja-mariyam",
+  "vishwasapramanam",
+]);
+
+const publishedJapangal = japangal.filter((item) => publishedJapangalSlugs.has(item.slug));
 ---
 
 <MainLayout title="Japangal | HolyfireMedia" description="A collection of Common Prayers in Malayalam.">
@@ -36,7 +47,7 @@ const japangal = [
     </div>
 
     <div class="space-y-4 max-w-3xl mx-auto">
-      {japangal.map((item) => (
+      {publishedJapangal.map((item) => (
         <a href={`/prayers/japangal/${item.slug}`} class="block group">
           <div class="flex items-center gap-6 bg-gradient-to-r from-indigo-900/40 to-purple-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl hover:bg-white/10 hover:border-pink-500/30 hover:scale-[1.02] transition-all duration-300">
             <div class="text-4xl bg-white/5 p-3 rounded-xl border border-white/5 flex items-center justify-center">

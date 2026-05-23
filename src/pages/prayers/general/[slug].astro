@@ -157,14 +157,10 @@ export function getStaticPaths() {
     { slug: "pregnant-women", title: "Garbhinikalude Japam" }
   ];
 
-  return generalList.map((y) => ({
+  return generalList.filter((y) => y.manglishText && y.malayalamText).map((y) => ({
     params: { slug: y.slug },
     props: { 
-        prayer: {
-            ...y,
-            manglishText: y.manglishText || "<p class='text-center italic text-purple-200 mt-10'>Work In Progress: Adding content...</p>",
-            malayalamText: y.malayalamText || "<p class='text-center italic text-purple-200 mt-10'>Work In Progress: Adding content...</p>"
-        } 
+        prayer: y
     },
   }));
 }
