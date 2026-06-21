@@ -10,9 +10,13 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/vercel": "^8.2.11",
     "@fontsource/inter": "^5.2.8",
+    "@supabase/supabase-js": "^2.108.2",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.11",
+    "razorpay": "^2.9.6",
+    "resend": "^6.14.0",
     "tailwindcss": "^4.1.18"
   }
 }
