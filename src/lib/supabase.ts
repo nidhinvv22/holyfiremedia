@@ -123,7 +123,7 @@ export async function generateDownloadUrl(songSlug: string, format: string = 'mp
 
   const { data, error } = await supabase
     .storage
-    .from('premium-karaoke')
+    .from('premium-karoke')
     .createSignedUrl(filePath, 60 * 60 * 24); // 24 hours
 
   if (error) {
