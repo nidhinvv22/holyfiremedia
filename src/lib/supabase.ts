@@ -118,7 +118,8 @@ export async function getPurchaseByOrderId(razorpay_order_id: string) {
  * The URL is valid for 24 hours.
  */
 export async function generateDownloadUrl(songSlug: string, format: string = 'mp3') {
-  const filePath = `${songSlug}/premium.${format}`;
+  // Use colon instead of slash since files are in the root bucket
+  const filePath = `${songSlug}:premium.${format}`;
 
   const { data, error } = await supabase
     .storage

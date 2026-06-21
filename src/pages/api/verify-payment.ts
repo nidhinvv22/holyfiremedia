@@ -59,20 +59,12 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     // Generate a signed download URL (valid for 24 hours)
-    let downloadUrl: string;
+    let downloadUrl: string | null = null;
     try {
       downloadUrl = await generateDownloadUrl(songSlug, 'mp3');
     } catch {
-      // If file not yet uploaded to Supabase storage, return a message
-      console.error('Download file not found for:', songSlug);
-      return new Response(
-        JSON.stringify({
-          success: true,
-          downloadUrl: null,
-          message: 'Payment successful! The file will be sent to your email within a few hours.',
-        }),
-        { status: 200, headers: { 'Content-Type': 'application/json' } }
-      );
+      console.error('Download file not found in storage for:', songSlug);
+      // Continue — we'll still send an email and mark as paid
     }
 
     // Send confirmation email via Resend
@@ -85,15 +77,25 @@ export const POST: APIRoute = async ({ request }) => {
           songTitle: song.title,
           artistName: song.artist,
           paymentId: razorpay_payment_id,
-          downloadUrl,
+          downloadUrl: downloadUrl || '',
           customerName: name,
         });
+
+        // If no download URL, override the subject to indicate manual delivery
+        const subject = downloadUrl
+          ? emailContent.subject
+          : `🎵 Payment Received — ${song.title} | HolyfireMedia`;
 
         await resend.emails.send({
           from: 'HolyfireMedia <noreply@holyfiremedia.in>',
           to: email,
-          subject: emailContent.subject,
-          html: emailContent.html,
+          subject,
+          html: downloadUrl
+            ? emailContent.html
+            : emailContent.html.replace(
+                '⬇️ Download Premium Track',
+                '✅ Payment Received — File will be sent shortly'
+              ),
         });
 
         emailSent = true;
@@ -119,9 +121,11 @@ export const POST: APIRoute = async ({ request }) => {
         success: true,
         downloadUrl,
         emailSent,
-        message: emailSent
-          ? 'Payment successful! Download your track below. A confirmation email has been sent.'
-          : 'Payment successful! Download your track below.',
+        message: downloadUrl
+          ? (emailSent
+            ? 'Payment successful! Download your track below. A confirmation email has been sent.'
+            : 'Payment successful! Download your track below.')
+          : 'Payment successful! The file will be sent to your email shortly.',
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
