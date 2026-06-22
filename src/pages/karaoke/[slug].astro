@@ -1,16 +1,18 @@
 ---
-import MainLayout from '../../layouts/MainLayout.astro';
-import { songs } from '../../data/songs';
-import aradhyaneFile from '../../assets/Aradhyane_Parishudane_Ennullam_Thirayunnori_sneham.mp3';
-import previewEnullam from '../../assets/enullam_sample.MP3';
+import MainLayout from "../../layouts/MainLayout.astro";
+import { songs } from "../../data/songs";
+import aradhyaneFile from "../../assets/Aradhyane_Parishudane_Ennullam_Thirayunnori_sneham.mp3";
+import previewEnullam from "../../assets/enullam_sample.MP3";
 
 export async function getStaticPaths() {
-  return songs.filter((song) => song.hasKaraoke).map((song) => {
-    return {
-      params: { slug: song.slug },
-      props: { song },
-    };
-  });
+  return songs
+    .filter((song) => song.hasKaraoke)
+    .map((song) => {
+      return {
+        params: { slug: song.slug },
+        props: { song },
+      };
+    });
 }
 
 const { song } = Astro.props;
@@ -24,118 +26,126 @@ if (slug === "aradhyane-parishudhane") {
 }
 
 const pageUrl = `https://holyfiremedia.in/karaoke/${song.slug}/`;
-const artistUrl = song.artistSlug ? `https://holyfiremedia.in/artists/${song.artistSlug}/` : "https://holyfiremedia.in/artists/";
+const artistUrl = song.artistSlug
+  ? `https://holyfiremedia.in/artists/${song.artistSlug}/`
+  : "https://holyfiremedia.in/artists/";
 const artistHref = song.artistSlug ? `/artists/${song.artistSlug}` : "/artists";
 const songAliases = song.alternateTitles || [];
-const aliasText = songAliases.length ? ` Also searched as ${songAliases.join(", ")}.` : "";
-const previewFileUrl = previewUrl ? new URL(previewUrl, Astro.url).href : undefined;
-const [durationMinutes = 0, durationSeconds = 0] = song.duration.split(":").map(Number);
+const aliasText = songAliases.length
+  ? ` Also searched as ${songAliases.join(", ")}.`
+  : "";
+const previewFileUrl = previewUrl
+  ? new URL(previewUrl, Astro.url).href
+  : undefined;
+const [durationMinutes = 0, durationSeconds = 0] = song.duration
+  .split(":")
+  .map(Number);
 const isoDuration = `PT${durationMinutes}M${durationSeconds}S`;
-const razorpayKeyId = import.meta.env.PUBLIC_RAZORPAY_KEY_ID || '';
+const razorpayKeyId = import.meta.env.PUBLIC_RAZORPAY_KEY_ID || "";
 
 const productSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
-  "name": `${song.title} Karaoke Track`,
-  "description": `Download ${song.title} karaoke by ${song.artist}. Free MP3 with chorus and premium studio instrumental version available.`,
-  "image": "https://holyfiremedia.in/holy_fire_logo.webp",
-  "brand": {
+  name: `${song.title} Karaoke Track`,
+  description: `Download ${song.title} karaoke by ${song.artist}. Free MP3 with chorus and premium studio instrumental version available.`,
+  image: "https://holyfiremedia.in/holy_fire_logo.webp",
+  brand: {
     "@type": "Brand",
-    "name": "HolyfireMedia"
+    name: "HolyfireMedia",
   },
-  "category": "Digital music download",
-  "url": pageUrl,
-  "offers": [
+  category: "Digital music download",
+  url: pageUrl,
+  offers: [
     {
       "@type": "Offer",
-      "name": "Free MP3 karaoke with chorus",
-      "price": "0",
-      "priceCurrency": "INR",
-      "availability": "https://schema.org/InStock",
-      "url": pageUrl
+      name: "Free MP3 karaoke with chorus",
+      price: "0",
+      priceCurrency: "INR",
+      availability: "https://schema.org/InStock",
+      url: pageUrl,
     },
     {
       "@type": "Offer",
-      "name": "Premium studio instrumental karaoke",
-      "price": String(song.price),
-      "priceCurrency": "INR",
-      "availability": "https://schema.org/InStock",
-      "url": pageUrl
-    }
-  ]
+      name: "Premium studio instrumental karaoke",
+      price: String(song.price),
+      priceCurrency: "INR",
+      availability: "https://schema.org/InStock",
+      url: pageUrl,
+    },
+  ],
 };
 
 const musicSchema = {
   "@context": "https://schema.org",
   "@type": "MusicRecording",
-  "name": song.title,
-  "alternateName": songAliases,
-  "byArtist": {
+  name: song.title,
+  alternateName: songAliases,
+  byArtist: {
     "@type": "Person",
-    "name": song.artist,
-    "url": artistUrl
+    name: song.artist,
+    url: artistUrl,
   },
-  "inLanguage": "ml",
-  "description": song.description,
-  "duration": isoDuration,
-  "url": pageUrl,
-  ...(previewFileUrl ? { "audio": previewFileUrl } : {})
+  inLanguage: "ml",
+  description: song.description,
+  duration: isoDuration,
+  url: pageUrl,
+  ...(previewFileUrl ? { audio: previewFileUrl } : {}),
 };
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "itemListElement": [
+  itemListElement: [
     {
       "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://holyfiremedia.in/"
+      position: 1,
+      name: "Home",
+      item: "https://holyfiremedia.in/",
     },
     {
       "@type": "ListItem",
-      "position": 2,
-      "name": "Karaoke",
-      "item": "https://holyfiremedia.in/karaoke/"
+      position: 2,
+      name: "Karaoke",
+      item: "https://holyfiremedia.in/karaoke/",
     },
     {
       "@type": "ListItem",
-      "position": 3,
-      "name": `${song.title} Karaoke Download`,
-      "item": pageUrl
-    }
-  ]
+      position: 3,
+      name: `${song.title} Karaoke Download`,
+      item: pageUrl,
+    },
+  ],
 };
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": [
+  mainEntity: [
     {
       "@type": "Question",
-      "name": `Can I download ${song.title} karaoke for free?`,
-      "acceptedAnswer": {
+      name: `Can I download ${song.title} karaoke for free?`,
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": `Yes. HolyfireMedia provides a free MP3 karaoke version of ${song.title} with chorus for personal devotional practice.`
-      }
+        text: `Yes. HolyfireMedia provides a free MP3 karaoke version of ${song.title} with chorus for personal devotional practice.`,
+      },
     },
     {
       "@type": "Question",
-      "name": `Is a premium instrumental version of ${song.title} available?`,
-      "acceptedAnswer": {
+      name: `Is a premium instrumental version of ${song.title} available?`,
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": `Yes. A premium studio instrumental version without chorus is available for ${song.price} INR per track.`
-      }
+        text: `Yes. A premium studio instrumental version without chorus is available for ${song.price} INR per track.`,
+      },
     },
     {
       "@type": "Question",
-      "name": `Who is the artist of ${song.title}?`,
-      "acceptedAnswer": {
+      name: `Who is the artist of ${song.title}?`,
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": `${song.title} is a Malayalam Christian devotional song by ${song.artist}.`
-      }
-    }
-  ]
+        text: `${song.title} is a Malayalam Christian devotional song by ${song.artist}.`,
+      },
+    },
+  ],
 };
 ---
 
@@ -148,28 +158,60 @@ const faqSchema = {
 >
   <div class="container mx-auto px-4 py-16">
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <a href="/karaoke" class="inline-flex items-center text-pink-400 hover:text-pink-300 transition-colors mb-8 group">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      <a
+        href="/karaoke"
+        class="inline-flex items-center text-pink-400 hover:text-pink-300 transition-colors mb-8 group"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 mr-2 transform group-hover:-translate-x-1 transition-transform"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>
         Back to Karaoke List
       </a>
-      
-      <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300 drop-shadow-lg mb-6">
+
+      <h1
+        class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300 drop-shadow-lg mb-6"
+      >
         {song.title} Karaoke Download
       </h1>
       <p class="text-2xl text-white mb-6 font-semibold">
-        Artist: <a href={artistHref} class="hover:text-pink-300 transition-colors underline decoration-pink-400/40 underline-offset-4">{song.artist}</a>
+        Artist: <a
+          href={artistHref}
+          class="hover:text-pink-300 transition-colors underline decoration-pink-400/40 underline-offset-4"
+          >{song.artist}</a
+        >
       </p>
       <p class="text-xl text-purple-200 leading-relaxed max-w-2xl mx-auto">
-        Download the {song.title} karaoke track for Malayalam Christian worship, singing practice, and devotional events.
-        {songAliases.length > 0 && <span> Also known as {songAliases.join(" / ")}.</span>}
+        Download the {song.title} karaoke track for Malayalam Christian worship, singing
+        practice, and devotional events.
+        {
+          songAliases.length > 0 && (
+            <span> Also known as {songAliases.join(" / ")}.</span>
+          )
+        }
       </p>
-      <div class="mt-6 flex flex-wrap justify-center gap-3 text-sm text-purple-100">
-        <a href={`/lyrics/${song.slug}`} class="px-4 py-2 rounded-full bg-white/10 border border-white/15 hover:bg-white/20 transition-colors">
+      <div
+        class="mt-6 flex flex-wrap justify-center gap-3 text-sm text-purple-100"
+      >
+        <a
+          href={`/lyrics/${song.slug}`}
+          class="px-4 py-2 rounded-full bg-white/10 border border-white/15 hover:bg-white/20 transition-colors"
+        >
           Read Lyrics
         </a>
-        <a href={artistHref} class="px-4 py-2 rounded-full bg-white/10 border border-white/15 hover:bg-white/20 transition-colors">
+        <a
+          href={artistHref}
+          class="px-4 py-2 rounded-full bg-white/10 border border-white/15 hover:bg-white/20 transition-colors"
+        >
           More from {song.artist}
         </a>
       </div>
@@ -177,7 +219,11 @@ const faqSchema = {
       {/* Audio Preview */}
       <div class="mt-12 animate-fade-in-up">
         <h3 class="text-lg font-semibold text-white mb-4">Preview Karaoke</h3>
-        <audio controls class="w-full max-w-md mx-auto rounded-full bg-indigo-900/40 opacity-90 border border-white/10 shadow-lg" style="border-radius: 9999px;">
+        <audio
+          controls
+          class="w-full max-w-md mx-auto rounded-full bg-indigo-900/40 opacity-90 border border-white/10 shadow-lg"
+          style="border-radius: 9999px;"
+        >
           <source src={previewUrl} type="audio/mpeg" />
           Your browser does not support the audio element.
         </audio>
@@ -185,15 +231,23 @@ const faqSchema = {
     </div>
 
     <!-- Karaoke Versions Layout -->
-    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20 md:items-stretch animate-fade-in-up">
-      
+    <div
+      class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20 md:items-stretch animate-fade-in-up"
+    >
       <!-- Column 1: Free Version -->
-      <article class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(236,72,153,0.3)] transition-all duration-300 relative overflow-hidden group flex flex-col">
+      <article
+        class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(236,72,153,0.3)] transition-all duration-300 relative overflow-hidden group flex flex-col"
+      >
         <!-- Glow -->
-        <div class="absolute top-0 right-0 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl group-hover:bg-pink-500/40 transition-colors pointer-events-none"></div>
-        
-        <h3 class="text-2xl font-bold text-white mb-6 relative z-10">Standard Version (With Chorus)</h3>
-        
+        <div
+          class="absolute top-0 right-0 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl group-hover:bg-pink-500/40 transition-colors pointer-events-none"
+        >
+        </div>
+
+        <h3 class="text-2xl font-bold text-white mb-6 relative z-10">
+          Standard Version (With Chorus)
+        </h3>
+
         <div class="mb-6 relative z-10">
           <div class="flex items-baseline gap-2 text-white">
             <span class="text-5xl font-extrabold tracking-tight">FREE</span>
@@ -202,14 +256,30 @@ const faqSchema = {
         </div>
 
         <ul class="space-y-4 mb-8 relative z-10 flex-grow">
-          {["MP3 format", "Includes backing vocals", "Standard quality"].map((feature) => (
-            <li class="flex items-start gap-3 text-purple-100">
-              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-pink-500/20 flex items-center justify-center border border-pink-500/30">
-                <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-              </span>
-              <span>{feature}</span>
-            </li>
-          ))}
+          {
+            ["MP3 format", "Includes backing vocals", "Standard quality"].map(
+              (feature) => (
+                <li class="flex items-start gap-3 text-purple-100">
+                  <span class="flex-shrink-0 w-6 h-6 rounded-full bg-pink-500/20 flex items-center justify-center border border-pink-500/30">
+                    <svg
+                      class="w-4 h-4 text-pink-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </span>
+                  <span>{feature}</span>
+                </li>
+              ),
+            )
+          }
         </ul>
 
         <!-- Conditional Download Link -->
@@ -223,48 +293,91 @@ const faqSchema = {
               Download Free Karaoke MP3
             </a>
           ) : (
-            <button disabled class="w-full mt-auto px-6 py-4 bg-white/5 border border-white/10 text-white/50 font-semibold rounded-xl cursor-not-allowed relative z-10 text-center block">
+            <button
+              disabled
+              class="w-full mt-auto px-6 py-4 bg-white/5 border border-white/10 text-white/50 font-semibold rounded-xl cursor-not-allowed relative z-10 text-center block"
+            >
               Download Not Available
             </button>
           )
         }
-        <p class="text-xs text-purple-300 text-center mt-3 relative z-10">Instant automatic download &bull; Free with chorus</p>
+        <p class="text-xs text-purple-300 text-center mt-3 relative z-10">
+          Instant automatic download &bull; Free with chorus
+        </p>
       </article>
 
       <!-- Column 2: Premium Version -->
-      <div class="relative group hover:scale-[1.02] transition-all duration-300 flex flex-col">
+      <div
+        class="relative group hover:scale-[1.02] transition-all duration-300 flex flex-col"
+      >
         <!-- Gradient Border Background Base -->
-        <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-[1.5rem] opacity-75 blur-[2px] group-hover:opacity-100 transition duration-500"></div>
-        
-        <article class="relative flex flex-col h-full bg-[#1b0b3b] backdrop-blur-xl rounded-3xl p-8 border border-white/10 overflow-hidden m-[1px]">
-          
+        <div
+          class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-[1.5rem] opacity-75 blur-[2px] group-hover:opacity-100 transition duration-500"
+        >
+        </div>
+
+        <article
+          class="relative flex flex-col h-full bg-[#1b0b3b] backdrop-blur-xl rounded-3xl p-8 border border-white/10 overflow-hidden m-[1px]"
+        >
           <!-- Best Value Badge -->
-          <div class="absolute top-0 right-0 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl z-20 shadow-lg border-b border-l border-white/20">
+          <div
+            class="absolute top-0 right-0 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl z-20 shadow-lg border-b border-l border-white/20"
+          >
             BEST VALUE
           </div>
 
           <!-- Glow Inside -->
-          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl group-hover:bg-purple-500/30 transition-colors pointer-events-none"></div>
+          <div
+            class="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl group-hover:bg-purple-500/30 transition-colors pointer-events-none"
+          >
+          </div>
 
-          <h3 class="text-2xl font-bold text-white mb-6 relative z-10 pr-16 lg:pr-20">Karoke with Chorus</h3>
-          
+          <h3
+            class="text-2xl font-bold text-white mb-6 relative z-10 pr-16 lg:pr-20"
+          >
+            Karoke without Chorus
+          </h3>
+
           <div class="mb-6 relative z-10">
             <div class="flex items-baseline gap-2 text-white">
-              <span class="text-5xl font-extrabold tracking-tight">₹{song.price}</span>
+              <span class="text-5xl font-extrabold tracking-tight"
+                >₹{song.price}</span
+              >
               <span class="text-purple-300 font-medium">/ track</span>
             </div>
-            <p class="text-sm text-purple-300 mt-2">(Inclusive of applicable taxes)</p>
+            <p class="text-sm text-purple-300 mt-2">
+              (Inclusive of applicable taxes)
+            </p>
           </div>
 
           <ul class="space-y-4 mb-8 relative z-10 flex-grow">
-            {["High-fidelity WAV + MP3", "Pure Instrumental (No Chorus)", "Studio Mastered", "Commercial License"].map((feature) => (
-              <li class="flex items-start gap-3 text-purple-100 font-medium">
-                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center shadow-[0_0_10px_rgba(236,72,153,0.3)]">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                </span>
-                <span>{feature}</span>
-              </li>
-            ))}
+            {
+              [
+                "High-fidelity WAV + MP3",
+                "Pure Instrumental (No Chorus)",
+                "Studio Mastered",
+                "Commercial License",
+              ].map((feature) => (
+                <li class="flex items-start gap-3 text-purple-100 font-medium">
+                  <span class="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center shadow-[0_0_10px_rgba(236,72,153,0.3)]">
+                    <svg
+                      class="w-4 h-4 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </span>
+                  <span>{feature}</span>
+                </li>
+              ))
+            }
           </ul>
 
           <!-- Payment Form (default state) -->
@@ -288,16 +401,47 @@ const faqSchema = {
               class="w-full px-6 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.6)] transition-all text-center block hover:scale-105 duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               <span id="btn-text">🔒 Buy Now ₹{song.price}</span>
-              <span id="btn-loading" class="hidden items-center justify-center gap-2">
-                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              <span
+                id="btn-loading"
+                class="hidden items-center justify-center gap-2"
+              >
+                <svg
+                  class="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
                 </svg>
                 Creating order...
               </span>
             </button>
-            <p class="text-xs text-purple-300/70 text-center flex items-center justify-center gap-1">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            <p
+              class="text-xs text-purple-300/70 text-center flex items-center justify-center gap-1"
+            >
+              <svg
+                class="w-3.5 h-3.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                ></path></svg
+              >
               Secured by Razorpay &bull; UPI, Cards, NetBanking
             </p>
           </div>
@@ -305,10 +449,24 @@ const faqSchema = {
           <!-- Payment Success State (hidden by default) -->
           <div id="payment-success" class="relative z-10 mt-auto hidden">
             <div class="text-center space-y-4">
-              <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/20 border border-green-500/30 mx-auto">
-                <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <div
+                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/20 border border-green-500/30 mx-auto"
+              >
+                <svg
+                  class="w-8 h-8 text-green-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"></path></svg
+                >
               </div>
-              <h4 class="text-xl font-bold text-green-400">Payment Successful!</h4>
+              <h4 class="text-xl font-bold text-green-400">
+                Payment Successful!
+              </h4>
               <a
                 id="download-link"
                 href="#"
@@ -319,10 +477,17 @@ const faqSchema = {
               </a>
               <div class="space-y-1 text-sm">
                 <p class="text-purple-200">
-                  📧 Confirmation email sent to <span id="success-email" class="text-pink-300 font-medium"></span>
+                  📧 Confirmation email sent to <span
+                    id="success-email"
+                    class="text-pink-300 font-medium"></span>
                 </p>
-                <p class="text-purple-300/70">⏰ Download link valid for 24 hours</p>
-                <p class="text-purple-300/70">Payment ID: <span id="success-payment-id" class="font-mono"></span></p>
+                <p class="text-purple-300/70">
+                  ⏰ Download link valid for 24 hours
+                </p>
+                <p class="text-purple-300/70">
+                  Payment ID: <span id="success-payment-id" class="font-mono"
+                  ></span>
+                </p>
               </div>
             </div>
           </div>
@@ -330,11 +495,25 @@ const faqSchema = {
           <!-- Payment Error State (hidden by default) -->
           <div id="payment-error" class="relative z-10 mt-auto hidden">
             <div class="text-center space-y-4">
-              <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-500/20 border border-red-500/30 mx-auto">
-                <svg class="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+              <div
+                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-500/20 border border-red-500/30 mx-auto"
+              >
+                <svg
+                  class="w-8 h-8 text-red-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"></path></svg
+                >
               </div>
               <h4 class="text-xl font-bold text-red-400">Payment Failed</h4>
-              <p id="error-message" class="text-purple-200 text-sm">Something went wrong. Please try again.</p>
+              <p id="error-message" class="text-purple-200 text-sm">
+                Something went wrong. Please try again.
+              </p>
               <button
                 id="retry-btn"
                 type="button"
@@ -344,31 +523,47 @@ const faqSchema = {
               </button>
             </div>
           </div>
-
         </article>
       </div>
-
     </div>
 
-    <section class="max-w-5xl mx-auto grid lg:grid-cols-[1.2fr_0.8fr] gap-8 mb-16">
-      <article class="bg-indigo-900/40 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-sm">
-        <h2 class="text-3xl font-bold text-white mb-4">Download {song.title} Karaoke Track</h2>
+    <section
+      class="max-w-5xl mx-auto grid lg:grid-cols-[1.2fr_0.8fr] gap-8 mb-16"
+    >
+      <article
+        class="bg-indigo-900/40 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-sm"
+      >
+        <h2 class="text-3xl font-bold text-white mb-4">
+          Download {song.title} Karaoke Track
+        </h2>
         <div class="space-y-4 text-purple-100 leading-relaxed">
           <p>
-            This page is dedicated to the {song.title} karaoke download by {song.artist}. The free version is an MP3 karaoke track with chorus, suitable for learning the melody, practicing the song, and singing along during personal devotion.
+            This page is dedicated to the {song.title} karaoke download by {
+              song.artist
+            }. The free version is an MP3 karaoke track with chorus, suitable
+            for learning the melody, practicing the song, and singing along
+            during personal devotion.
           </p>
           <p>
-            The premium studio version is prepared for singers, choirs, ministries, and devotional programs that need a cleaner instrumental track without chorus. It includes high-fidelity WAV and MP3 formats.
+            The premium studio version is prepared for singers, choirs,
+            ministries, and devotional programs that need a cleaner instrumental
+            track without chorus. It includes high-fidelity WAV and MP3 formats.
           </p>
-          {songAliases.length > 0 && (
-            <p>
-              People may also search this song as {songAliases.join(", ")}. All those searches refer to this same Malayalam Christian devotional karaoke track.
-            </p>
-          )}
+          {
+            songAliases.length > 0 && (
+              <p>
+                People may also search this song as {songAliases.join(", ")}.
+                All those searches refer to this same Malayalam Christian
+                devotional karaoke track.
+              </p>
+            )
+          }
         </div>
       </article>
 
-      <aside class="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-sm">
+      <aside
+        class="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-sm"
+      >
         <h2 class="text-2xl font-bold text-white mb-5">Track Details</h2>
         <dl class="space-y-4 text-sm md:text-base">
           <div>
@@ -377,7 +572,12 @@ const faqSchema = {
           </div>
           <div>
             <dt class="text-purple-300 font-semibold">Artist</dt>
-            <dd><a href={artistHref} class="text-white hover:text-pink-300 transition-colors">{song.artist}</a></dd>
+            <dd>
+              <a
+                href={artistHref}
+                class="text-white hover:text-pink-300 transition-colors"
+                >{song.artist}</a>
+            </dd>
           </div>
           <div>
             <dt class="text-purple-300 font-semibold">Language</dt>
@@ -389,26 +589,48 @@ const faqSchema = {
           </div>
           <div>
             <dt class="text-purple-300 font-semibold">Related page</dt>
-            <dd><a href={`/lyrics/${song.slug}`} class="text-white hover:text-pink-300 transition-colors">Read {song.title} lyrics</a></dd>
+            <dd>
+              <a
+                href={`/lyrics/${song.slug}`}
+                class="text-white hover:text-pink-300 transition-colors"
+                >Read {song.title} lyrics</a>
+            </dd>
           </div>
         </dl>
       </aside>
     </section>
 
     <section class="max-w-5xl mx-auto mb-8">
-      <h2 class="text-3xl font-bold text-white mb-6 text-center">Frequently Asked Questions</h2>
+      <h2 class="text-3xl font-bold text-white mb-6 text-center">
+        Frequently Asked Questions
+      </h2>
       <div class="grid md:grid-cols-3 gap-4">
         <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 class="text-lg font-bold text-white mb-3">Can I download it for free?</h3>
-          <p class="text-purple-200 text-sm leading-relaxed">Yes. The free MP3 version includes chorus and is useful for personal devotional practice.</p>
+          <h3 class="text-lg font-bold text-white mb-3">
+            Can I download it for free?
+          </h3>
+          <p class="text-purple-200 text-sm leading-relaxed">
+            Yes. The free MP3 version includes chorus and is useful for personal
+            devotional practice.
+          </p>
         </article>
         <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 class="text-lg font-bold text-white mb-3">Is there a no-chorus version?</h3>
-          <p class="text-purple-200 text-sm leading-relaxed">Yes. The pro studio version is a pure instrumental track prepared for singing and events.</p>
+          <h3 class="text-lg font-bold text-white mb-3">
+            Is there a no-chorus version?
+          </h3>
+          <p class="text-purple-200 text-sm leading-relaxed">
+            Yes. The pro studio version is a pure instrumental track prepared
+            for singing and events.
+          </p>
         </article>
         <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
           <h3 class="text-lg font-bold text-white mb-3">Who is the artist?</h3>
-          <p class="text-purple-200 text-sm leading-relaxed">{song.title} is a Malayalam Christian devotional song by <a href={artistHref} class="text-pink-300 hover:text-pink-200">{song.artist}</a>.</p>
+          <p class="text-purple-200 text-sm leading-relaxed">
+            {song.title} is a Malayalam Christian devotional song by <a
+              href={artistHref}
+              class="text-pink-300 hover:text-pink-200">{song.artist}</a
+            >.
+          </p>
         </article>
       </div>
     </section>
@@ -418,19 +640,25 @@ const faqSchema = {
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const buyBtn = document.getElementById('buy-premium-btn') as HTMLButtonElement;
-      const emailInput = document.getElementById('customer-email') as HTMLInputElement;
-      const btnText = document.getElementById('btn-text')!;
-      const btnLoading = document.getElementById('btn-loading')!;
-      const paymentForm = document.getElementById('payment-form')!;
-      const paymentSuccess = document.getElementById('payment-success')!;
-      const paymentError = document.getElementById('payment-error')!;
-      const downloadLink = document.getElementById('download-link') as HTMLAnchorElement;
-      const successEmail = document.getElementById('success-email')!;
-      const successPaymentId = document.getElementById('success-payment-id')!;
-      const errorMessage = document.getElementById('error-message')!;
-      const retryBtn = document.getElementById('retry-btn')!;
+    document.addEventListener("DOMContentLoaded", () => {
+      const buyBtn = document.getElementById(
+        "buy-premium-btn",
+      ) as HTMLButtonElement;
+      const emailInput = document.getElementById(
+        "customer-email",
+      ) as HTMLInputElement;
+      const btnText = document.getElementById("btn-text")!;
+      const btnLoading = document.getElementById("btn-loading")!;
+      const paymentForm = document.getElementById("payment-form")!;
+      const paymentSuccess = document.getElementById("payment-success")!;
+      const paymentError = document.getElementById("payment-error")!;
+      const downloadLink = document.getElementById(
+        "download-link",
+      ) as HTMLAnchorElement;
+      const successEmail = document.getElementById("success-email")!;
+      const successPaymentId = document.getElementById("success-payment-id")!;
+      const errorMessage = document.getElementById("error-message")!;
+      const retryBtn = document.getElementById("retry-btn")!;
 
       if (!buyBtn) return;
 
@@ -439,18 +667,18 @@ const faqSchema = {
       const songTitle = buyBtn.dataset.songTitle!;
       const razorpayKey = buyBtn.dataset.razorpayKey!;
 
-      function showState(state: 'form' | 'success' | 'error') {
-        paymentForm.classList.toggle('hidden', state !== 'form');
-        paymentSuccess.classList.toggle('hidden', state !== 'success');
-        paymentError.classList.toggle('hidden', state !== 'error');
+      function showState(state: "form" | "success" | "error") {
+        paymentForm.classList.toggle("hidden", state !== "form");
+        paymentSuccess.classList.toggle("hidden", state !== "success");
+        paymentError.classList.toggle("hidden", state !== "error");
       }
 
       function setLoading(loading: boolean) {
         buyBtn.disabled = loading;
-        btnText.classList.toggle('hidden', loading);
-        btnLoading.classList.toggle('hidden', !loading);
-        if (loading) btnLoading.classList.add('flex');
-        else btnLoading.classList.remove('flex');
+        btnText.classList.toggle("hidden", loading);
+        btnLoading.classList.toggle("hidden", !loading);
+        if (loading) btnLoading.classList.add("flex");
+        else btnLoading.classList.remove("flex");
       }
 
       async function startPayment() {
@@ -458,10 +686,18 @@ const faqSchema = {
 
         // Validate email
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          emailInput.classList.add('ring-2', 'ring-red-500/50', 'border-red-500/50');
+          emailInput.classList.add(
+            "ring-2",
+            "ring-red-500/50",
+            "border-red-500/50",
+          );
           emailInput.focus();
           setTimeout(() => {
-            emailInput.classList.remove('ring-2', 'ring-red-500/50', 'border-red-500/50');
+            emailInput.classList.remove(
+              "ring-2",
+              "ring-red-500/50",
+              "border-red-500/50",
+            );
           }, 2000);
           return;
         }
@@ -470,15 +706,15 @@ const faqSchema = {
 
         try {
           // Step 1: Create order on our server
-          const orderRes = await fetch('/api/create-order', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+          const orderRes = await fetch("/api/create-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ songSlug, email }),
           });
 
           if (!orderRes.ok) {
             const err = await orderRes.json();
-            throw new Error(err.error || 'Failed to create order');
+            throw new Error(err.error || "Failed to create order");
           }
 
           const orderData = await orderRes.json();
@@ -488,26 +724,26 @@ const faqSchema = {
             key: razorpayKey,
             amount: orderData.amount,
             currency: orderData.currency,
-            name: 'HolyfireMedia',
+            name: "HolyfireMedia",
             description: `Premium Karaoke: ${songTitle}`,
             order_id: orderData.orderId,
             prefill: {
               email: email,
             },
             theme: {
-              color: '#ec4899',
-              backdrop_color: 'rgba(15, 5, 36, 0.85)',
+              color: "#ec4899",
+              backdrop_color: "rgba(15, 5, 36, 0.85)",
             },
             handler: async function (response: any) {
               // Step 3: Verify payment on our server
               setLoading(true);
-              btnText.textContent = 'Verifying payment...';
+              btnText.textContent = "Verifying payment...";
               setLoading(true);
 
               try {
-                const verifyRes = await fetch('/api/verify-payment', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
+                const verifyRes = await fetch("/api/verify-payment", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
                     razorpay_order_id: response.razorpay_order_id,
                     razorpay_payment_id: response.razorpay_payment_id,
@@ -524,19 +760,22 @@ const faqSchema = {
                   if (verifyData.downloadUrl) {
                     downloadLink.href = verifyData.downloadUrl;
                   } else {
-                    downloadLink.textContent = '📧 File will be sent to your email';
-                    downloadLink.removeAttribute('href');
-                    downloadLink.classList.remove('hover:scale-105');
+                    downloadLink.textContent =
+                      "📧 File will be sent to your email";
+                    downloadLink.removeAttribute("href");
+                    downloadLink.classList.remove("hover:scale-105");
                   }
                   successEmail.textContent = email;
                   successPaymentId.textContent = response.razorpay_payment_id;
-                  showState('success');
+                  showState("success");
                 } else {
-                  throw new Error(verifyData.error || 'Verification failed');
+                  throw new Error(verifyData.error || "Verification failed");
                 }
               } catch (verifyError: any) {
-                errorMessage.textContent = verifyError.message || 'Payment verification failed. Don\'t worry, if money was deducted it will be refunded.';
-                showState('error');
+                errorMessage.textContent =
+                  verifyError.message ||
+                  "Payment verification failed. Don't worry, if money was deducted it will be refunded.";
+                showState("error");
               }
             },
             modal: {
@@ -547,32 +786,34 @@ const faqSchema = {
           };
 
           const rzp = new (window as any).Razorpay(options);
-          rzp.on('payment.failed', function (response: any) {
-            errorMessage.textContent = response.error?.description || 'Payment failed. Please try again.';
-            showState('error');
+          rzp.on("payment.failed", function (response: any) {
+            errorMessage.textContent =
+              response.error?.description ||
+              "Payment failed. Please try again.";
+            showState("error");
           });
           rzp.open();
           setLoading(false);
-
         } catch (err: any) {
-          errorMessage.textContent = err.message || 'Something went wrong. Please try again.';
-          showState('error');
+          errorMessage.textContent =
+            err.message || "Something went wrong. Please try again.";
+          showState("error");
         }
       }
 
-      buyBtn.addEventListener('click', startPayment);
+      buyBtn.addEventListener("click", startPayment);
 
       // Allow Enter key in email input to trigger payment
-      emailInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
+      emailInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
           e.preventDefault();
           startPayment();
         }
       });
 
       // Retry button
-      retryBtn.addEventListener('click', () => {
-        showState('form');
+      retryBtn.addEventListener("click", () => {
+        showState("form");
         setLoading(false);
       });
     });
