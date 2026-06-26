@@ -356,7 +356,7 @@ const faqSchema = {
                 "High-fidelity WAV + MP3",
                 "Pure Instrumental (No Chorus)",
                 "Studio Mastered",
-                "Commercial License",
+                "Personal Use License",
               ].map((feature) => (
                 <li class="flex items-start gap-3 text-purple-100 font-medium">
                   <span class="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center shadow-[0_0_10px_rgba(236,72,153,0.3)]">
@@ -576,7 +576,8 @@ const faqSchema = {
               <a
                 href={artistHref}
                 class="text-white hover:text-pink-300 transition-colors"
-                >{song.artist}</a>
+                >{song.artist}</a
+              >
             </dd>
           </div>
           <div>
@@ -593,7 +594,8 @@ const faqSchema = {
               <a
                 href={`/lyrics/${song.slug}`}
                 class="text-white hover:text-pink-300 transition-colors"
-                >Read {song.title} lyrics</a>
+                >Read {song.title} lyrics</a
+              >
             </dd>
           </div>
         </dl>
