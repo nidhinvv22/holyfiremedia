@@ -63,6 +63,72 @@ const featuredSongs = songs.slice(0, 3);
       ))}
     </div>
   </section>
+  <!-- KARAOKE & PRAYERS SPLIT -->
+  <section class="container mx-auto px-4 py-16">
+    <div class="grid md:grid-cols-2 gap-8">
+      
+      <!-- Karaoke Section -->
+      <div class="bg-gradient-to-br from-pink-900/40 to-purple-900/40 backdrop-blur border border-pink-500/20 rounded-3xl p-8 md:p-12 shadow-xl hover:shadow-pink-500/10 transition-shadow">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Premium Karaoke Tracks</h2>
+        <p class="text-pink-200 text-lg mb-6">Download high-quality professional karaoke tracks to sing along with your favorite Christian hymns.</p>
+        
+        <!-- Direct links to individual karaoke pages -->
+        <div class="space-y-3 mb-8">
+          {songs.filter(s => s.hasKaraoke).map((song) => (
+            <a href={`/karaoke/${song.slug}`} class="flex items-center gap-3 text-white/90 hover:text-pink-300 transition-colors group">
+              <span class="flex-shrink-0 w-8 h-8 rounded-lg bg-pink-500/20 flex items-center justify-center border border-pink-500/30 group-hover:bg-pink-500/30 transition-colors">
+                <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"></path></svg>
+              </span>
+              <span class="font-medium">{song.title} — Free & Premium</span>
+            </a>
+          ))}
+        </div>
+        
+        <a href="/karaoke" class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-lg transition-transform hover:scale-105 inline-block">
+          All Karaoke Tracks
+        </a>
+      </div>
+
+      <!-- Prayer Section -->
+      <div class="bg-gradient-to-br from-blue-900/40 to-indigo-900/40 backdrop-blur border border-blue-500/20 rounded-3xl p-8 md:p-12 shadow-xl hover:shadow-blue-500/10 transition-shadow">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">Prayer & Devotion</h2>
+        
+        <!-- Direct links to important prayer pages -->
+        <ul class="space-y-3 mb-8">
+          <li>
+            <a href="/prayers/japamala/holy-rosary" class="flex items-center gap-3 text-blue-100 hover:text-pink-300 transition-colors">
+              <span class="text-pink-400 font-bold">✧</span> Holy Rosary in Malayalam & Manglish
+            </a>
+          </li>
+          <li>
+            <a href="/prayers/japamala/karuna-kontha" class="flex items-center gap-3 text-blue-100 hover:text-pink-300 transition-colors">
+              <span class="text-pink-400 font-bold">✧</span> Karuna Kontha (Divine Mercy Chaplet)
+            </a>
+          </li>
+          <li>
+            <a href="/prayers/japangal/swargasthanaya-pithave" class="flex items-center gap-3 text-blue-100 hover:text-pink-300 transition-colors">
+              <span class="text-pink-400 font-bold">✧</span> Swargasthanaya Pithave (Our Father)
+            </a>
+          </li>
+          <li>
+            <a href="/prayers/japangal/nanma-niranja-mariyam" class="flex items-center gap-3 text-blue-100 hover:text-pink-300 transition-colors">
+              <span class="text-pink-400 font-bold">✧</span> Nanma Niranja Mariyame (Hail Mary)
+            </a>
+          </li>
+          <li>
+            <a href="/prayers/general/three-oclock-prayer" class="flex items-center gap-3 text-blue-100 hover:text-pink-300 transition-colors">
+              <span class="text-pink-400 font-bold">✧</span> 3 O'Clock Prayer
+            </a>
+          </li>
+        </ul>
+        
+        <a href="/prayers" class="px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold rounded-xl shadow-lg transition-transform hover:-translate-y-1 inline-block">
+          View All Prayers
+        </a>
+      </div>
+
+    </div>
+  </section>
 
   <!-- SONGS SECTION -->
   <section class="container mx-auto px-4 py-16">
@@ -96,34 +162,30 @@ const featuredSongs = songs.slice(0, 3);
     </div>
   </section>
 
-  <!-- KARAOKE & PRAYERS SPLIT -->
+  <!-- LYRICS QUICK LINKS -->
   <section class="container mx-auto px-4 py-16">
-    <div class="grid md:grid-cols-2 gap-8">
-      
-      <!-- Karaoke Section -->
-      <div class="bg-gradient-to-br from-pink-900/40 to-purple-900/40 backdrop-blur border border-pink-500/20 rounded-3xl p-8 md:p-12 text-center sm:text-left flex flex-col items-center sm:items-start justify-center shadow-xl hover:shadow-pink-500/10 transition-shadow">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Premium Karaoke Tracks</h2>
-        <p class="text-pink-200 text-lg mb-8">Download high-quality professional karaoke tracks to sing along with your favorite Christian hymns.</p>
-        <a href="/karaoke" class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-lg transition-transform hover:scale-105 inline-block">
-          Explore Karaoke
+    <div class="bg-indigo-900/30 backdrop-blur-md border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl">
+      <div class="flex justify-between items-end mb-8">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Song Lyrics</h2>
+        <a href="/lyrics" class="text-pink-300 hover:text-pink-400 font-medium flex items-center gap-1 group">
+          All Lyrics <span class="group-hover:translate-x-1 transition-transform">→</span>
         </a>
       </div>
-
-      <!-- Prayer Section -->
-      <div class="bg-gradient-to-br from-blue-900/40 to-indigo-900/40 backdrop-blur border border-blue-500/20 rounded-3xl p-8 md:p-12 text-center sm:text-left shadow-xl hover:shadow-blue-500/10 transition-shadow">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">Prayer & Devotion</h2>
-        <ul class="space-y-4 mb-8">
-          {['Holy Rosary', 'Divine Mercy Chaplet', 'Morning Prayer'].map((item) => (
-            <li class="flex items-center gap-3 text-blue-100 text-lg">
-              <span class="text-pink-400 font-bold">✧</span> {item}
-            </li>
-          ))}
-        </ul>
-        <a href="/prayers" class="px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold rounded-xl shadow-lg transition-transform hover:-translate-y-1 inline-block">
-          View All Prayers
-        </a>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {songs.filter(s => s.hasLyrics).map((song) => (
+          <a href={`/lyrics/${song.slug}`} class="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-pink-500/30 transition-all group">
+            <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-inner flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-white font-semibold group-hover:text-pink-300 transition-colors">{song.title}</h3>
+              <p class="text-purple-300 text-sm">{song.artist}</p>
+            </div>
+          </a>
+        ))}
       </div>
-
     </div>
   </section>
 

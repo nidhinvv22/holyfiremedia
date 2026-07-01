@@ -75,6 +75,11 @@ const navItems = [
     <!-- Canonical URL -->
     <link rel="canonical" href={Astro.url.href} />
     
+    <!-- hreflang for multilingual content (Malayalam/Manglish + English) -->
+    <link rel="alternate" hreflang="en" href={Astro.url.href} />
+    <link rel="alternate" hreflang="ml" href={Astro.url.href} />
+    <link rel="alternate" hreflang="x-default" href={Astro.url.href} />
+
     <!-- JSON-LD WebSite Structured Data (default) -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
@@ -83,6 +88,14 @@ const navItems = [
       "url": "https://holyfiremedia.in/",
       "description": "Discover Malayalam Christian songs, artists, lyrics, prayers, and karaoke tracks.",
       "inLanguage": ["en", "ml"],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.google.com/search?q=site:holyfiremedia.in+{search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      },
       "publisher": {
         "@type": "Organization",
         "name": "HolyfireMedia",
@@ -90,7 +103,11 @@ const navItems = [
         "logo": {
           "@type": "ImageObject",
           "url": "https://holyfiremedia.in/holy_fire_logo.webp"
-        }
+        },
+        "sameAs": [
+          "https://www.instagram.com/holyfire_media/",
+          "https://www.youtube.com/@HOLYFIRE-channel"
+        ]
       }
     })} />
     

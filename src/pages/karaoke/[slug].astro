@@ -3,6 +3,7 @@ import MainLayout from "../../layouts/MainLayout.astro";
 import { songs } from "../../data/songs";
 import aradhyaneFile from "../../assets/Aradhyane_Parishudane_Ennullam_Thirayunnori_sneham.mp3";
 import previewEnullam from "../../assets/enullam_sample.MP3";
+import previewNoChorus from "../../assets/enullam_sample_no_chorus.MP3";
 
 export async function getStaticPaths() {
   return songs
@@ -20,9 +21,11 @@ const { slug } = Astro.params;
 
 let downloadUrl = song.freeFile;
 let previewUrl = `/audio/preview-${song.slug}.mp3`;
+let premiumPreviewUrl = `/audio/preview-premium-${song.slug}.mp3`;
 if (slug === "aradhyane-parishudhane") {
   downloadUrl = aradhyaneFile;
   previewUrl = previewEnullam;
+  premiumPreviewUrl = previewNoChorus;
 }
 
 const pageUrl = `https://holyfiremedia.in/karaoke/${song.slug}/`;
@@ -190,123 +193,61 @@ const faqSchema = {
           >{song.artist}</a
         >
       </p>
-      <p class="text-xl text-purple-200 leading-relaxed max-w-2xl mx-auto">
-        Download the {song.title} karaoke track for Malayalam Christian worship, singing
-        practice, and devotional events.
-        {
-          songAliases.length > 0 && (
-            <span> Also known as {songAliases.join(" / ")}.</span>
-          )
-        }
-      </p>
-      <div
-        class="mt-6 flex flex-wrap justify-center gap-3 text-sm text-purple-100"
-      >
-        <a
-          href={`/lyrics/${song.slug}`}
-          class="px-4 py-2 rounded-full bg-white/10 border border-white/15 hover:bg-white/20 transition-colors"
-        >
-          Read Lyrics
-        </a>
-        <a
-          href={artistHref}
-          class="px-4 py-2 rounded-full bg-white/10 border border-white/15 hover:bg-white/20 transition-colors"
-        >
-          More from {song.artist}
-        </a>
-      </div>
 
-      {/* Audio Preview */}
-      <div class="mt-12 animate-fade-in-up">
-        <h3 class="text-lg font-semibold text-white mb-4">Preview Karaoke</h3>
-        <audio
-          controls
-          class="w-full max-w-md mx-auto rounded-full bg-indigo-900/40 opacity-90 border border-white/10 shadow-lg"
-          style="border-radius: 9999px;"
-        >
-          <source src={previewUrl} type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
+      {/* Audio Comparison — Hear the Difference */}
+      <div class="mt-14 mb-4 max-w-3xl mx-auto animate-fade-in-up">
+        <h3 class="text-xl font-bold text-white text-center mb-2">
+          🎧 Hear the Difference
+        </h3>
+        <p class="text-purple-300 text-center text-sm mb-6">
+          Listen to both versions and decide which one fits your needs
+        </p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div
+            class="bg-gradient-to-r from-pink-500/10 to-purple-500/10 border border-pink-500/30 rounded-2xl p-5"
+          >
+            <p class="text-sm font-semibold text-white mb-1">
+              Premium Version <span class="text-pink-400">(no chorus)</span>
+            </p>
+            <p class="text-xs text-pink-300 mb-3">
+              Preview clip · Full track: {song.duration}
+            </p>
+            <audio
+              controls
+              class="w-full"
+              style="border-radius: 9999px; height: 36px;"
+            >
+              <source src={premiumPreviewUrl} type="audio/mpeg" />
+            </audio>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p class="text-sm font-semibold text-purple-200 mb-1">
+              Free Version <span class="text-purple-400">(with chorus)</span>
+            </p>
+            <p class="text-xs text-purple-400 mb-3">
+              Preview clip · Full track: {song.duration}
+            </p>
+            <audio
+              controls
+              class="w-full"
+              style="border-radius: 9999px; height: 36px;"
+            >
+              <source src={previewUrl} type="audio/mpeg" />
+            </audio>
+          </div>
+        </div>
+        <p class="text-center text-xs text-purple-400 mt-3">
+          💡 Notice: The premium version has crystal-clear instrumentation with
+          no vocal overlay
+        </p>
       </div>
     </div>
 
-    <!-- Karaoke Versions Layout -->
+    <!-- Karaoke Versions Layout — Premium FIRST (left), Free SECOND (right) -->
     <div
-      class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20 md:items-stretch animate-fade-in-up"
+      class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12 md:items-stretch animate-fade-in-up"
     >
-      <!-- Column 1: Free Version -->
-      <article
-        class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(236,72,153,0.3)] transition-all duration-300 relative overflow-hidden group flex flex-col"
-      >
-        <!-- Glow -->
-        <div
-          class="absolute top-0 right-0 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl group-hover:bg-pink-500/40 transition-colors pointer-events-none"
-        >
-        </div>
-
-        <h3 class="text-2xl font-bold text-white mb-6 relative z-10">
-          Standard Version (With Chorus)
-        </h3>
-
-        <div class="mb-6 relative z-10">
-          <div class="flex items-baseline gap-2 text-white">
-            <span class="text-5xl font-extrabold tracking-tight">FREE</span>
-          </div>
-          <p class="text-sm text-purple-300 mt-2">Instant community download</p>
-        </div>
-
-        <ul class="space-y-4 mb-8 relative z-10 flex-grow">
-          {
-            ["MP3 format", "Includes backing vocals", "Standard quality"].map(
-              (feature) => (
-                <li class="flex items-start gap-3 text-purple-100">
-                  <span class="flex-shrink-0 w-6 h-6 rounded-full bg-pink-500/20 flex items-center justify-center border border-pink-500/30">
-                    <svg
-                      class="w-4 h-4 text-pink-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </span>
-                  <span>{feature}</span>
-                </li>
-              ),
-            )
-          }
-        </ul>
-
-        <!-- Conditional Download Link -->
-        {
-          downloadUrl ? (
-            <a
-              href={downloadUrl}
-              download
-              class="w-full mt-auto px-6 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-xl transition-colors relative z-10 text-center block"
-            >
-              Download Free Karaoke MP3
-            </a>
-          ) : (
-            <button
-              disabled
-              class="w-full mt-auto px-6 py-4 bg-white/5 border border-white/10 text-white/50 font-semibold rounded-xl cursor-not-allowed relative z-10 text-center block"
-            >
-              Download Not Available
-            </button>
-          )
-        }
-        <p class="text-xs text-purple-300 text-center mt-3 relative z-10">
-          Instant automatic download &bull; Free with chorus
-        </p>
-      </article>
-
-      <!-- Column 2: Premium Version -->
+      <!-- Column 1: PREMIUM Version (shown first) -->
       <div
         class="relative group hover:scale-[1.02] transition-all duration-300 flex flex-col"
       >
@@ -323,7 +264,7 @@ const faqSchema = {
           <div
             class="absolute top-0 right-0 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl z-20 shadow-lg border-b border-l border-white/20"
           >
-            BEST VALUE
+            MOST POPULAR
           </div>
 
           <!-- Glow Inside -->
@@ -335,28 +276,49 @@ const faqSchema = {
           <h3
             class="text-2xl font-bold text-white mb-6 relative z-10 pr-16 lg:pr-20"
           >
-            Karoke without Chorus
+            Premium Karaoke <span class="text-pink-400">(No Chorus)</span>
           </h3>
 
+          <!-- Anchor Pricing -->
           <div class="mb-6 relative z-10">
-            <div class="flex items-baseline gap-2 text-white">
+            <div class="flex items-baseline gap-3 text-white">
+              <span class="text-2xl text-purple-400 line-through font-medium"
+                >₹999</span
+              >
               <span class="text-5xl font-extrabold tracking-tight"
                 >₹{song.price}</span
               >
               <span class="text-purple-300 font-medium">/ track</span>
             </div>
-            <p class="text-sm text-purple-300 mt-2">
-              (Inclusive of applicable taxes)
-            </p>
+            <div class="flex items-center gap-2 mt-2">
+              <span
+                class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-green-500/20 text-green-400 border border-green-500/30"
+              >
+                50% OFF
+              </span>
+              <p class="text-sm text-purple-300">
+                (Inclusive of applicable taxes)
+              </p>
+            </div>
+            <!-- Urgency -->
+            <div
+              class="mt-3 flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20"
+            >
+              <span class="text-amber-400 text-sm">🔥</span>
+              <p class="text-xs text-amber-300 font-medium">
+                Launch price — Limited time offer
+              </p>
+            </div>
           </div>
 
           <ul class="space-y-4 mb-8 relative z-10 flex-grow">
             {
               [
-                "High-fidelity WAV + MP3",
-                "Pure Instrumental (No Chorus)",
-                "Studio Mastered",
-                "Personal Use License",
+                "Pure instrumental — zero chorus, zero vocals",
+                "Crystal-clear studio mastered audio",
+                "High-fidelity MP3 format",
+                "Perfect for live events & Sunday Mass",
+                "Personal use license included",
               ].map((feature) => (
                 <li class="flex items-start gap-3 text-purple-100 font-medium">
                   <span class="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center shadow-[0_0_10px_rgba(236,72,153,0.3)]">
@@ -380,6 +342,16 @@ const faqSchema = {
             }
           </ul>
 
+          <!-- Social Proof -->
+          <div
+            class="mb-5 relative z-10 flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10"
+          >
+            <span class="text-base">🎤</span>
+            <p class="text-xs text-purple-200">
+              Trusted by church choirs across Kerala
+            </p>
+          </div>
+
           <!-- Payment Form (default state) -->
           <div id="payment-form" class="relative z-10 mt-auto space-y-3">
             <div>
@@ -400,7 +372,11 @@ const faqSchema = {
               data-razorpay-key={razorpayKeyId}
               class="w-full px-6 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.6)] transition-all text-center block hover:scale-105 duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
-              <span id="btn-text">🔒 Buy Now ₹{song.price}</span>
+              <span id="btn-text"
+                >🔒 Buy Now — ₹{song.price}
+                <span class="text-pink-200 text-sm line-through">₹999</span
+                ></span
+              >
               <span
                 id="btn-loading"
                 class="hidden items-center justify-center gap-2"
@@ -525,8 +501,217 @@ const faqSchema = {
           </div>
         </article>
       </div>
+
+      <!-- Column 2: FREE Version (shown second, on right) -->
+      <article
+        class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 transition-all duration-300 relative overflow-hidden group flex flex-col"
+      >
+        <!-- Glow -->
+        <div
+          class="absolute top-0 right-0 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl group-hover:bg-pink-500/40 transition-colors pointer-events-none"
+        >
+        </div>
+
+        <h3 class="text-2xl font-bold text-white mb-6 relative z-10">
+          Standard Version <span class="text-purple-300">(With Chorus)</span>
+        </h3>
+
+        <div class="mb-6 relative z-10">
+          <div class="flex items-baseline gap-2 text-white">
+            <span class="text-5xl font-extrabold tracking-tight">FREE</span>
+          </div>
+          <p class="text-sm text-purple-300 mt-2">For practice & learning</p>
+        </div>
+
+        <ul class="space-y-4 mb-6 relative z-10 flex-grow">
+          {
+            [
+              { text: "MP3 format", type: "ok" },
+              { text: "Contains chorus vocals (cannot remove)", type: "warn" },
+              { text: "Standard audio quality", type: "warn" },
+              { text: "Suitable for practice only", type: "ok" },
+            ].map((feature) => (
+              <li class="flex items-start gap-3 text-purple-100">
+                <span
+                  class={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center border ${feature.type === "warn" ? "bg-amber-500/10 border-amber-500/30" : "bg-pink-500/20 border-pink-500/30"}`}
+                >
+                  {feature.type === "warn" ? (
+                    <svg
+                      class="w-4 h-4 text-amber-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      class="w-4 h-4 text-pink-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  )}
+                </span>
+                <span class={feature.type === "warn" ? "text-purple-300" : ""}>
+                  {feature.text}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <!-- Conditional Download Link -->
+        {
+          downloadUrl ? (
+            <a
+              href={downloadUrl}
+              download
+              class="w-full mt-auto px-6 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-xl transition-colors relative z-10 text-center block"
+            >
+              Download Free Karaoke MP3
+            </a>
+          ) : (
+            <button
+              disabled
+              class="w-full mt-auto px-6 py-4 bg-white/5 border border-white/10 text-white/50 font-semibold rounded-xl cursor-not-allowed relative z-10 text-center block"
+            >
+              Download Not Available
+            </button>
+          )
+        }
+        <p class="text-xs text-purple-300 text-center mt-3 relative z-10">
+          Free with chorus · Good for practice
+        </p>
+      </article>
     </div>
 
+    <!-- Perfect For Section -->
+    <div class="max-w-3xl mx-auto mb-16 text-center animate-fade-in-up">
+      <h3 class="text-xl font-bold text-white mb-6">
+        Who Buys the Premium Version?
+      </h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+          <div class="text-2xl mb-2">🎤</div>
+          <p class="text-sm text-purple-200">Church choirs for Sunday Mass</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+          <div class="text-2xl mb-2">🎵</div>
+          <p class="text-sm text-purple-200">Solo singers at parish events</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+          <div class="text-2xl mb-2">🙏</div>
+          <p class="text-sm text-purple-200">
+            Prayer groups & devotional programs
+          </p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+          <div class="text-2xl mb-2">🎶</div>
+          <p class="text-sm text-purple-200">
+            Music ministries & worship teams
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Song Lyrics Section -->
+    {song.hasLyrics && song.lyrics && (
+      <section class="max-w-4xl mx-auto mb-16 animate-fade-in-up">
+        <div class="bg-indigo-900/40 border border-white/10 rounded-3xl p-6 md:p-10 backdrop-blur-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+            <h2 class="text-3xl font-bold text-white">{song.title} Lyrics</h2>
+            <div class="flex gap-2" id="lyrics-tabs">
+              <button
+                id="tab-manglish"
+                type="button"
+                class="px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg cursor-pointer transition-all"
+              >
+                Manglish
+              </button>
+              <button
+                id="tab-malayalam"
+                type="button"
+                class="px-4 py-2 rounded-xl text-sm font-semibold bg-white/10 text-purple-200 border border-white/10 hover:bg-white/20 cursor-pointer transition-all"
+              >
+                Malayalam
+              </button>
+            </div>
+          </div>
+
+          <div id="lyrics-manglish" class="whitespace-pre-line text-purple-100 leading-relaxed text-lg font-medium">
+            {song.lyrics.manglish}
+          </div>
+          <div id="lyrics-malayalam" class="whitespace-pre-line text-purple-100 leading-relaxed text-lg font-medium hidden">
+            {song.lyrics.malayalam}
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-white/10 flex flex-wrap gap-3">
+            <a
+              href={`/lyrics/${song.slug}`}
+              class="px-4 py-2 rounded-full bg-white/10 border border-white/15 hover:bg-white/20 transition-colors text-sm text-purple-100"
+            >
+              View full lyrics page
+            </a>
+            <a
+              href={artistHref}
+              class="px-4 py-2 rounded-full bg-white/10 border border-white/15 hover:bg-white/20 transition-colors text-sm text-purple-100"
+            >
+              More from {song.artist}
+            </a>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section class="max-w-5xl mx-auto mb-8">
+      <h2 class="text-3xl font-bold text-white mb-6 text-center">
+        Frequently Asked Questions
+      </h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h3 class="text-lg font-bold text-white mb-3">
+            Can I download it for free?
+          </h3>
+          <p class="text-purple-200 text-sm leading-relaxed">
+            Yes. The free MP3 version includes chorus and is useful for personal
+            devotional practice.
+          </p>
+        </article>
+        <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h3 class="text-lg font-bold text-white mb-3">
+            Is there a no-chorus version?
+          </h3>
+          <p class="text-purple-200 text-sm leading-relaxed">
+            Yes. The pro studio version is a pure instrumental track prepared
+            for singing and events.
+          </p>
+        </article>
+        <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h3 class="text-lg font-bold text-white mb-3">Who is the artist?</h3>
+          <p class="text-purple-200 text-sm leading-relaxed">
+            {song.title} is a Malayalam Christian devotional song by <a
+              href={artistHref}
+              class="text-pink-300 hover:text-pink-200">{song.artist}</a
+            >.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SEO Content Section (below FAQ for better mobile UX) -->
     <section
       class="max-w-5xl mx-auto grid lg:grid-cols-[1.2fr_0.8fr] gap-8 mb-16"
     >
@@ -547,7 +732,7 @@ const faqSchema = {
           <p>
             The premium studio version is prepared for singers, choirs,
             ministries, and devotional programs that need a cleaner instrumental
-            track without chorus. It includes high-fidelity WAV and MP3 formats.
+            track without chorus. It is a high-fidelity studio mastered MP3.
           </p>
           {
             songAliases.length > 0 && (
@@ -586,7 +771,7 @@ const faqSchema = {
           </div>
           <div>
             <dt class="text-purple-300 font-semibold">Available formats</dt>
-            <dd class="text-white">Free MP3, premium WAV + MP3</dd>
+            <dd class="text-white">Free MP3, Premium MP3</dd>
           </div>
           <div>
             <dt class="text-purple-300 font-semibold">Related page</dt>
@@ -601,42 +786,34 @@ const faqSchema = {
         </dl>
       </aside>
     </section>
-
-    <section class="max-w-5xl mx-auto mb-8">
-      <h2 class="text-3xl font-bold text-white mb-6 text-center">
-        Frequently Asked Questions
-      </h2>
-      <div class="grid md:grid-cols-3 gap-4">
-        <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 class="text-lg font-bold text-white mb-3">
-            Can I download it for free?
-          </h3>
-          <p class="text-purple-200 text-sm leading-relaxed">
-            Yes. The free MP3 version includes chorus and is useful for personal
-            devotional practice.
-          </p>
-        </article>
-        <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 class="text-lg font-bold text-white mb-3">
-            Is there a no-chorus version?
-          </h3>
-          <p class="text-purple-200 text-sm leading-relaxed">
-            Yes. The pro studio version is a pure instrumental track prepared
-            for singing and events.
-          </p>
-        </article>
-        <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 class="text-lg font-bold text-white mb-3">Who is the artist?</h3>
-          <p class="text-purple-200 text-sm leading-relaxed">
-            {song.title} is a Malayalam Christian devotional song by <a
-              href={artistHref}
-              class="text-pink-300 hover:text-pink-200">{song.artist}</a
-            >.
-          </p>
-        </article>
-      </div>
-    </section>
   </div>
+
+  <!-- Lyrics Tab Switching -->
+  <script>
+    const tabManglish = document.getElementById('tab-manglish');
+    const tabMalayalam = document.getElementById('tab-malayalam');
+    const lyricsManglish = document.getElementById('lyrics-manglish');
+    const lyricsMalayalam = document.getElementById('lyrics-malayalam');
+
+    if (tabManglish && tabMalayalam && lyricsManglish && lyricsMalayalam) {
+      const activeClass = 'bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg';
+      const inactiveClass = 'bg-white/10 text-purple-200 border border-white/10';
+
+      tabManglish.addEventListener('click', () => {
+        lyricsManglish.classList.remove('hidden');
+        lyricsMalayalam.classList.add('hidden');
+        tabManglish.className = `px-4 py-2 rounded-xl text-sm font-semibold ${activeClass} cursor-pointer transition-all`;
+        tabMalayalam.className = `px-4 py-2 rounded-xl text-sm font-semibold ${inactiveClass} hover:bg-white/20 cursor-pointer transition-all`;
+      });
+
+      tabMalayalam.addEventListener('click', () => {
+        lyricsMalayalam.classList.remove('hidden');
+        lyricsManglish.classList.add('hidden');
+        tabMalayalam.className = `px-4 py-2 rounded-xl text-sm font-semibold ${activeClass} cursor-pointer transition-all`;
+        tabManglish.className = `px-4 py-2 rounded-xl text-sm font-semibold ${inactiveClass} hover:bg-white/20 cursor-pointer transition-all`;
+      });
+    }
+  </script>
 
   <!-- Razorpay Checkout Script -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
