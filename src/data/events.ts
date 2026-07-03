@@ -39,7 +39,7 @@ export const events: EventData[] = [
     date: "2026-07-04",
     time: "09:30 AM – 04:00 PM",
     recurrence: "Every first Saturday of the month",
-    image: "/images/events/london-bible-convention.png",
+    image: "/images/events/london-bible-convention.jpg",
     location: {
       name: "Our Lady of La Salette",
       address: "1 Rainham Rd., Rainham",
