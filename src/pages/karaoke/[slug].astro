@@ -66,6 +66,23 @@ const productSchema = {
       priceCurrency: "INR",
       availability: "https://schema.org/InStock",
       url: pageUrl,
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: "0",
+          currency: "INR"
+        },
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "IN"
+        }
+      },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "IN",
+        returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted"
+      }
     },
     {
       "@type": "Offer",
@@ -74,6 +91,23 @@ const productSchema = {
       priceCurrency: "INR",
       availability: "https://schema.org/InStock",
       url: pageUrl,
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: "0",
+          currency: "INR"
+        },
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "IN"
+        }
+      },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "IN",
+        returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted"
+      }
     },
   ],
 };
