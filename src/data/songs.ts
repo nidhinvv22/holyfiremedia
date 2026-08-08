@@ -13,6 +13,8 @@ export const songs = [
     duration: "4:32",
     hasKaraoke: true,
     hasLyrics: true,
+    thumbnail: "/images/karaoke/thumbnails/aradhyane-parishudhane.webp",
+    premiumType: "no-chorus",
     videoId: "NJAAUEmt_so",
     lyrics: {
       manglish: `ennulam thirayunori sneham ni mathrame
@@ -99,8 +101,10 @@ anayunnu njan thirumumbilay alivode enne nokkaname`,
     price: 500,
     originalArtist: "Fr. Joseph Mukkatt",
     duration: "4:00",
-    hasKaraoke: false,
+    hasKaraoke: true,
     hasLyrics: true,
+    thumbnail: "/images/karaoke/thumbnails/aradhana-aradhana.webp",
+    premiumType: "with-chorus",
     videoId: "7aVrtNj0jZs",
     lyrics: {
       manglish: `Nadhamay Roopamay
