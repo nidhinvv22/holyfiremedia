@@ -1,23 +1,58 @@
-export const songs = [
-  {
-    slug: "aradhyane-parishudhane",
-    title: "Aradhyane Parishudhane",
-    artist: "Fr. Joseph Mukkatt",
-    artistSlug: "fr-joseph-mukkatt",
-    alternateTitles: ["Ennullam Thirayunnori Sneham", "Ennullam Thirayunnori"],
-    description: "A beautiful Malayalam Christian devotional worship song by Fr. Joseph Mukkatt.",
-    freeFile: "",
-    paidFile: "",
-    price: 500,
-    originalArtist: "Traditional",
-    duration: "4:32",
-    hasKaraoke: true,
-    hasLyrics: true,
-    thumbnail: "/images/karaoke/thumbnails/aradhyane-parishudhane.webp",
-    premiumType: "no-chorus",
-    videoId: "NJAAUEmt_so",
-    lyrics: {
-      manglish: `ennulam thirayunori sneham ni mathrame
+export interface LyricsData {
+      /** Lyrics in the native script (e.g. Malayalam, Kannada, Tamil) */
+      native: string;
+      /** Phonetic Romanized transliteration (e.g. Manglish, Kanglish, Tanglish) */
+      transliterated: string;
+}
+
+export interface Song {
+      slug: string;
+      title: string;
+      artist: string;
+      artistSlug?: string;
+      language?: "malayalam" | "kannada" | "tamil" | "english";
+      alternateTitles?: string[];
+      description: string;
+      freeFile?: string;
+      paidFile?: string;
+      price: number;
+      originalPrice?: number;
+      originalArtist?: string;
+      duration: string;
+      hasKaraoke: boolean;
+      hasFreeVersion?: boolean;
+      hasPremiumVersion?: boolean;
+      hasLyrics: boolean;
+      thumbnail?: string;
+      premiumType?: "no-chorus" | "with-chorus";
+      videoId?: string;
+      lyrics?: LyricsData;
+}
+
+export const songs: Song[] = [
+      {
+            slug: "aradhyane-parishudhane",
+            title: "Aradhyane Parishudhane",
+            artist: "Fr. Joseph Mukkatt",
+            artistSlug: "fr-joseph-mukkatt",
+            language: "malayalam",
+            alternateTitles: ["Ennullam Thirayunnori Sneham", "Ennullam Thirayunnori"],
+            description: "A beautiful Malayalam Christian devotional worship song by Fr. Joseph Mukkatt.",
+            freeFile: "",
+            paidFile: "",
+            price: 500,
+            originalPrice: 1000,
+            originalArtist: "Traditional",
+            duration: "4:32",
+            hasKaraoke: true,
+            hasFreeVersion: true,
+            hasPremiumVersion: true,
+            hasLyrics: true,
+            thumbnail: "/images/karaoke/thumbnails/aradhyane-parishudhane.webp",
+            premiumType: "no-chorus",
+            videoId: "NJAAUEmt_so",
+            lyrics: {
+                  transliterated: `ennulam thirayunori sneham ni mathrame
 enn ninavilum kanavilum ay nirayunnoren deyvame
 enne nin swanthamakidu
 enne nin nadamakidu
@@ -52,7 +87,7 @@ enne nin nadamakidu
 
 aradhyane parishudhane paramonnatha deivame
 anayunnu njan thirumumbilay alivode enne nokkaname`,
-      malayalam: `എന്നുള്ളം തിരിയുന്നൊരീ സ്നേഹം നീ മാത്രമേ 
+                  native: `എന്നുള്ളം തിരിയുന്നൊരീ സ്നേഹം നീ മാത്രമേ 
 എന് നിനവിലും കനവിലുമായ് നിറയുന്നൊരെന് ദൈവമേ 
 എന്നെ നിന് സ്വന്തമാക്കിടൂ എന്നെ നിന് നാദമാക്കിടൂ (2) 
 
@@ -87,27 +122,31 @@ anayunnu njan thirumumbilay alivode enne nokkaname`,
 
 ആരാധ്യനെ പരിശുദ്ധനേ പരമോന്നതാ ദൈവമേ 
 അണയുന്നു ഞാന് തിരുമുന്പിലായ് അലിവോടെ എന്നെ നോക്കണമേ.`
-    }
-  },
-  {
-    slug: "aradhana-aradhana",
-    title: "Aradhana Aradhana",
-    artist: "Fr. Joseph Mukkatt",
-    artistSlug: "fr-joseph-mukkatt",
-    alternateTitles: [],
-    description: "A profound Malayalam Christian devotional song of worship by Fr. Joseph Mukkatt.",
-    freeFile: "",
-    paidFile: "",
-    price: 500,
-    originalArtist: "Fr. Joseph Mukkatt",
-    duration: "4:00",
-    hasKaraoke: true,
-    hasLyrics: true,
-    thumbnail: "/images/karaoke/thumbnails/aradhana-aradhana.webp",
-    premiumType: "with-chorus",
-    videoId: "7aVrtNj0jZs",
-    lyrics: {
-      manglish: `Nadhamay Roopamay
+            }
+      },
+      {
+            slug: "aradhana-aradhana",
+            title: "Aradhana Aradhana",
+            artist: "Fr. Joseph Mukkatt",
+            artistSlug: "fr-joseph-mukkatt",
+            language: "malayalam",
+            alternateTitles: [],
+            description: "A profound Malayalam Christian devotional song of worship by Fr. Joseph Mukkatt.",
+            freeFile: "/audio/karaoke-aradhana-aradhana.mp3",
+            paidFile: "",
+            price: 0,
+            originalPrice: 0,
+            originalArtist: "Fr. Joseph Mukkatt",
+            duration: "4:00",
+            hasKaraoke: true,
+            hasFreeVersion: true,
+            hasPremiumVersion: false,
+            hasLyrics: true,
+            thumbnail: "/images/karaoke/thumbnails/aradhana-aradhana.webp",
+            premiumType: "with-chorus",
+            videoId: "7aVrtNj0jZs",
+            lyrics: {
+                  transliterated: `Nadhamay Roopamay
 Snehamaay Sathyamayi
 Jeevnay Deepamay
 Veediyay Vazhikaatiyay
@@ -138,7 +177,7 @@ Aradhaana Araadhaana
 Sathya Snehame Aradhana
 Aradhaana Araadhaana
 Nithya Roopmae Aradhana`,
-      malayalam: `നാദമായ് രൂപമായ്
+                  native: `നാദമായ് രൂപമായ്
 സ്നേഹമായ് സത്യമായ്
 ജീവനായ് ദീപമായ്
 വീഥിയായ് വഴികാട്ടിയായ്
@@ -169,25 +208,117 @@ Nithya Roopmae Aradhana`,
 സത്യ സ്നേഹമേ ആരാധന
 ആരാധന ആരാധന
 നിത്യ രൂപമേ ആരാധന`
-    }
-  },
-  {
-    slug: "kurbanayay-theerna-snehame",
-    title: "Kurbanayay Theerna Snehame",
-    artist: "Fr. Joseph Mukkatt",
-    artistSlug: "fr-joseph-mukkatt",
-    alternateTitles: [],
-    description: "A touching Holy Communion Malayalam Christian song by Fr. Joseph Mukkatt.",
-    freeFile: "",
-    paidFile: "",
-    price: 500,
-    originalArtist: "Fr. Joseph Mukkatt",
-    duration: "4:00",
-    hasKaraoke: false,
-    hasLyrics: true,
-    videoId: "L5jN1aveRRA",
-    lyrics: {
-      manglish: `Kurbanayay Theerna Snehame
+            }
+      },
+      {
+            slug: "o-nanna-yesuve",
+            title: "O Nanna Yesuve",
+            artist: "Fr. Joseph Mukkatt",
+            artistSlug: "fr-joseph-mukkatt",
+            language: "kannada",
+            alternateTitles: ["Oh Nanna Yesuve"],
+            description: "A heartfelt Kannada Christian devotional prayer and worship song by Fr. Joseph Mukkatt.",
+            freeFile: "",
+            paidFile: "",
+            price: 1,
+            originalPrice: 1,
+            originalArtist: "Fr. Joseph Mukkatt",
+            duration: "4:15",
+            hasKaraoke: true,
+            hasFreeVersion: false,
+            hasPremiumVersion: true,
+            hasLyrics: true,
+            thumbnail: "/images/karaoke/thumbnails/o_nanna_yesuve.webp",
+            premiumType: "no-chorus",
+            videoId: "",
+            lyrics: {
+                  transliterated: `O nanna yesuve ninnodhige jeevisalu
+nannathamvu harshisidhe Annandhahi naliyuthidhe(2)
+Mithi illadha ninna aa divya snehava
+paramapavithrane nannalli thumbisuve(2)
+
+Baa baa nannesuve jeevantha rottiye
+Hridhayadhi araadhisuve(2)
+Araadhane Araadhane Yesuve Araadhane(2)
+
+Divyakaruneya surishe prabhuve
+Ni baruva samayadhi swargeeya anubhava needuve devane(2)
+Nannusirali neenu usiraagi bereyalu
+nannondhu bereyuvaa devalayavaaguve 
+
+Baa baa nannesuve jeevantha rottiye
+Hridhayadhi araadhisuve(2)
+Araadhane Araadhane Yesuve Araadhane(2)
+
+Rottiyu dehavaagi rasavu rakthavaagi 
+marpadisuva devaa nannannu maarpadisu O Devane(2)
+Ee jeevake neene asareyu prabhuve
+ninnodhige nithyakku jeevisuve devane
+
+Baa baa nannesuve jeevantha rottiye
+Hridhayadhi araadhisuve(2)
+Araadhane Araadhane Yesuve Araadhane(2)`,
+                  native: `ಓ ನನ್ನ ಯೇಸುವೇ ನಿನ್ನೊಂದಿಗೆ ಜೀವಿಸಲು
+ನನ್ನ ಆತ್ಮವು ಹರ್ಷಿಸಿದೆ
+ಆನಂದದಿ ನಲಿಯುತಿದೆ (2)
+
+ಮಿತಿಯಿಲ್ಲದ ನಿನ್ನ ಆ ದಿವ್ಯ ಸ್ನೇಹವ
+ಪರಮಪವಿತ್ರನೇ ನನ್ನಲ್ಲಿ ತುಂಬಿಸುವೆ (2)
+
+ಬಾ ಬಾ ನನ್ನೇಸುವೇ, ಜೀವಂತ ರೊಟ್ಟಿಯೇ
+ಹೃದಯದಿ ಆರಾಧಿಸುವೆ (2)
+
+ಆರಾಧನೆ ಆರಾಧನೆ
+ಯೇಸುವೇ ಆರಾಧನೆ (2)
+
+ದಿವ್ಯಕರುಣೆಯ ಸುರಿಶೇ ಪ್ರಭುವೇ
+ನೀ ಬರುವ ಸಮಯದಿ
+ಸ್ವರ್ಗೀಯ ಅನುಭವ ನೀಡುವೆ ದೇವನೇ (2)
+
+ನನ್ನ ಉಸಿರಲಿ ನೀನು ಉಸಿರಾಗಿ ಬೆರೆಯಲು
+ನನ್ನೊಂದು ಬೆರೆಯುವ ದೇವಾಲಯವಾಗುವೆ
+
+ಬಾ ಬಾ ನನ್ನೇಸುವೇ, ಜೀವಂತ ರೊಟ್ಟಿಯೇ
+ಹೃದಯದಿ ಆರಾಧಿಸುವೆ (2)
+
+ಆರಾಧನೆ ಆರಾಧನೆ
+ಯೇಸುವೇ ಆರಾಧನೆ (2)
+
+ರೊಟ್ಟಿಯು ದೇಹವಾಗಿ
+ರಸವು ರಕ್ತವಾಗಿ
+ಮಾರ್ಪಡಿಸುವ ದೇವಾ
+ನನ್ನನ್ನು ಮಾರ್ಪಡಿಸು ಓ ದೇವನೇ (2)
+
+ಈ ಜೀವಕೆ ನೀನೇ ಆಸರೆಯು ಪ್ರಭುವೇ
+ನಿನ್ನೊಂದಿಗೆ ನಿತ್ಯಕ್ಕೂ ಜೀವಿಸುವೆ ದೇವನೇ
+
+ಬಾ ಬಾ ನನ್ನೇಸುವೇ, ಜೀವಂತ ರೊಟ್ಟಿಯೇ
+ಹೃದಯದಿ ಆರಾಧಿಸುವೆ (2)
+
+ಆರಾಧನೆ ಆರಾಧನೆ
+ಯೇಸುವೇ ಆರಾಧನೆ (2)`
+            }
+      },
+      {
+            slug: "kurbanayay-theerna-snehame",
+            title: "Kurbanayay Theerna Snehame",
+            artist: "Fr. Joseph Mukkatt",
+            artistSlug: "fr-joseph-mukkatt",
+            language: "malayalam",
+            alternateTitles: [],
+            description: "A touching Holy Communion Malayalam Christian song by Fr. Joseph Mukkatt.",
+            freeFile: "",
+            paidFile: "",
+            price: 0,
+            originalArtist: "Fr. Joseph Mukkatt",
+            duration: "4:00",
+            hasKaraoke: false,
+            hasFreeVersion: false,
+            hasPremiumVersion: false,
+            hasLyrics: true,
+            videoId: "L5jN1aveRRA",
+            lyrics: {
+                  transliterated: `Kurbanayay Theerna Snehame
 Kurbanayil Vazhum Albudhamae
 Ende Jeevande Vilayay Theernavane
 Ente Pranil Alivay Chernavane
@@ -235,7 +366,7 @@ Divyakarunya kanalay Ni varane(2)
 Va va Eeshoye
 Ende hridayathil
 Divyakarunya kanalay Ni varane(2)`,
-      malayalam: `കുർബാനയായ് തീർന്ന സ്നേഹമേ
+                  native: `കുർബാനയായ് തീർന്ന സ്നേഹമേ
 കുർബാനയിൽ വാഴും അത്ഭുതമേ
 എന്റെ ജീവന്റെ വിലയായ് തീർന്നവനേ
 എന്റെ പ്രാണനിൽ അലിവായ് ചേർന്നവനേ 
@@ -283,6 +414,6 @@ Divyakarunya kanalay Ni varane(2)`,
 വാ വാ ഈശോയേ
 എന്റെ ഹൃദയത്തിൽ 
 ദിവ്യകാരുണ്യ കനലായ് നീ വരണേ (2)`
-    }
-  }
+            }
+      }
 ];

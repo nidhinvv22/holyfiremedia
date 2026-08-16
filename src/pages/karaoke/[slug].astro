@@ -1,6 +1,7 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
 import { songs } from "../../data/songs";
+import { getLanguage } from "../../data/languages";
 import aradhyaneFile from "../../assets/Aradhyane_Parishudane_Ennullam_Thirayunnori_sneham.mp3";
 import previewEnullam from "../../assets/enullam_sample.MP3";
 import previewNoChorus from "../../assets/enullam_sample_no_chorus.MP3";
@@ -18,6 +19,7 @@ export async function getStaticPaths() {
 
 const { song } = Astro.props;
 const { slug } = Astro.params;
+const lang = getLanguage(song.language);
 
 let downloadUrl = song.freeFile;
 let previewUrl = `/audio/preview-${song.slug}.mp3`;
@@ -28,8 +30,12 @@ if (slug === "aradhyane-parishudhane") {
   premiumPreviewUrl = previewNoChorus;
 }
 
-const hasFreeVersion = !!downloadUrl;
+const hasFreeVersion = song.hasFreeVersion !== false && (!!downloadUrl || song.slug === "aradhyane-parishudhane");
+const hasPremiumVersion = song.hasPremiumVersion !== false && song.price > 0;
+const isDualVersion = hasFreeVersion && hasPremiumVersion;
 const premiumType = song.premiumType || "no-chorus";
+const originalPrice = song.originalPrice || (song.price ? song.price * 2 : 0);
+const discountPercent = originalPrice > song.price ? Math.round(((originalPrice - song.price) / originalPrice) * 100) : 0;
 
 const pageUrl = `https://holyfiremedia.in/karaoke/${song.slug}/`;
 const artistUrl = song.artistSlug
@@ -49,17 +55,76 @@ const [durationMinutes = 0, durationSeconds = 0] = song.duration
 const isoDuration = `PT${durationMinutes}M${durationSeconds}S`;
 const razorpayKeyId = import.meta.env.PUBLIC_RAZORPAY_KEY_ID || "";
 
-const pageDescription = hasFreeVersion
-  ? `Download ${song.title} karaoke track by ${song.artist}. Free MP3 with chorus and premium studio instrumental available for Malayalam Christian worship.${aliasText}`
-  : `Download premium studio karaoke track (${premiumType === "with-chorus" ? "with backing chorus" : "without chorus"}) for ${song.title} by ${song.artist}. High-fidelity studio version available for Malayalam Christian worship.${aliasText}`;
+let pageDescription = "";
+if (isDualVersion) {
+  pageDescription = `Download ${song.title} ${lang.name} Christian karaoke track by ${song.artist}. Free MP3 with chorus and premium studio instrumental available for ${lang.name} Christian worship.${aliasText}`;
+} else if (hasPremiumVersion) {
+  pageDescription = `Download premium studio karaoke track (${premiumType === "with-chorus" ? "with backing chorus" : "without chorus"}) for ${song.title} by ${song.artist}. High-fidelity ${lang.name} Christian devotional instrumental available for worship and singing.${aliasText}`;
+} else {
+  pageDescription = `Download free MP3 karaoke track for ${song.title} by ${song.artist}. High-quality ${lang.name} devotional track for personal singing and worship practice.${aliasText}`;
+}
+
+const productSchemaOffers = [];
+if (hasFreeVersion) {
+  productSchemaOffers.push({
+    "@type": "Offer",
+    name: `Free ${lang.name} MP3 karaoke with chorus`,
+    price: "0",
+    priceCurrency: "INR",
+    availability: "https://schema.org/InStock",
+    url: pageUrl,
+    shippingDetails: {
+      "@type": "OfferShippingDetails",
+      shippingRate: {
+        "@type": "MonetaryAmount",
+        value: "0",
+        currency: "INR",
+      },
+      shippingDestination: {
+        "@type": "DefinedRegion",
+        addressCountry: "IN",
+      },
+    },
+    hasMerchantReturnPolicy: {
+      "@type": "MerchantReturnPolicy",
+      applicableCountry: "IN",
+      returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+    },
+  });
+}
+if (hasPremiumVersion) {
+  productSchemaOffers.push({
+    "@type": "Offer",
+    name: premiumType === "with-chorus" ? `Premium ${lang.name} studio karaoke with chorus` : `Premium ${lang.name} studio instrumental karaoke`,
+    price: String(song.price),
+    priceCurrency: "INR",
+    availability: "https://schema.org/InStock",
+    url: pageUrl,
+    shippingDetails: {
+      "@type": "OfferShippingDetails",
+      shippingRate: {
+        "@type": "MonetaryAmount",
+        value: "0",
+        currency: "INR",
+      },
+      shippingDestination: {
+        "@type": "DefinedRegion",
+        addressCountry: "IN",
+      },
+    },
+    hasMerchantReturnPolicy: {
+      "@type": "MerchantReturnPolicy",
+      applicableCountry: "IN",
+      returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+    },
+  });
+}
 
 const productSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
-  name: `${song.title} Karaoke Track`,
-  description: hasFreeVersion
-    ? `Download ${song.title} karaoke by ${song.artist}. Free MP3 with chorus and premium studio instrumental version available.`
-    : `Download premium studio karaoke track (${premiumType === "with-chorus" ? "with backing chorus" : "without chorus"}) for ${song.title} by ${song.artist}.`,
+  name: `${song.title} (${lang.name} Christian Karaoke Track)`,
+  description: pageDescription,
   image: song.thumbnail ? `https://holyfiremedia.in${song.thumbnail}` : "https://holyfiremedia.in/holy_fire_logo.webp",
   brand: {
     "@type": "Brand",
@@ -67,62 +132,7 @@ const productSchema = {
   },
   category: "Digital music download",
   url: pageUrl,
-  offers: [
-    ...(hasFreeVersion
-      ? [
-          {
-            "@type": "Offer",
-            name: "Free MP3 karaoke with chorus",
-            price: "0",
-            priceCurrency: "INR",
-            availability: "https://schema.org/InStock",
-            url: pageUrl,
-            shippingDetails: {
-              "@type": "OfferShippingDetails",
-              shippingRate: {
-                "@type": "MonetaryAmount",
-                value: "0",
-                currency: "INR",
-              },
-              shippingDestination: {
-                "@type": "DefinedRegion",
-                addressCountry: "IN",
-              },
-            },
-            hasMerchantReturnPolicy: {
-              "@type": "MerchantReturnPolicy",
-              applicableCountry: "IN",
-              returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
-            },
-          },
-        ]
-      : []),
-    {
-      "@type": "Offer",
-      name: "Premium studio instrumental karaoke",
-      price: String(song.price),
-      priceCurrency: "INR",
-      availability: "https://schema.org/InStock",
-      url: pageUrl,
-      shippingDetails: {
-        "@type": "OfferShippingDetails",
-        shippingRate: {
-          "@type": "MonetaryAmount",
-          value: "0",
-          currency: "INR",
-        },
-        shippingDestination: {
-          "@type": "DefinedRegion",
-          addressCountry: "IN",
-        },
-      },
-      hasMerchantReturnPolicy: {
-        "@type": "MerchantReturnPolicy",
-        applicableCountry: "IN",
-        returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
-      },
-    },
-  ],
+  offers: productSchemaOffers,
 };
 
 const musicSchema = {
@@ -135,7 +145,8 @@ const musicSchema = {
     name: song.artist,
     url: artistUrl,
   },
-  inLanguage: "ml",
+  inLanguage: [lang.code, "en"],
+  genre: `${lang.name} Christian Devotional`,
   description: song.description,
   duration: isoDuration,
   url: pageUrl,
@@ -167,76 +178,69 @@ const breadcrumbSchema = {
   ],
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    ...(hasFreeVersion
-      ? [
-          {
-            "@type": "Question",
-            name: `Can I download ${song.title} karaoke for free?`,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: `Yes. HolyfireMedia provides a free MP3 karaoke version of ${song.title} with chorus for personal devotional practice.`,
-            },
-          },
-        ]
-      : []),
-    {
-      "@type": "Question",
-      name: `Is a premium instrumental version of ${song.title} available?`,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: `Yes. A premium studio instrumental version without chorus is available for ${song.price} INR per track.`,
-      },
-    },
-    {
-      "@type": "Question",
-      name: `Who is the artist of ${song.title}?`,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: `${song.title} is a Malayalam Christian devotional song by ${song.artist}.`,
-      },
-    },
-  ],
-};
-
-const faqList = hasFreeVersion
+const faqList = isDualVersion
   ? [
       {
         q: `Can I download ${song.title} karaoke for free?`,
         a: `Yes. HolyfireMedia provides a free MP3 karaoke version of ${song.title} with chorus for personal devotional practice.`,
       },
       {
-        q: "Is there a no-chorus version?",
-        a: "Yes. The pro studio version is a pure instrumental track prepared for singing and events.",
+        q: "Is there a premium studio version available?",
+        a: `Yes. A premium studio instrumental version is available for ${song.price} INR per track.`,
       },
       {
         q: "Who is the artist?",
-        a: `${song.title} is a Malayalam Christian devotional song by <a href="${artistHref}" class="text-pink-300 hover:text-pink-200 underline">${song.artist}</a>.`,
+        a: `${song.title} is a ${lang.name} Christian devotional song by <a href="${artistHref}" class="text-pink-300 hover:text-pink-200 underline">${song.artist}</a>.`,
       },
     ]
-  : [
-      {
-        q: `What is included in the premium karaoke for ${song.title}?`,
-        a: `The premium version is a high-fidelity studio-mastered MP3 instrumental track with absolutely no backup vocals or chorus.`,
-      },
-      {
-        q: "How will I receive the files after payment?",
-        a: "Immediately upon successful payment, a signed download link will be shown on the page, and a copy will be sent to your email address (valid for 24 hours).",
-      },
-      {
-        q: "Who is the artist?",
-        a: `${song.title} is a Malayalam Christian devotional song by <a href="${artistHref}" class="text-pink-300 hover:text-pink-200 underline">${song.artist}</a>.`,
-      },
-    ];
+  : (hasPremiumVersion
+      ? [
+          {
+            q: `What is included in the premium karaoke for ${song.title}?`,
+            a: `The premium version is a high-fidelity studio-mastered MP3 instrumental track ${premiumType === "with-chorus" ? "with backing chorus" : "with absolutely no backup vocals or chorus"}.`,
+          },
+          {
+            q: "How will I receive the files after payment?",
+            a: "Immediately upon successful payment, a signed download link will be shown on the page, and a copy will be sent to your email address (valid for 24 hours).",
+          },
+          {
+            q: "Who is the artist?",
+            a: `${song.title} is a ${lang.name} Christian devotional song by <a href="${artistHref}" class="text-pink-300 hover:text-pink-200 underline">${song.artist}</a>.`,
+          },
+        ]
+      : [
+          {
+            q: `Can I download ${song.title} karaoke for free?`,
+            a: `Yes! ${song.title} is completely free to download directly on HolyfireMedia for personal devotion and practice.`,
+          },
+          {
+            q: "Does this track have chorus?",
+            a: `Yes, this free karaoke track includes chorus backing vocals to guide your singing.`,
+          },
+          {
+            q: "Who is the artist?",
+            a: `${song.title} is a ${lang.name} Christian devotional song by <a href="${artistHref}" class="text-pink-300 hover:text-pink-200 underline">${song.artist}</a>.`,
+          },
+        ]);
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqList.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a.replace(/<[^>]*>/g, ""),
+    },
+  })),
+};
 ---
 
 <MainLayout
-  title={`${song.title} Karaoke Download MP3 | ${song.artist} | HolyfireMedia`}
+  title={`${song.title} Karaoke Download MP3 | ${lang.name} Christian Song | ${song.artist} | HolyfireMedia`}
   description={pageDescription}
-  keywords={`${song.title} karaoke download, ${song.title} karaoke, ${song.artist} karaoke, ${songAliases.join(", ")}, Malayalam Christian karaoke download, Catholic devotional karaoke`}
+  keywords={`${song.title} karaoke download, ${song.title} ${lang.name} karaoke, ${song.title} karaoke ${lang.name}, ${song.artist} karaoke, ${lang.name} Christian karaoke download, Catholic devotional karaoke ${lang.name}, ${songAliases.join(", ")}`}
   image={song.thumbnail}
   ogType="music.song"
   schemaData={[productSchema, musicSchema, breadcrumbSchema, faqSchema]}
@@ -279,318 +283,94 @@ const faqList = hasFreeVersion
 
     <!-- Karaoke Versions Layout -->
     <div
-      class={hasFreeVersion
+      class={isDualVersion
         ? "grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12 md:items-stretch animate-fade-in-up"
         : "max-w-md mx-auto mb-12 animate-fade-in-up"}
     >
-      <!-- Column 1: PREMIUM Version (shown first) -->
-      <div
-        class="relative group hover:scale-[1.02] transition-all duration-300 flex flex-col"
-      >
-        <!-- Gradient Border Background Base -->
+      <!-- Column 1: PREMIUM Version (only if hasPremiumVersion) -->
+      {hasPremiumVersion && (
         <div
-          class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-[1.5rem] opacity-75 blur-[2px] group-hover:opacity-100 transition duration-500"
+          class="relative group hover:scale-[1.02] transition-all duration-300 flex flex-col"
         >
-        </div>
-
-        <article
-          class="relative flex flex-col h-full bg-[#1b0b3b] backdrop-blur-xl rounded-3xl p-8 border border-white/10 overflow-hidden m-[1px]"
-        >
-          <!-- Best Value Badge -->
+          <!-- Gradient Border Background Base -->
           <div
-            class="absolute top-0 right-0 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl z-20 shadow-lg border-b border-l border-white/20"
-          >
-            MOST POPULAR
-          </div>
-
-          <!-- Glow Inside -->
-          <div
-            class="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl group-hover:bg-purple-500/30 transition-colors pointer-events-none"
+            class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-[1.5rem] opacity-75 blur-[2px] group-hover:opacity-100 transition duration-500"
           >
           </div>
 
-          <h3
-            class="text-2xl font-bold text-white mb-6 relative z-10 pr-16 lg:pr-20"
+          <article
+            class="relative flex flex-col h-full bg-[#1b0b3b] backdrop-blur-xl rounded-3xl p-8 border border-white/10 overflow-hidden m-[1px]"
           >
-            Premium Karaoke <span class="text-pink-400">({premiumType === "with-chorus" ? "With Chorus" : "No Chorus"})</span>
-          </h3>
-
-          <!-- Anchor Pricing -->
-          <div class="mb-6 relative z-10">
-            <div class="flex items-baseline gap-3 text-white">
-              <span class="text-2xl text-purple-400 line-through font-medium"
-                >₹999</span
-              >
-              <span class="text-5xl font-extrabold tracking-tight"
-                >₹{song.price}</span
-              >
-              <span class="text-purple-300 font-medium">/ track</span>
-            </div>
-            <div class="flex items-center gap-2 mt-2">
-              <span
-                class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-green-500/20 text-green-400 border border-green-500/30"
-              >
-                50% OFF
-              </span>
-              <p class="text-sm text-purple-300">
-                (Inclusive of applicable taxes)
-              </p>
-            </div>
-            <!-- Urgency -->
+            <!-- Best Value Badge -->
             <div
-              class="mt-3 flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20"
+              class="absolute top-0 right-0 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl z-20 shadow-lg border-b border-l border-white/20"
             >
-              <span class="text-amber-400 text-sm">🔥</span>
-              <p class="text-xs text-amber-300 font-medium">
-                Launch price — Limited time offer
-              </p>
+              MOST POPULAR
             </div>
-          </div>
 
-          <ul class="space-y-4 mb-8 relative z-10 flex-grow">
-            {
-              [
-                premiumType === "with-chorus"
-                  ? "Instrumental track with high-quality backing chorus"
-                  : "Pure instrumental — zero chorus, zero vocals",
-                "Crystal-clear studio mastered audio",
-                "High-fidelity MP3 format",
-                "Perfect for live events & Sunday Mass",
-                "Personal use license included",
-              ].map((feature) => (
-                <li class="flex items-start gap-3 text-purple-100 font-medium">
-                  <span class="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center shadow-[0_0_10px_rgba(236,72,153,0.3)]">
-                    <svg
-                      class="w-4 h-4 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
+            <!-- Glow Inside -->
+            <div
+              class="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl group-hover:bg-purple-500/30 transition-colors pointer-events-none"
+            >
+            </div>
+
+            <h3
+              class="text-2xl font-bold text-white mb-6 relative z-10 pr-16 lg:pr-20"
+            >
+              Premium Karaoke <span class="text-pink-400">({premiumType === "with-chorus" ? "With Chorus" : "No Chorus"})</span>
+            </h3>
+
+            <!-- Anchor Pricing -->
+            <div class="mb-6 relative z-10">
+              <div class="flex items-baseline gap-3 text-white">
+                {originalPrice > song.price && (
+                  <span class="text-2xl text-purple-400 line-through font-medium">
+                    ₹{originalPrice}
                   </span>
-                  <span>{feature}</span>
-                </li>
-              ))
-            }
-          </ul>
-
-          <!-- Social Proof -->
-          <div
-            class="mb-5 relative z-10 flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10"
-          >
-            <span class="text-base">🎤</span>
-            <p class="text-xs text-purple-200">
-              Trusted by church choirs across Kerala
-            </p>
-          </div>
-
-          <!-- Payment Form (default state) -->
-          <div id="payment-form" class="relative z-10 mt-auto space-y-3">
-            <div>
-              <input
-                type="email"
-                id="customer-email"
-                placeholder="Your email address"
-                required
-                class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-300/60 focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all text-sm"
-              />
-            </div>
-            <button
-              id="buy-premium-btn"
-              type="button"
-              data-song-slug={song.slug}
-              data-song-price={song.price}
-              data-song-title={song.title}
-              data-razorpay-key={razorpayKeyId}
-              class="w-full px-6 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.6)] transition-all text-center block hover:scale-105 duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-            >
-              <span id="btn-text"
-                >🔒 Buy Now — ₹{song.price}
-                <span class="text-pink-200 text-sm line-through">₹999</span
-                ></span
-              >
-              <span
-                id="btn-loading"
-                class="hidden items-center justify-center gap-2"
-              >
-                <svg
-                  class="animate-spin h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    class="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    stroke-width="4"></circle>
-                  <path
-                    class="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-                Creating order...
-              </span>
-            </button>
-            <p
-              class="text-xs text-purple-300/70 text-center flex items-center justify-center gap-1"
-            >
-              <svg
-                class="w-3.5 h-3.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                ></path></svg
-              >
-              Secured by Razorpay &bull; UPI, Cards, NetBanking
-            </p>
-          </div>
-
-          <!-- Payment Success State (hidden by default) -->
-          <div id="payment-success" class="relative z-10 mt-auto hidden">
-            <div class="text-center space-y-4">
-              <div
-                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/20 border border-green-500/30 mx-auto"
-              >
-                <svg
-                  class="w-8 h-8 text-green-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"></path></svg
-                >
+                )}
+                <span class="text-5xl font-extrabold tracking-tight">
+                  ₹{song.price}
+                </span>
+                <span class="text-purple-300 font-medium">/ track</span>
               </div>
-              <h4 class="text-xl font-bold text-green-400">
-                Payment Successful!
-              </h4>
-              <a
-                id="download-link"
-                href="#"
-                download
-                class="w-full px-6 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(34,197,94,0.4)] transition-all text-center block hover:scale-105 duration-300"
-              >
-                ⬇️ Download Premium Karaoke Track
-              </a>
-              <div class="space-y-1 text-sm">
-                <p class="text-purple-200">
-                  📧 Confirmation email sent to <span
-                    id="success-email"
-                    class="text-pink-300 font-medium"></span>
-                </p>
-                <p class="text-purple-300/70">
-                  ⏰ Download link valid for 24 hours
-                </p>
-                <p class="text-purple-300/70">
-                  Payment ID: <span id="success-payment-id" class="font-mono"
-                  ></span>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Payment Error State (hidden by default) -->
-          <div id="payment-error" class="relative z-10 mt-auto hidden">
-            <div class="text-center space-y-4">
-              <div
-                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-500/20 border border-red-500/30 mx-auto"
-              >
-                <svg
-                  class="w-8 h-8 text-red-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12"></path></svg
-                >
-              </div>
-              <h4 class="text-xl font-bold text-red-400">Payment Failed</h4>
-              <p id="error-message" class="text-purple-200 text-sm">
-                Something went wrong. Please try again.
-              </p>
-              <button
-                id="retry-btn"
-                type="button"
-                class="w-full px-6 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-xl transition-colors text-center block cursor-pointer"
-              >
-                Try Again
-              </button>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <!-- Column 2: FREE Version (shown second, on right) -->
-      {hasFreeVersion && (
-        <article
-          class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 transition-all duration-300 relative overflow-hidden group flex flex-col"
-        >
-          <!-- Glow -->
-          <div
-            class="absolute top-0 right-0 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl group-hover:bg-pink-500/40 transition-colors pointer-events-none"
-          >
-          </div>
-
-          <h3 class="text-2xl font-bold text-white mb-6 relative z-10">
-            Standard Version <span class="text-purple-300">(With Chorus)</span>
-          </h3>
-
-          <div class="mb-6 relative z-10">
-            <div class="flex items-baseline gap-2 text-white">
-              <span class="text-5xl font-extrabold tracking-tight">FREE</span>
-            </div>
-            <p class="text-sm text-purple-300 mt-2">For practice & learning</p>
-          </div>
-
-          <ul class="space-y-4 mb-6 relative z-10 flex-grow">
-            {
-              [
-                { text: "MP3 format", type: "ok" },
-                { text: "Contains chorus vocals (cannot remove)", type: "warn" },
-                { text: "Standard audio quality", type: "warn" },
-                { text: "Suitable for practice only", type: "ok" },
-              ].map((feature) => (
-                <li class="flex items-start gap-3 text-purple-100">
+              {discountPercent > 0 && (
+                <div class="flex items-center gap-2 mt-2">
                   <span
-                    class={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center border ${feature.type === "warn" ? "bg-amber-500/10 border-amber-500/30" : "bg-pink-500/20 border-pink-500/30"}`}
+                    class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-green-500/20 text-green-400 border border-green-500/30"
                   >
-                    {feature.type === "warn" ? (
+                    {discountPercent}% OFF
+                  </span>
+                  <p class="text-sm text-purple-300">
+                    (Inclusive of applicable taxes)
+                  </p>
+                </div>
+              )}
+              <!-- Urgency -->
+              <div
+                class="mt-3 flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20"
+              >
+                <span class="text-amber-400 text-sm">🔥</span>
+                <p class="text-xs text-amber-300 font-medium">
+                  Launch price — Limited time offer
+                </p>
+              </div>
+            </div>
+
+            <ul class="space-y-4 mb-8 relative z-10 flex-grow">
+              {
+                [
+                  premiumType === "with-chorus"
+                    ? "Instrumental track with high-quality backing chorus"
+                    : "Pure instrumental — zero chorus, zero vocals",
+                  "Crystal-clear studio mastered audio",
+                  "High-fidelity MP3 format",
+                  "Perfect for live events & Sunday Mass",
+                  "Personal use license included",
+                ].map((feature) => (
+                  <li class="flex items-start gap-3 text-purple-100 font-medium">
+                    <span class="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center shadow-[0_0_10px_rgba(236,72,153,0.3)]">
                       <svg
-                        class="w-4 h-4 text-amber-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        class="w-4 h-4 text-pink-400"
+                        class="w-4 h-4 text-white"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -602,39 +382,266 @@ const faqList = hasFreeVersion
                           d="M5 13l4 4L19 7"
                         />
                       </svg>
-                    )}
-                  </span>
-                  <span class={feature.type === "warn" ? "text-purple-300" : ""}>
-                    {feature.text}
-                  </span>
-                </li>
-              ))
-            }
-          </ul>
+                    </span>
+                    <span>{feature}</span>
+                  </li>
+                ))
+              }
+            </ul>
 
-          <!-- Conditional Download Link -->
-          {
-            downloadUrl ? (
-              <a
-                href={downloadUrl}
-                download
-                class="w-full mt-auto px-6 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-xl transition-colors relative z-10 text-center block"
-              >
-                Download Free Karaoke MP3
-              </a>
-            ) : (
+            <!-- Social Proof -->
+            <div
+              class="mb-5 relative z-10 flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10"
+            >
+              <span class="text-base">🎤</span>
+              <p class="text-xs text-purple-200">
+                Trusted by church choirs across Kerala
+              </p>
+            </div>
+
+            <!-- Payment Form (default state) -->
+            <div id="payment-form" class="relative z-10 mt-auto space-y-3">
+              <div>
+                <input
+                  type="email"
+                  id="customer-email"
+                  placeholder="Your email address"
+                  required
+                  class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-300/60 focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all text-sm"
+                />
+              </div>
               <button
-                disabled
-                class="w-full mt-auto px-6 py-4 bg-white/5 border border-white/10 text-white/50 font-semibold rounded-xl cursor-not-allowed relative z-10 text-center block"
+                id="buy-premium-btn"
+                type="button"
+                data-song-slug={song.slug}
+                data-song-price={song.price}
+                data-song-title={song.title}
+                data-razorpay-key={razorpayKeyId}
+                class="w-full px-6 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.6)] transition-all text-center block hover:scale-105 duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                Download Not Available
+                <span id="btn-text"
+                  >🔒 Buy Now — ₹{song.price}
+                  {originalPrice > song.price && (
+                    <span class="text-pink-200 text-sm line-through">₹{originalPrice}</span>
+                  )}
+                </span>
+                <span
+                  id="btn-loading"
+                  class="hidden items-center justify-center gap-2"
+                >
+                  <svg
+                    class="animate-spin h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"></circle>
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Creating order...
+                </span>
               </button>
-            )
-          }
-          <p class="text-xs text-purple-300 text-center mt-3 relative z-10">
-            Free with chorus · Good for practice
-          </p>
-        </article>
+              <p
+                class="text-xs text-purple-300/70 text-center flex items-center justify-center gap-1"
+              >
+                <svg
+                  class="w-3.5 h-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  ></path></svg
+                >
+                Secured by Razorpay &bull; UPI, Cards, NetBanking
+              </p>
+            </div>
+
+            <!-- Payment Success State (hidden by default) -->
+            <div id="payment-success" class="relative z-10 mt-auto hidden">
+              <div class="text-center space-y-4">
+                <div
+                  class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/20 border border-green-500/30 mx-auto"
+                >
+                  <svg
+                    class="w-8 h-8 text-green-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"></path></svg
+                  >
+                </div>
+                <h4 class="text-xl font-bold text-green-400">
+                  Payment Successful!
+                </h4>
+                <a
+                  id="download-link"
+                  href="#"
+                  download
+                  class="w-full px-6 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(34,197,94,0.4)] transition-all text-center block hover:scale-105 duration-300"
+                >
+                  ⬇️ Download Premium Karaoke Track
+                </a>
+                <div class="space-y-1 text-sm">
+                  <p class="text-purple-200">
+                    📧 Confirmation email sent to <span
+                      id="success-email"
+                      class="text-pink-300 font-medium"></span>
+                  </p>
+                  <p class="text-purple-300/70">
+                    ⏰ Download link valid for 24 hours
+                  </p>
+                  <p class="text-purple-300/70">
+                    Payment ID: <span id="success-payment-id" class="font-mono"
+                    ></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Error State (hidden by default) -->
+            <div id="payment-error" class="relative z-10 mt-auto hidden">
+              <div class="text-center space-y-4">
+                <div
+                  class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-500/20 border border-red-500/30 mx-auto"
+                >
+                  <svg
+                    class="w-8 h-8 text-red-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"></path></svg
+                  >
+                </div>
+                <h4 class="text-xl font-bold text-red-400">Payment Failed</h4>
+                <p id="error-message" class="text-purple-200 text-sm">
+                  Something went wrong. Please try again.
+                </p>
+                <button
+                  id="retry-btn"
+                  type="button"
+                  class="w-full px-6 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-xl transition-colors text-center block cursor-pointer"
+                >
+                  Try Again
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      )}
+
+      <!-- Column 2: FREE Version -->
+      {hasFreeVersion && (
+        <div class={`relative group hover:scale-[1.02] transition-all duration-300 flex flex-col ${!hasPremiumVersion ? "m-[1px]" : ""}`}>
+          {!hasPremiumVersion && (
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-[1.5rem] opacity-75 blur-[2px] group-hover:opacity-100 transition duration-500"></div>
+          )}
+          <article
+            class={`relative flex flex-col h-full bg-[#1b0b3b] backdrop-blur-xl rounded-3xl p-8 border border-white/20 transition-all duration-300 overflow-hidden ${!hasPremiumVersion ? "border-white/10" : ""}`}
+          >
+            <!-- Badge for Free -->
+            <div
+              class="absolute top-0 right-0 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl z-20 shadow-lg border-b border-l border-white/20"
+            >
+              FREE DOWNLOAD
+            </div>
+
+            <!-- Glow -->
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 rounded-full blur-3xl group-hover:bg-emerald-500/40 transition-colors pointer-events-none"
+            >
+            </div>
+
+            <h3 class="text-2xl font-bold text-white mb-6 relative z-10 pr-16">
+              Standard Version <span class="text-purple-300">(With Chorus)</span>
+            </h3>
+
+            <div class="mb-6 relative z-10">
+              <div class="flex items-baseline gap-2 text-white">
+                <span class="text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">FREE</span>
+              </div>
+              <p class="text-sm text-purple-300 mt-2">For personal devotion & singing practice</p>
+            </div>
+
+            <ul class="space-y-4 mb-8 relative z-10 flex-grow">
+              {
+                [
+                  { text: "High-quality MP3 format", type: "ok" },
+                  { text: "Contains chorus vocals to guide melody", type: "info" },
+                  { text: "Standard audio quality", type: "ok" },
+                  { text: "Free for personal & prayer practice", type: "ok" },
+                ].map((feature) => (
+                  <li class="flex items-start gap-3 text-purple-100 font-medium">
+                    <span
+                      class="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 flex items-center justify-center shadow-[0_0_10px_rgba(16,185,129,0.3)]"
+                    >
+                      <svg
+                        class="w-4 h-4 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </span>
+                    <span>
+                      {feature.text}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <!-- Conditional Download Link -->
+            {
+              downloadUrl ? (
+                <a
+                  href={downloadUrl}
+                  download
+                  class="w-full mt-auto px-6 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] transition-all text-center block hover:scale-105 duration-300 relative z-10"
+                >
+                  ⬇️ Download Free Karaoke MP3
+                </a>
+              ) : (
+                <button
+                  disabled
+                  class="w-full mt-auto px-6 py-4 bg-white/5 border border-white/10 text-white/50 font-semibold rounded-xl cursor-not-allowed relative z-10 text-center block"
+                >
+                  Download Not Available
+                </button>
+              )
+            }
+            <p class="text-xs text-purple-300 text-center mt-3 relative z-10">
+              Free with chorus · Instant direct download
+            </p>
+          </article>
+        </div>
       )}
     </div>
 
@@ -663,24 +670,59 @@ const faqList = hasFreeVersion
       </div>
     </div>
 
-    {/* Audio Preview Section */}
-    <div class="mt-14 mb-4 max-w-3xl mx-auto animate-fade-in-up">
-      <h3 class="text-xl font-bold text-white text-center mb-2">
-        {hasFreeVersion ? "🎧 Hear the Difference" : "🎧 Preview the Karaoke Track"}
-      </h3>
-      <p class="text-purple-300 text-center text-sm mb-6">
-        {hasFreeVersion
-          ? "Listen to both versions and decide which one fits your needs"
-          : "Listen to a sample preview of the premium studio version"}
-      </p>
+    {/* Audio Preview Section — ONLY shown if track has a paid premium version */}
+    {hasPremiumVersion && (
+      <div class="mt-14 mb-4 max-w-3xl mx-auto animate-fade-in-up">
+        <h3 class="text-xl font-bold text-white text-center mb-2">
+          {isDualVersion ? "🎧 Hear the Difference" : "🎧 Preview the Karaoke Track"}
+        </h3>
+        <p class="text-purple-300 text-center text-sm mb-6">
+          {isDualVersion
+            ? "Listen to both versions and decide which one fits your needs"
+            : "Listen to a sample preview of the premium studio version"}
+        </p>
 
-      {hasFreeVersion ? (
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div
-            class="bg-gradient-to-r from-pink-500/10 to-purple-500/10 border border-pink-500/30 rounded-2xl p-5"
-          >
+        {isDualVersion ? (
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div
+              class="bg-gradient-to-r from-pink-500/10 to-purple-500/10 border border-pink-500/30 rounded-2xl p-5"
+            >
+              <p class="text-sm font-semibold text-white mb-1">
+                Premium Version <span class="text-pink-400">({premiumType === "with-chorus" ? "with chorus" : "no chorus"})</span>
+              </p>
+              <p class="text-xs text-pink-300 mb-3">
+                Preview clip · Full track: {song.duration}
+              </p>
+              <audio
+                controls
+                controlslist="nodownload noplaybackrate"
+                class="w-full"
+                style="border-radius: 9999px; height: 36px;"
+              >
+                <source src={premiumPreviewUrl} type="audio/mpeg" />
+              </audio>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+              <p class="text-sm font-semibold text-purple-200 mb-1">
+                Free Version <span class="text-purple-400">(with chorus)</span>
+              </p>
+              <p class="text-xs text-purple-400 mb-3">
+                Preview clip · Full track: {song.duration}
+              </p>
+              <audio
+                controls
+                controlslist="nodownload noplaybackrate"
+                class="w-full"
+                style="border-radius: 9999px; height: 36px;"
+              >
+                <source src={previewUrl} type="audio/mpeg" />
+              </audio>
+            </div>
+          </div>
+        ) : (
+          <div class="max-w-md mx-auto bg-gradient-to-r from-pink-500/10 to-purple-500/10 border border-pink-500/30 rounded-2xl p-5">
             <p class="text-sm font-semibold text-white mb-1">
-              Premium Version <span class="text-pink-400">(no chorus)</span>
+              Premium Version <span class="text-pink-400">({premiumType === "with-chorus" ? "with backing chorus" : "without chorus"})</span>
             </p>
             <p class="text-xs text-pink-300 mb-3">
               Preview clip · Full track: {song.duration}
@@ -694,54 +736,21 @@ const faqList = hasFreeVersion
               <source src={premiumPreviewUrl} type="audio/mpeg" />
             </audio>
           </div>
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
-            <p class="text-sm font-semibold text-purple-200 mb-1">
-              Free Version <span class="text-purple-400">(with chorus)</span>
-            </p>
-            <p class="text-xs text-purple-400 mb-3">
-              Preview clip · Full track: {song.duration}
-            </p>
-            <audio
-              controls
-              controlslist="nodownload noplaybackrate"
-              class="w-full"
-              style="border-radius: 9999px; height: 36px;"
-            >
-              <source src={previewUrl} type="audio/mpeg" />
-            </audio>
-          </div>
-        </div>
-      ) : (
-        <div class="max-w-md mx-auto bg-gradient-to-r from-pink-500/10 to-purple-500/10 border border-pink-500/30 rounded-2xl p-5">
-          <p class="text-sm font-semibold text-white mb-1">
-            Premium Version <span class="text-pink-400">({song.premiumType === "with-chorus" ? "with backing chorus" : "without chorus"})</span>
-          </p>
-          <p class="text-xs text-pink-300 mb-3">
-            Preview clip · Full track: {song.duration}
-          </p>
-          <audio
-            controls
-            controlslist="nodownload noplaybackrate"
-            class="w-full"
-            style="border-radius: 9999px; height: 36px;"
-          >
-            <source src={premiumPreviewUrl} type="audio/mpeg" />
-          </audio>
-        </div>
-      )}
+        )}
 
-      {hasFreeVersion && (
-        <p class="text-center text-xs text-purple-400 mt-3">
-          💡 Notice: The premium version has crystal-clear instrumentation with no
-          vocal overlay
-        </p>
-      )}
-    </div>
+        {isDualVersion && (
+          <p class="text-center text-xs text-purple-400 mt-3">
+            💡 Notice: The premium version has crystal-clear instrumentation with no
+            vocal overlay
+          </p>
+        )}
+      </div>
+    )}
     <br />
     <!-- Perfect For Section -->
     <div class="max-w-3xl mx-auto mb-16 text-center animate-fade-in-up">
       <h3 class="text-xl font-bold text-white mb-6">
-        Who Buys the Premium Version?
+        {hasPremiumVersion ? "Who Buys the Premium Version?" : "Who Uses This Karaoke Track?"}
       </h3>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
@@ -776,33 +785,33 @@ const faqList = hasFreeVersion
               <h2 class="text-3xl font-bold text-white">{song.title} Lyrics</h2>
               <div class="flex gap-2" id="lyrics-tabs">
                 <button
-                  id="tab-manglish"
+                  id="tab-transliterated"
                   type="button"
                   class="px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg cursor-pointer transition-all"
                 >
-                  Manglish
+                  {lang.transliterationName}
                 </button>
                 <button
-                  id="tab-malayalam"
+                  id="tab-native"
                   type="button"
                   class="px-4 py-2 rounded-xl text-sm font-semibold bg-white/10 text-purple-200 border border-white/10 hover:bg-white/20 cursor-pointer transition-all"
                 >
-                  Malayalam
+                  {lang.nativeName}
                 </button>
               </div>
             </div>
 
             <div
-              id="lyrics-manglish"
+              id="lyrics-transliterated"
               class="whitespace-pre-line text-purple-100 leading-relaxed text-lg font-medium"
             >
-              {song.lyrics.manglish}
+              {song.lyrics.transliterated}
             </div>
             <div
-              id="lyrics-malayalam"
-              class="whitespace-pre-line text-purple-100 leading-relaxed text-lg font-medium hidden"
+              id="lyrics-native"
+              class={`whitespace-pre-line text-purple-100 leading-relaxed text-lg font-medium hidden ${lang.fontClass}`}
             >
-              {song.lyrics.malayalam}
+              {song.lyrics.native}
             </div>
 
             <div class="mt-8 pt-6 border-t border-white/10 flex flex-wrap gap-3">
@@ -855,21 +864,27 @@ const faqList = hasFreeVersion
             This page is dedicated to the {song.title} karaoke download by {
               song.artist
             }. {
-              hasFreeVersion
-                ? "The free version is an MP3 karaoke track with chorus, suitable for learning the melody, practicing the song, and singing along during personal devotion."
-                : "The premium studio version is a high-fidelity studio instrumental track, ideal for public performances, church choirs, and worship ministries."
+              isDualVersion
+                ? `The free version is an MP3 karaoke track with chorus, suitable for learning the melody, practicing the song, and singing along during personal devotion.`
+                : (hasFreeVersion
+                    ? `This track is available as a free high-quality MP3 karaoke download for personal worship and practice.`
+                    : `The premium studio version is a high-fidelity studio instrumental track, ideal for public performances, church choirs, and worship ministries.`)
             }
           </p>
-          <p>
-            The premium studio version is prepared for singers, choirs,
-            ministries, and devotional programs that need a cleaner instrumental
-            track without chorus. It is a high-fidelity studio mastered MP3.
-          </p>
+          {
+            hasPremiumVersion && (
+              <p>
+                The premium studio version is prepared for singers, choirs,
+                ministries, and devotional programs that need a cleaner instrumental
+                track {premiumType === "with-chorus" ? "with backing chorus" : "without chorus"}. It is a high-fidelity studio mastered MP3.
+              </p>
+            )
+          }
           {
             songAliases.length > 0 && (
               <p>
                 People may also search this song as {songAliases.join(", ")}.
-                All those searches refer to this same Malayalam Christian
+                All those searches refer to this same {lang.name} Christian
                 devotional karaoke track.
               </p>
             )
@@ -898,12 +913,12 @@ const faqList = hasFreeVersion
           </div>
           <div>
             <dt class="text-purple-300 font-semibold">Language</dt>
-            <dd class="text-white">Malayalam</dd>
+            <dd class="text-white">{lang.name} ({lang.nativeName})</dd>
           </div>
           <div>
             <dt class="text-purple-300 font-semibold">Available formats</dt>
             <dd class="text-white">
-              {hasFreeVersion ? "Free MP3, Premium MP3" : "Premium MP3"}
+              {isDualVersion ? "Free MP3, Premium MP3" : (hasFreeVersion ? "Free MP3" : "Premium MP3")}
             </dd>
           </div>
           <div>
@@ -923,29 +938,29 @@ const faqList = hasFreeVersion
 
   <!-- Lyrics Tab Switching -->
   <script>
-    const tabManglish = document.getElementById("tab-manglish");
-    const tabMalayalam = document.getElementById("tab-malayalam");
-    const lyricsManglish = document.getElementById("lyrics-manglish");
-    const lyricsMalayalam = document.getElementById("lyrics-malayalam");
+    const tabTransliterated = document.getElementById("tab-transliterated");
+    const tabNative = document.getElementById("tab-native");
+    const lyricsTransliterated = document.getElementById("lyrics-transliterated");
+    const lyricsNative = document.getElementById("lyrics-native");
 
-    if (tabManglish && tabMalayalam && lyricsManglish && lyricsMalayalam) {
+    if (tabTransliterated && tabNative && lyricsTransliterated && lyricsNative) {
       const activeClass =
         "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg";
       const inactiveClass =
         "bg-white/10 text-purple-200 border border-white/10";
 
-      tabManglish.addEventListener("click", () => {
-        lyricsManglish.classList.remove("hidden");
-        lyricsMalayalam.classList.add("hidden");
-        tabManglish.className = `px-4 py-2 rounded-xl text-sm font-semibold ${activeClass} cursor-pointer transition-all`;
-        tabMalayalam.className = `px-4 py-2 rounded-xl text-sm font-semibold ${inactiveClass} hover:bg-white/20 cursor-pointer transition-all`;
+      tabTransliterated.addEventListener("click", () => {
+        lyricsTransliterated.classList.remove("hidden");
+        lyricsNative.classList.add("hidden");
+        tabTransliterated.className = `px-4 py-2 rounded-xl text-sm font-semibold ${activeClass} cursor-pointer transition-all`;
+        tabNative.className = `px-4 py-2 rounded-xl text-sm font-semibold ${inactiveClass} hover:bg-white/20 cursor-pointer transition-all`;
       });
 
-      tabMalayalam.addEventListener("click", () => {
-        lyricsMalayalam.classList.remove("hidden");
-        lyricsManglish.classList.add("hidden");
-        tabMalayalam.className = `px-4 py-2 rounded-xl text-sm font-semibold ${activeClass} cursor-pointer transition-all`;
-        tabManglish.className = `px-4 py-2 rounded-xl text-sm font-semibold ${inactiveClass} hover:bg-white/20 cursor-pointer transition-all`;
+      tabNative.addEventListener("click", () => {
+        lyricsNative.classList.remove("hidden");
+        lyricsTransliterated.classList.add("hidden");
+        tabNative.className = `px-4 py-2 rounded-xl text-sm font-semibold ${activeClass} cursor-pointer transition-all`;
+        tabTransliterated.className = `px-4 py-2 rounded-xl text-sm font-semibold ${inactiveClass} hover:bg-white/20 cursor-pointer transition-all`;
       });
     }
   </script>

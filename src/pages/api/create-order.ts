@@ -36,9 +36,9 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    if (!song.hasKaraoke) {
+    if (!song.hasKaraoke || song.hasPremiumVersion === false || song.price <= 0) {
       return new Response(
-        JSON.stringify({ error: 'Karaoke not available for this song' }),
+        JSON.stringify({ error: 'This karaoke track is free and does not require purchase.' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }

@@ -1,8 +1,8 @@
 # HolyfireMedia
 
-> Your spiritual home for Malayalam Catholic prayers, Christian devotional songs, lyrics, and karaoke tracks.
+> Your spiritual home for Malayalam & Kannada Catholic prayers, Christian devotional songs, lyrics, and karaoke tracks.
 
-HolyfireMedia is a comprehensive Catholic devotional platform offering prayers, songs, and karaoke tracks in both Malayalam (മലയാളം) and Manglish (transliterated Malayalam in English script). The site primarily serves the Syro-Malabar Catholic community worldwide.
+HolyfireMedia is a comprehensive Catholic devotional platform offering prayers, songs, and karaoke tracks in Malayalam (മലയാളം & Manglish) and Kannada (ಕನ್ನಡ & Kanglish). The platform serves Christian believers and church ministries across South India and worldwide.
 
 ## Content Sections
 
@@ -13,37 +13,35 @@ HolyfireMedia is a comprehensive Catholic devotional platform offering prayers, 
   - [Prarthanakal (General Prayers)](https://holyfiremedia.in/prayers/general): Prayer for Priests, Prayer for Students, Three O'Clock Prayer, Precious Blood Prayer
   - [Madhyastha Prarthanakal (Intercessory Prayers)](https://holyfiremedia.in/prayers/madhyastha): Prayers to St. Alphonsa, St. Jude, St. Anthony, St. George, and more saints
   - [Yama Prarthanakal (Liturgy of the Hours)](https://holyfiremedia.in/prayers/yamams): Syro-Malabar canonical hours
-- [Songs](https://holyfiremedia.in/songs): Malayalam Christian devotional songs with full lyrics
-- [Lyrics](https://holyfiremedia.in/lyrics): Song lyrics in both Malayalam script and Manglish transliteration
-- [Karaoke](https://holyfiremedia.in/karaoke): Downloadable karaoke tracks — free version with chorus, premium studio instrumental
-- [Artists](https://holyfiremedia.in/artists): Featured Catholic music artists including Fr. Joseph Mukkatt
+- [Songs](https://holyfiremedia.in/songs): Malayalam & Kannada Christian devotional songs with full lyrics
+- [Lyrics](https://holyfiremedia.in/lyrics): Song lyrics in native scripts (മലയാളം, ಕನ್ನಡ) and romanized transliterations (Manglish, Kanglish)
+- [Karaoke](https://holyfiremedia.in/karaoke): Downloadable karaoke tracks in Malayalam & Kannada — free direct MP3 downloads and pro studio instrumental tracks
+- [Artists](https://holyfiremedia.in/artists): Featured Christian music artists including Fr. Joseph Mukkatt
 
 ## Key Features
 
-- Dual-language toggle on every prayer page: Malayalam (മലയാളം) and Manglish
-- Complete Holy Rosary (Japamala) text with all mysteries
-- Complete Divine Mercy Chaplet (Karuna Kontha) text
-- Catholic Catechism content: 10 Commandments, 7 Sacraments, 14 Works of Mercy
-- Intercessory prayers to Indian and universal Catholic saints
-- Syro-Malabar Liturgy of the Hours (Yama Prarthanakal)
-- Song lyrics with Manglish transliteration for singing along
-- Free and premium karaoke track downloads
+- Multilingual support: Malayalam (മലയാളം / Manglish) and Kannada (ಕನ್ನಡ / Kanglish)
+- Dual-script toggle on lyrics and prayer pages for singing along and pronunciation
+- Complete Catholic prayers, Rosaries, Novenas, and Catechism content
+- Free and premium studio karaoke track downloads with instant delivery
+- Clear personal devotional singing permission guidelines
 
 ## Frequently Asked Questions
 
 Q: What is HolyfireMedia?
-A: HolyfireMedia is a Catholic devotional platform providing Malayalam Christian prayers, songs, lyrics, and karaoke tracks in both Malayalam and Manglish.
-
-Q: What prayers are available?
-A: Common Catholic prayers (Our Father, Hail Mary, Creed), Holy Rosary, Divine Mercy Chaplet, intercessory prayers to saints, catechism teachings, and Syro-Malabar liturgical prayers.
+A: HolyfireMedia is a Christian devotional platform providing Malayalam and Kannada Christian prayers, songs, lyrics, and karaoke tracks.
 
 Q: What languages are supported?
-A: All content is available in Malayalam (മലയാളം) and Manglish (Malayalam transliterated in English script), with an easy toggle to switch between them.
+A: Content is primarily available in Malayalam (മലയാളം with Manglish transliteration) and Kannada (ಕನ್ನಡ with Kanglish transliteration).
 
-Q: Are karaoke tracks free?
-A: Each song has a free version with chorus vocals. Premium studio instrumental versions are available for purchase.
+Q: Are karaoke tracks available in Kannada and Malayalam?
+A: Yes. HolyfireMedia offers free and premium studio karaoke tracks in both Malayalam (e.g. Aradhyane Parishudhane, Aradhana Aradhana) and Kannada (e.g. O Nanna Yesuve).
+
+Q: Who is featured on HolyfireMedia?
+A: Christian artists, composers, and preachers including Fr. Joseph Mukkatt.
 
 ## Contact
 
 - Website: https://holyfiremedia.in
 - Contact: https://holyfiremedia.in/contact
+

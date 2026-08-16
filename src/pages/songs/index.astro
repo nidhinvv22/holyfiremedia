@@ -2,6 +2,7 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import PlayerModal from '../../components/PlayerModal.astro';
 import { songs } from '../../data/songs';
+import { getLanguage } from '../../data/languages';
 
 const playerPlaylist = songs.map((song) => ({
   title: song.title,
@@ -12,20 +13,20 @@ const playerPlaylist = songs.map((song) => ({
 const songListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": "Malayalam Christian Songs",
+  "name": "Christian Devotional Songs (Malayalam & Kannada)",
   "itemListElement": songs.map((song, index) => ({
     "@type": "ListItem",
     "position": index + 1,
     "url": `https://holyfiremedia.in/lyrics/${song.slug}/`,
-    "name": song.title
+    "name": `${song.title} (${getLanguage(song.language).name} Christian Song)`
   }))
 };
 ---
 
 <MainLayout
-  title="Malayalam Christian Songs - Listen, Lyrics & Karaoke | HolyfireMedia"
-  description="Browse all Malayalam Christian devotional songs. Listen online, read lyrics in Malayalam & Manglish, and download karaoke tracks."
-  keywords="Malayalam Christian songs, devotional songs Malayalam, Catholic songs online, Christian music Malayalam, worship songs Malayalam"
+  title="Christian Songs - Listen, Lyrics & Karaoke (Malayalam & Kannada) | HolyfireMedia"
+  description="Browse Malayalam & Kannada Christian devotional songs. Listen online, read lyrics in native script & transliteration, and download karaoke tracks."
+  keywords="Christian songs, Malayalam Christian songs, Kannada Christian songs, devotional songs, Catholic songs online, worship songs"
   schemaData={songListSchema}
 >
   <script is:inline define:vars={{ playlist: playerPlaylist }}>window.songsPlaylist = playlist;</script>
@@ -33,7 +34,7 @@ const songListSchema = {
     <div class="mb-12">
       <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">All Songs</h1>
       <p class="text-xl text-purple-200">
-        Discover and listen to our vast collection of devotional music.
+        Discover and listen to our curated collection of Malayalam & Kannada Christian devotional music.
       </p>
     </div>
 
@@ -61,44 +62,52 @@ const songListSchema = {
       </div>
 
       <div class="divide-y divide-white/5">
-        {songs.map((song, index) => (
-          <div onclick={`window.openGlobalPlayer(window.songsPlaylist, ${index})`} class="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 items-center hover:bg-white/5 border border-transparent hover:border-pink-500/20 transition-all duration-300 group cursor-pointer rounded-2xl">
-            <div class="col-span-1 text-center font-bold text-purple-400 hidden md:block">{index + 1}</div>
-            
-            <div class="col-span-12 md:col-span-5 flex items-center gap-3">
-              <div class="h-10 w-10 min-w-[40px] rounded bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.536l8-1.6V12.114A4.369 4.369 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
-                </svg>
+        {songs.map((song, index) => {
+          const lang = getLanguage(song.language);
+          return (
+            <div onclick={`window.openGlobalPlayer(window.songsPlaylist, ${index})`} class="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 items-center hover:bg-white/5 border border-transparent hover:border-pink-500/20 transition-all duration-300 group cursor-pointer rounded-2xl">
+              <div class="col-span-1 text-center font-bold text-purple-400 hidden md:block">{index + 1}</div>
+              
+              <div class="col-span-12 md:col-span-5 flex items-center gap-3">
+                <div class="h-10 w-10 min-w-[40px] rounded bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.536l8-1.6V12.114A4.369 4.369 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
+                  </svg>
+                </div>
+                <div class="truncate">
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-white font-bold group-hover:text-pink-300 transition-colors truncate">{song.title}</h3>
+                    <span class={`text-[10px] px-2 py-0.5 rounded-full border font-semibold ${lang.badgeColor}`}>
+                      {lang.name}
+                    </span>
+                  </div>
+                  <p class="text-purple-300 text-sm md:hidden">{song.artist}</p>
+                </div>
               </div>
-              <div class="truncate">
-                <h3 class="text-white font-bold group-hover:text-pink-300 transition-colors truncate">{song.title}</h3>
-                <p class="text-purple-300 text-sm md:hidden">{song.artist}</p>
+              
+              <div class="col-span-3 text-purple-200 hidden md:block truncate">
+                <a href={song.artistSlug ? `/artists/${song.artistSlug}` : "/artists"} onclick="event.stopPropagation()" class="hover:text-pink-300 transition-colors">
+                  {song.artist}
+                </a>
+              </div>
+              
+              <div class="col-span-1 text-purple-300 text-center hidden md:block">{song.duration}</div>
+              
+              <div class="col-span-12 md:col-span-2 flex gap-2 justify-end">
+                {song.hasLyrics && (
+                  <a href={`/lyrics/${song.slug}`} onclick="event.stopPropagation()" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded transition-colors">
+                    Lyrics
+                  </a>
+                )}
+                {song.hasKaraoke && (
+                  <a href={`/karaoke/${song.slug}`} onclick="event.stopPropagation()" class="px-3 py-1.5 bg-pink-600 hover:bg-pink-500 text-white text-sm font-medium rounded shadow-md transition-transform hover:scale-105">
+                    Karaoke
+                  </a>
+                )}
               </div>
             </div>
-            
-            <div class="col-span-3 text-purple-200 hidden md:block truncate">
-              <a href={song.artistSlug ? `/artists/${song.artistSlug}` : "/artists"} onclick="event.stopPropagation()" class="hover:text-pink-300 transition-colors">
-                {song.artist}
-              </a>
-            </div>
-            
-            <div class="col-span-1 text-purple-300 text-center hidden md:block">{song.duration}</div>
-            
-            <div class="col-span-12 md:col-span-2 flex gap-2 justify-end">
-              {song.hasLyrics && (
-                <a href={`/lyrics/${song.slug}`} onclick="event.stopPropagation()" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded transition-colors">
-                  Lyrics
-                </a>
-              )}
-              {song.hasKaraoke && (
-                <a href={`/karaoke/${song.slug}`} onclick="event.stopPropagation()" class="px-3 py-1.5 bg-pink-600 hover:bg-pink-500 text-white text-sm font-medium rounded shadow-md transition-transform hover:scale-105">
-                  Karaoke
-                </a>
-              )}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   </div>

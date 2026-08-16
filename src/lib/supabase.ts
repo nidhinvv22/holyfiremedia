@@ -1,10 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.SUPABASE_URL;
-const supabaseSecretKey = import.meta.env.SUPABASE_SECRET_KEY;
+const supabaseSecretKey = import.meta.env.SUPABASE_SECRET_KEY || import.meta.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!supabaseUrl || !supabaseSecretKey) {
-  throw new Error('Missing Supabase environment variables. Set SUPABASE_URL and SUPABASE_SECRET_KEY.');
+  throw new Error('Missing Supabase environment variables. Set SUPABASE_URL and SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY.');
 }
 
 // Use the service_role key for server-side operations (bypasses RLS)
