@@ -1,10 +1,10 @@
 ---
-import MainLayout from '../../../layouts/MainLayout.astro';
+import MainLayout from "../../../layouts/MainLayout.astro";
 
 export function getStaticPaths() {
   const japangalList = [
-    { 
-      slug: "kurishadayalam-cheruth", 
+    {
+      slug: "kurishadayalam-cheruth",
       title: "Kurishadayalam (Cheruth)",
       manglishText: `
         <div class="flex flex-col items-center justify-center min-h-[30vh]">
@@ -21,10 +21,10 @@ export function getStaticPaths() {
             <span class="text-pink-300 font-bold mt-6 block text-2xl md:text-4xl">ആമ്മേൻ.</span>
           </p>
         </div>
-      `
+      `,
     },
-    { 
-      slug: "kurishadayalam-valuth", 
+    {
+      slug: "kurishadayalam-valuth",
       title: "Kurishadayalam (Valuth)",
       manglishText: `
         <div class="flex flex-col items-center justify-center min-h-[40vh]">
@@ -49,10 +49,10 @@ export function getStaticPaths() {
             <p class="text-pink-300 font-bold mt-8 text-2xl md:text-4xl">ആമ്മേൻ.</p>
           </div>
         </div>
-      `
+      `,
     },
-    { 
-      slug: "thrithva-sthuthi", 
+    {
+      slug: "thrithva-sthuthi",
       title: "Thrithva Sthuthi",
       manglishText: `
         <div class="flex flex-col items-center justify-center min-h-[30vh]">
@@ -71,10 +71,10 @@ export function getStaticPaths() {
             <p class="text-pink-300 font-bold mt-6 text-2xl md:text-4xl">ആമ്മേൻ.</p>
           </div>
         </div>
-      `
+      `,
     },
-    { 
-      slug: "swargasthanaya-pithave", 
+    {
+      slug: "swargasthanaya-pithave",
       title: "Swargasthanaya Pithave",
       manglishText: `
         <div class="max-w-3xl mx-auto p-4 md:p-8">
@@ -91,10 +91,10 @@ export function getStaticPaths() {
           </p>
           <p class="text-center text-pink-300 font-bold text-2xl md:text-4xl">ആമ്മേൻ.</p>
         </div>
-      `
+      `,
     },
-    { 
-      slug: "nanma-niranja-mariyam", 
+    {
+      slug: "nanma-niranja-mariyam",
       title: "Nanma Niranja Mariyam",
       manglishText: `
         <div class="max-w-3xl mx-auto p-4 md:p-8">
@@ -111,10 +111,10 @@ export function getStaticPaths() {
           </p>
           <p class="text-center text-pink-300 font-bold text-2xl md:text-4xl">ആമ്മേൻ.</p>
         </div>
-      `
+      `,
     },
-    { 
-      slug: "vishwasapramanam", 
+    {
+      slug: "vishwasapramanam",
       title: "Vishwasapramanam",
       manglishText: `
         <div class="max-w-3xl mx-auto p-4 md:p-8">
@@ -131,21 +131,42 @@ export function getStaticPaths() {
           </p>
           <p class="text-center text-pink-300 font-bold text-2xl md:text-4xl">ആമ്മേൻ.</p>
         </div>
-      `
+      `,
     },
     { slug: "thrisandhyajapangal", title: "Thrisandhyajapangal" },
     { slug: "kumbasarathinulla-japam", title: "Kumbasarathinulla Japam" },
     { slug: "manasthapa-prakaranam", title: "Manasthapa Prakaranam" },
     { slug: "ethrayum-dayayulla-mathave", title: "Ethrayum Dayayulla Mathave" },
-    { slug: "parishudha-rajni", title: "Parishudha Rajni" }
+    {
+      slug: "parishudha-rajni",
+      title: "Parishudha Rajni (Hail Holy Queen)",
+      manglishText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8">
+            Parishudha rajni, karunayulla mathave! Swasthi! Njangalude jeevanum madhuryvum sharanavume swasthi! Haavayude purathallappetta makkalaya njangal angeppackal nilavilikunnu. Kannunirinteyee thazhvaarayil ninnu vingikkaranju angeppackal njangal neduveerppedunnu. Aakayaal njangalude madhyasthe, angayude karunayulla kannukal njangalude nere thirikkename. Njangalude ee pravaasathinku sheesham angayude udaratthinte anugrahaheethaphalamaaya eeshoyae njangalkku kaanichchu tharename. Ettavum karunyavum vaathsalyvum maadhuryavum niranja kanyaka mariyame!
+          </p>
+          <p class="text-center text-pink-300 font-bold text-2xl md:text-4xl">Amen.</p>
+        </div>
+      `,
+      malayalamText: `
+        <div class="max-w-3xl mx-auto p-4 md:p-8">
+          <p class="text-justify text-lg md:text-2xl leading-loose md:leading-[2.5] text-purple-100 indent-8 font-malayalam">
+            പരിശുദ്ധ രാജ്ഞി, കരുണയുള്ള മാതാവേ! സ്വസ്തി! ഞങ്ങളുടെ ജീവനും മാധുര്യവും ശരണവുമേ സ്വസ്തി! ഹാവായുടെ പുറംതള്ളപ്പെട്ട മക്കളായ ഞങ്ങൾ അങ്ങേപ്പക്കൽ നിലവിളിക്കുന്നു. കണ്ണുനീരിന്റെ ഈ താഴ്‌വരയിൽ നിന്ന് വിങ്ങിക്കരഞ്ഞ് അങ്ങേപ്പക്കൽ ഞങ്ങൾ നെടുവീർപ്പെടുന്നു. ആകയാൽ ഞങ്ങളുടെ മദ്ധ്യസ്ഥേ, അങ്ങയുടെ കരുണയുള്ള കണ്ണുകൾ ഞങ്ങളുടെ നേരെ തിരിക്കേണമേ. ഞങ്ങളുടെ ഈ പ്രവാസത്തിനു ശേഷം അങ്ങയുടെ ഉദരത്തിന്റെ അനുഗ്രഹീതഫലമായ ഈശോയെ ഞങ്ങൾക്ക് കാണിച്ചു തരേണമേ. ഏറ്റവും കരുണയും വാത്സല്യവും മാധുര്യവും നിറഞ്ഞ കന്യകാമറിയമേ!
+          </p>
+          <p class="text-center text-pink-300 font-bold text-2xl md:text-4xl">ആമ്മേൻ.</p>
+        </div>
+      `,
+    },
   ];
 
-  return japangalList.filter((y) => y.manglishText && y.malayalamText).map((y) => ({
-    params: { slug: y.slug },
-    props: { 
-        prayer: y
-    },
-  }));
+  return japangalList
+    .filter((y) => y.manglishText && y.malayalamText)
+    .map((y) => ({
+      params: { slug: y.slug },
+      props: {
+        prayer: y,
+      },
+    }));
 }
 
 const { prayer } = Astro.props;
@@ -153,51 +174,75 @@ const { prayer } = Astro.props;
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": prayer.title,
-  "description": `Read and pray the ${prayer.title} in Malayalam and Manglish.`,
-  "inLanguage": ["ml", "en"],
-  "url": `https://holyfiremedia.in/prayers/japangal/${prayer.slug}`,
-  "publisher": {
+  headline: prayer.title,
+  description: `Read and pray the ${prayer.title} in Malayalam and Manglish.`,
+  inLanguage: ["ml", "en"],
+  url: `https://holyfiremedia.in/prayers/japangal/${prayer.slug}`,
+  publisher: {
     "@type": "Organization",
-    "name": "HolyfireMedia",
-    "url": "https://holyfiremedia.in/"
+    name: "HolyfireMedia",
+    url: "https://holyfiremedia.in/",
   },
-  "mainEntityOfPage": `https://holyfiremedia.in/prayers/japangal/${prayer.slug}`
+  mainEntityOfPage: `https://holyfiremedia.in/prayers/japangal/${prayer.slug}`,
 };
+const prayerKeywords =
+  prayer.slug === "parishudha-rajni"
+    ? `Parishudha Rajni, പരിശുദ്ധ രാജ്ഞി, Hail Holy Queen Malayalam, Hail Holy Queen prayer text, Salve Regina Malayalam, Parishudha Rajni Manglish, പരിശുദ്ധ രാജ്ഞീ പ്രാർത്ഥന, Catholic Marian prayer Malayalam, daily Catholic prayer Malayalam, Manglish Marian prayer, karunayulla mathave Malayalam, Parishudha Rajni lyrics Malayalam, Mother Mary prayer Malayalam Manglish, കന്യകാമറിയം പ്രാർത്ഥന, HolyfireMedia prayers`
+    : `${prayer.title}, ${prayer.title} Malayalam, Catholic prayer text, daily Catholic prayers, Manglish prayer, common prayers Catholic`;
 ---
 
 <MainLayout
   title={`${prayer.title} - Malayalam & Manglish | Catholic Prayer | HolyfireMedia`}
   description={`Read and pray the ${prayer.title} in Malayalam and Manglish. Daily Catholic prayer text with dual-language toggle.`}
-  keywords={`${prayer.title}, ${prayer.title} Malayalam, Catholic prayer text, daily Catholic prayers, Manglish prayer, common prayers Catholic`}
+  keywords={prayerKeywords}
   schemaData={articleSchema}
 >
   <div class="container mx-auto px-4 py-8 md:py-16">
     <div class="max-w-4xl mx-auto">
-      
       <!-- Sticky Header -->
-      <div class="sticky top-[73px] z-40 bg-purple-900/90 backdrop-blur-xl border-b border-white/10 md:static md:bg-transparent md:border-none pt-4 pb-4 md:pt-0 mb-6 md:mb-12">
-        <a href="/prayers/japangal" class="inline-flex items-center text-pink-300 hover:text-pink-400 font-medium mb-4 group transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      <div
+        class="sticky top-[73px] z-40 bg-purple-900/90 backdrop-blur-xl border-b border-white/10 md:static md:bg-transparent md:border-none pt-4 pb-4 md:pt-0 mb-6 md:mb-12"
+      >
+        <a
+          href="/prayers/japangal"
+          class="inline-flex items-center text-pink-300 hover:text-pink-400 font-medium mb-4 group transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 mr-1 group-hover:-translate-x-1 transition-transform"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"></path>
           </svg>
           Back to Japangal
         </a>
 
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <h1 class="text-3xl md:text-5xl font-extrabold text-white">{prayer.title}</h1>
-          
+        <div
+          class="flex flex-col md:flex-row md:items-end justify-between gap-4"
+        >
+          <h1 class="text-3xl md:text-5xl font-extrabold text-white">
+            {prayer.title}
+          </h1>
+
           <!-- Language Toggle View -->
-          <div class="inline-flex bg-black/40 p-1 rounded-xl border border-white/10 w-full sm:w-auto">
-            <button 
-              id="btn-malayalam" 
+          <div
+            class="inline-flex bg-black/40 p-1 rounded-xl border border-white/10 w-full sm:w-auto"
+          >
+            <button
+              id="btn-malayalam"
               class="flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all"
               onclick="setActiveState('malayalam')"
             >
               മലയാളം (Malayalam)
             </button>
-            <button 
-              id="btn-manglish" 
+            <button
+              id="btn-manglish"
               class="flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all"
               onclick="setActiveState('manglish')"
             >
@@ -208,49 +253,64 @@ const articleSchema = {
       </div>
 
       <!-- Content Area -->
-      <div class="bg-indigo-900/30 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden min-h-[50vh]">
-        
-        <div id="content-malayalam" class="animate-fade-in text-white/90 text-lg leading-relaxed">
+      <div
+        class="bg-indigo-900/30 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden min-h-[50vh]"
+      >
+        <div
+          id="content-malayalam"
+          class="animate-fade-in text-white/90 text-lg leading-relaxed"
+        >
           <Fragment set:html={prayer.malayalamText} />
         </div>
-        
-        <div id="content-manglish" class="hidden text-white/90 text-lg leading-relaxed font-sans">
+
+        <div
+          id="content-manglish"
+          class="hidden text-white/90 text-lg leading-relaxed font-sans"
+        >
           <Fragment set:html={prayer.manglishText} />
         </div>
-
       </div>
-
     </div>
   </div>
 
   <script is:inline>
     // Handles toggling logic client-side
     function setActiveState(language) {
-      const btnMalayalam = document.getElementById('btn-malayalam');
-      const btnManglish = document.getElementById('btn-manglish');
-      const contentMalayalam = document.getElementById('content-malayalam');
-      const contentManglish = document.getElementById('content-manglish');
+      const btnMalayalam = document.getElementById("btn-malayalam");
+      const btnManglish = document.getElementById("btn-manglish");
+      const contentMalayalam = document.getElementById("content-malayalam");
+      const contentManglish = document.getElementById("content-manglish");
 
-      if (!btnMalayalam || !btnManglish || !contentMalayalam || !contentManglish) return;
+      if (
+        !btnMalayalam ||
+        !btnManglish ||
+        !contentMalayalam ||
+        !contentManglish
+      )
+        return;
 
-      if (language === 'malayalam') {
+      if (language === "malayalam") {
         // Active Button
-        btnMalayalam.className = 'flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all';
+        btnMalayalam.className =
+          "flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all";
         // Inactive Button
-        btnManglish.className = 'flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all';
-        
-        contentMalayalam.classList.remove('hidden');
-        contentMalayalam.classList.add('animate-fade-in');
-        contentManglish.classList.add('hidden');
+        btnManglish.className =
+          "flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all";
+
+        contentMalayalam.classList.remove("hidden");
+        contentMalayalam.classList.add("animate-fade-in");
+        contentManglish.classList.add("hidden");
       } else {
         // Inactive Button
-        btnMalayalam.className = 'flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all';
+        btnMalayalam.className =
+          "flex-1 px-6 py-2 rounded-lg text-purple-200 hover:text-white hover:bg-white/5 font-semibold transition-all";
         // Active Button
-        btnManglish.className = 'flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all';
-        
-        contentManglish.classList.remove('hidden');
-        contentManglish.classList.add('animate-fade-in');
-        contentMalayalam.classList.add('hidden');
+        btnManglish.className =
+          "flex-1 px-6 py-2 rounded-lg bg-pink-500 text-white font-semibold shadow-lg transition-all";
+
+        contentManglish.classList.remove("hidden");
+        contentManglish.classList.add("animate-fade-in");
+        contentMalayalam.classList.add("hidden");
       }
     }
   </script>
